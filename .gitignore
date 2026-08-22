@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# اجازه کامیت شدن فایل نمونه
+!.env.example
+
+# ابزار محلی Claude Code
+.claude/

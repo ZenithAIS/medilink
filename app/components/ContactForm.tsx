@@ -1,25 +1,17 @@
 "use client";
-import { useState } from "react";
+import { useActionState } from "react";
+import { submitLead, type LeadState } from "@/app/actions/leads";
+
+const initialState: LeadState = { status: "idle" };
+
+const FIELDS = [
+  { name: "name", label: "نام و نام خانوادگی", type: "text", placeholder: "دکتر احمدی" },
+  { name: "clinic", label: "نام کلینیک", type: "text", placeholder: "کلینیک زیبایی ..." },
+  { name: "phone", label: "شماره تماس", type: "tel", placeholder: "۰۹۱۲۰۰۰۰۰۰۰" },
+] as const;
 
 export default function ContactForm() {
-  const [form, setForm] = useState({
-    name: "",
-    clinic: "",
-    phone: "",
-    message: "",
-  });
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
+  const [state, formAction, pending] = useActionState(submitLead, initialState);
 
   return (
     <section id="contact" className="py-24 bg-gray-50">
@@ -62,7 +54,7 @@ export default function ContactForm() {
           </div>
 
           <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
-            {submitted ? (
+            {state.status === "success" ? (
               <div className="text-center py-12">
                 <div className="text-5xl mb-4">🎉</div>
                 <h3 className="text-xl font-black text-gray-900 mb-2">
@@ -73,51 +65,79 @@ export default function ContactForm() {
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form action={formAction} className="space-y-4">
                 <h3 className="text-lg font-black text-gray-900 mb-6">
                   فرم درخواست مشاوره
                 </h3>
 
-                {[
-                  { name: "name", label: "نام و نام خانوادگی", type: "text", placeholder: "دکتر احمدی" },
-                  { name: "clinic", label: "نام کلینیک", type: "text", placeholder: "کلینیک زیبایی ..." },
-                  { name: "phone", label: "شماره تماس", type: "tel", placeholder: "۰۹۱۲۰۰۰۰۰۰۰" },
-                ].map((field) => (
-                  <div key={field.name}>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      {field.label}
-                    </label>
-                    <input
-                      type={field.type}
-                      name={field.name}
-                      value={form[field.name as keyof typeof form]}
-                      onChange={handleChange}
-                      placeholder={field.placeholder}
-                      required
-                      className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-400 transition-colors"
-                    />
-                  </div>
-                ))}
+                {FIELDS.map((field) => {
+                  const error = state.fieldErrors?.[field.name];
+                  return (
+                    <div key={field.name}>
+                      <label
+                        htmlFor={field.name}
+                        className="block text-sm font-medium text-gray-700 mb-1"
+                      >
+                        {field.label}
+                      </label>
+                      <input
+                        id={field.name}
+                        type={field.type}
+                        name={field.name}
+                        placeholder={field.placeholder}
+                        required
+                        disabled={pending}
+                        aria-invalid={error ? true : undefined}
+                        className={`w-full border rounded-xl px-4 py-3 text-sm focus:outline-none transition-colors disabled:opacity-60 ${
+                          error
+                            ? "border-red-300 focus:border-red-400"
+                            : "border-gray-200 focus:border-sky-400"
+                        }`}
+                      />
+                      {error && (
+                        <p className="mt-1 text-xs text-red-500">{error}</p>
+                      )}
+                    </div>
+                  );
+                })}
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     توضیحات
                   </label>
                   <textarea
+                    id="message"
                     name="message"
-                    value={form.message}
-                    onChange={handleChange}
                     placeholder="درباره کلینیک و نیازهای خود بنویسید..."
                     rows={4}
-                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-400 transition-colors resize-none"
+                    disabled={pending}
+                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-400 transition-colors resize-none disabled:opacity-60"
                   />
+                  {state.fieldErrors?.message && (
+                    <p className="mt-1 text-xs text-red-500">
+                      {state.fieldErrors.message}
+                    </p>
+                  )}
                 </div>
+
+                {state.status === "error" && state.message && (
+                  <div
+                    role="alert"
+                    className="bg-red-50 border border-red-200 text-red-600 text-sm rounded-xl px-4 py-3"
+                  >
+                    {state.message}
+                  </div>
+                )}
 
                 <button
                   type="submit"
-                  className="w-full gradient-primary text-white py-3 rounded-xl font-bold hover:opacity-90 transition-opacity shadow-md"
+                  disabled={pending}
+                  className="w-full gradient-primary text-white py-3 rounded-xl font-bold hover:opacity-90 transition-opacity shadow-md disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  ارسال درخواست مشاوره
+                  {pending ? "در حال ارسال..." : "ارسال درخواست مشاوره"}
                 </button>
               </form>
             )}
