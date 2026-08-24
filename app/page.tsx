@@ -1,23 +1,25 @@
-import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import Services from "./components/Services";
-import WhyUs from "./components/WhyUs";
-import Portfolio from "./components/Portfolio";
+import TrustBar from "./components/TrustBar";
+import ProblemSolution from "./components/ProblemSolution";
+import Products from "./components/Products";
+import HowItWorks from "./components/HowItWorks";
+import Stats from "./components/Stats";
 import Testimonials from "./components/Testimonials";
-import ContactForm from "./components/ContactForm";
-import Footer from "./components/Footer";
+import Faq from "./components/Faq";
+import FinalCta from "./components/FinalCta";
 
 export default function Home() {
   return (
     <main>
-      <Navbar />
       <Hero />
-      <Services />
-      <WhyUs />
-      <Portfolio />
+      <TrustBar />
+      <ProblemSolution />
+      <Products />
+      <HowItWorks />
+      <Stats />
       <Testimonials />
-      <ContactForm />
-      <Footer />
+      <Faq />
+      <FinalCta />
     </main>
   );
 }

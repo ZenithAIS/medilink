@@ -2,10 +2,12 @@
 
 import { z } from "zod";
 import { createAdminClient } from "@/app/lib/supabase/admin";
+import { CLINIC_TYPES } from "@/app/lib/clinic-types";
+
 
 const LeadSchema = z.object({
   name: z.string().trim().min(2, "نام را کامل وارد کنید").max(100),
-  clinic: z.string().trim().min(2, "نام کلینیک را وارد کنید").max(120),
+  clinicType: z.enum(CLINIC_TYPES, { message: "نوع کلینیک را انتخاب کنید" }),
   phone: z
     .string()
     .trim()
@@ -13,10 +15,12 @@ const LeadSchema = z.object({
   message: z.string().trim().max(2000).optional().or(z.literal("")),
 });
 
+type FieldName = "name" | "clinicType" | "phone" | "message";
+
 export type LeadState = {
   status: "idle" | "success" | "error";
   message?: string;
-  fieldErrors?: Partial<Record<"name" | "clinic" | "phone" | "message", string>>;
+  fieldErrors?: Partial<Record<FieldName, string>>;
 };
 
 export async function submitLead(
@@ -25,7 +29,7 @@ export async function submitLead(
 ): Promise<LeadState> {
   const parsed = LeadSchema.safeParse({
     name: formData.get("name"),
-    clinic: formData.get("clinic"),
+    clinicType: formData.get("clinicType"),
     phone: formData.get("phone"),
     message: formData.get("message"),
   });
@@ -33,7 +37,7 @@ export async function submitLead(
   if (!parsed.success) {
     const fieldErrors: LeadState["fieldErrors"] = {};
     for (const issue of parsed.error.issues) {
-      const key = issue.path[0] as keyof NonNullable<LeadState["fieldErrors"]>;
+      const key = issue.path[0] as FieldName;
       if (key && !fieldErrors[key]) fieldErrors[key] = issue.message;
     }
     return {
@@ -47,7 +51,7 @@ export async function submitLead(
     const supabase = createAdminClient();
     const { error } = await supabase.from("leads").insert({
       name: parsed.data.name,
-      clinic: parsed.data.clinic,
+      clinic_type: parsed.data.clinicType,
       phone: parsed.data.phone,
       message: parsed.data.message || null,
     });

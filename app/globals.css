@@ -1,14 +1,14 @@
-@import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css');
-
 @import "tailwindcss";
 
+/* فونت با next/font (self-hosted) در app/layout.tsx بارگذاری می‌شود. */
+
 * {
-  font-family: "Vazirmatn", sans-serif;
   box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
+  font-family: var(--font-vazirmatn), system-ui, sans-serif;
 }
 
 body {

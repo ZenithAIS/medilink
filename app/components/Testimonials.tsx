@@ -1,38 +1,30 @@
+import Link from "next/link";
+/* TODO(asset): عکس پرتره‌ی پزشک + لوگوی کلینیک برای هر نقل‌قول — بند ۵ بریف */
 const testimonials = [
   {
     name: "دکتر سارا محمدی",
-    role: "مدیر کلینیک زیبایی آرتا",
-    text: "از وقتی با مدیلینک کار می‌کنیم، تعداد مراجعین ما بیش از دو برابر شده. تیم حرفه‌ای و متعهدی هستند که واقعاً به رشد کلینیک ما اهمیت می‌دهند.",
-    avatar: "👩‍⚕️",
-    stars: 5,
+    role: "مدیر کلینیک پوست و زیبایی آرتا",
+    text: "منشی ما روزی سه ساعت صرف یادآوری نوبت می‌کرد. حالا این کار کاملاً خودکار است و نرخ عدم‌حضور ما تقریباً نصف شده.",
   },
   {
     name: "دکتر امیر رضایی",
     role: "مدیر مرکز درمانی نوین",
-    text: "استراتژی محتوایی که مدیلینک برای ما طراحی کرد، کاملاً متفاوت از آژانس‌های دیگر بود. نتایج در همان ماه اول قابل مشاهده بود.",
-    avatar: "👨‍⚕️",
-    stars: 5,
+    text: "ربات پاسخ‌گو شب‌ها و تعطیلات هم نوبت می‌گیرد. ماه اول بیش از ۱۸۰ نوبت خارج از ساعت کاری ثبت شد.",
   },
   {
     name: "دکتر نیلوفر کریمی",
-    role: "مدیر کلینیک پوست و مو سپید",
-    text: "مدیلینک زبان صنعت پزشکی و زیبایی را می‌فهمد. محتواهایی که تولید می‌کنند هم علمی است هم جذاب. اعتماد بیماران ما بیشتر شده.",
-    avatar: "👩‍⚕️",
-    stars: 5,
+    role: "مدیر پلی‌کلینیک سپید",
+    text: "گزارش‌های مدی‌لینک اولین باری بود که عدد دقیق نرخ بازگشت بیمار را دیدم. تصمیم‌گیری برای سه شعبه خیلی ساده‌تر شد.",
   },
 ];
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="py-24 bg-white">
+    <section id="testimonials" className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 bg-amber-50 border border-amber-200 text-amber-600 px-4 py-2 rounded-full text-sm font-medium mb-4">
-            <span className="w-2 h-2 bg-amber-500 rounded-full"></span>
-            نظرات مشتریان
-          </div>
           <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">
-            مشتریان ما
+            پزشکانی که با ما کار می‌کنند
             <br />
             <span className="gradient-text">چه می‌گویند؟</span>
           </h2>
@@ -40,36 +32,31 @@ export default function Testimonials() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {testimonials.map((item) => (
-            <div
+            <figure
               key={item.name}
-              className="bg-gray-50 rounded-2xl p-6 hover:shadow-md transition-shadow duration-300"
+              className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm"
             >
-              <div className="flex gap-1 mb-4">
-                {Array.from({ length: item.stars }).map((_, i) => (
-                  <span key={i} className="text-amber-400 text-lg">
-                    ★
-                  </span>
-                ))}
-              </div>
-
-              <p className="text-gray-600 text-sm leading-relaxed mb-6">
-                "{item.text}"
-              </p>
-
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-gradient-to-br from-sky-100 to-indigo-100 rounded-full flex items-center justify-center text-2xl">
-                  {item.avatar}
+              <blockquote className="text-gray-600 text-sm leading-relaxed mb-6">
+                &laquo;{item.text}&raquo;
+              </blockquote>
+              <figcaption>
+                <div className="font-bold text-gray-900 text-sm">
+                  {item.name}
                 </div>
-                <div>
-                  <div className="font-bold text-gray-900 text-sm">
-                    {item.name}
-                  </div>
-                  <div className="text-gray-500 text-xs">{item.role}</div>
-                </div>
-              </div>
-            </div>
+                <div className="text-gray-500 text-xs mt-0.5">{item.role}</div>
+              </figcaption>
+            </figure>
           ))}
         </div>
+
+        <p className="text-center mt-10">
+          <Link
+            href="/clients"
+            className="text-sky-600 font-bold text-sm hover:underline"
+          >
+            مشاهده‌ی داستان‌های موفقیت
+          </Link>
+        </p>
       </div>
     </section>
   );
