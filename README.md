@@ -1,36 +1,118 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# مدی‌لینک (Medilink)
 
-## Getting Started
+وب‌سایت **مدی‌لینک** — ارائه‌دهنده‌ی سیستم‌های هوش مصنوعی و اتوماسیون برای کلینیک‌ها و مراکز پزشکی.
+سایتی چندصفحه‌ای فارسی/RTL که محصولات را معرفی می‌کند و مدیران کلینیک را به «درخواست دمو» هدایت می‌کند.
 
-First, run the development server:
+ساختار صفحات بر اساس `Medilink-Website-Brief.docx` (نسخه ۱٫۰) پیاده شده است.
+
+## پشته فناوری
+
+| لایه | فناوری |
+| --- | --- |
+| فریم‌ورک | Next.js 16 (App Router) + React 19 |
+| استایل | Tailwind CSS v4 |
+| دیتابیس | Supabase (Postgres + RLS) |
+| اعتبارسنجی | Zod |
+| فونت | Vazirmatn از طریق `next/font` (self-hosted) |
+
+## راه‌اندازی
+
+۱. نصب پکیج‌ها:
+
+```bash
+npm install
+```
+
+۲. یک پروژه Supabase بسازید و فایل محیطی را از نمونه کپی کنید:
+
+```bash
+cp .env.example .env.local
+```
+
+سپس مقادیر را از مسیر Supabase › Project Settings › API Keys پر کنید:
+
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY` — **فقط سمت سرور.** هرگز پیشوند `NEXT_PUBLIC_` نگیرد و در گیت کامیت نشود.
+- `NEXT_PUBLIC_SITE_URL` — دامنه سایت، برای تگ‌های canonical و Open Graph (اختیاری؛ پیش‌فرض `https://medilink.ir`).
+
+- `NEXT_PUBLIC_WHATSAPP_NUMBER` — شماره‌ی دکمه‌ی شناور واتساپ، فرمت بین‌المللی بدون `+` (اختیاری).
+
+۳. مایگریشن‌های دیتابیس را اجرا کنید. فایل‌های `supabase/migrations/` را به ترتیب در SQL Editor داشبورد Supabase اجرا کنید، یا با CLI:
+
+```bash
+supabase db push
+```
+
+۴. سرور توسعه:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+سایت روی [http://localhost:3000](http://localhost:3000) بالا می‌آید.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## دستورها
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run dev        # سرور توسعه
+npm run build      # بیلد پروداکشن
+npm run start      # اجرای بیلد پروداکشن
+npm run lint       # ESLint
+npm run typecheck  # بررسی تایپ‌ها با tsc
+```
 
-## Learn More
+## نقشه‌ی سایت
 
-To learn more about Next.js, take a look at the following resources:
+| مسیر | صفحه |
+| --- | --- |
+| `/` | خانه |
+| `/products` | فهرست محصولات |
+| `/products/[slug]` | صفحه‌ی اختصاصی هر محصول (۵ محصول) |
+| `/pricing` | تعرفه‌ها و پلن‌ها |
+| `/about` | درباره‌ی ما |
+| `/clients` | نمونه‌کارها و مشتریان |
+| `/blog` و `/blog/[slug]` | بلاگ و منابع |
+| `/faq` | سوالات متداول |
+| `/contact` | تماس و درخواست دمو |
+| `/privacy` و `/terms` | صفحات حقوقی |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`sitemap.xml` و `robots.txt` به‌صورت پویا از همین داده‌ها ساخته می‌شوند.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ساختار پروژه
 
-## Deploy on Vercel
+```
+app/
+  actions/
+    leads.ts              # Server Action فرم دمو (اعتبارسنجی Zod + درج در دیتابیس)
+    newsletter.ts         # Server Action عضویت خبرنامه
+  components/             # کامپوننت‌های مشترک و سکشن‌های صفحات
+  lib/
+    site.ts               # اطلاعات تماس، منوی ناوبری، آدرس سایت
+    products.ts           # داده‌ی ۵ محصول (منبع مشترک صفحات و sitemap)
+    pricing.ts            # پلن‌ها، جدول مقایسه و افزودنی‌ها
+    blog.ts               # مقالات بلاگ
+    faq.ts                # سوالات متداول
+    clinic-types.ts       # فهرست انواع کلینیک برای فرم دمو
+  lib/supabase/
+    env.ts                # خواندن متغیرهای محیطی با خطای شفاف
+    client.ts             # کلاینت مرورگر (کلید anon، محدود به RLS)
+    server.ts             # کلاینت سرور مبتنی بر کوکی نشست
+    admin.ts             # کلاینت service_role — server-only، RLS را دور می‌زند
+  layout.tsx              # هدر، فوتر و دکمه‌ی واتساپ مشترک همه‌ی صفحات
+  sitemap.ts, robots.ts   # سئو
+supabase/migrations/      # اسکیمای دیتابیس
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+> محتوای فعلی (تعرفه‌ها، مقالات، کیس‌استادی‌ها، اعضای تیم) و همه‌ی تصاویر **placeholder** هستند
+> و با کامنت‌های `TODO(asset)`، `TODO(content)` و `TODO(legal)` در کد علامت‌گذاری شده‌اند.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## نکات امنیتی
+
+- جدول‌های `leads` و `newsletter_subscribers` با RLS فعال‌اند و **هیچ policy‌ای برای نقش `anon` تعریف نشده**؛ یعنی از مرورگر نه خواندنی ممکن است و نه نوشتنی.
+- درج داده فقط در Server Action و با کلید `service_role` انجام می‌شود که RLS را دور می‌زند. فایل `app/lib/supabase/admin.ts` با `server-only` علامت‌گذاری شده تا اگر تصادفاً از یک کامپوننت کلاینتی import شود، بیلد خطا بدهد.
+- پیام خطای دیتابیس هرگز به کاربر برگردانده نمی‌شود؛ فقط در لاگ سرور ثبت می‌شود.
+
+## دیپلوی
+
+روی Vercel: مخزن را وصل کنید و هر چهار متغیر محیطی بالا را در تنظیمات پروژه ثبت کنید.
