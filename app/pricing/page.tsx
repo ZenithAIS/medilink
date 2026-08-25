@@ -66,7 +66,7 @@ export default function PricingPage() {
                     پرطرفدار
                   </span>
                 )}
-                <h2 className="text-xl font-black text-gray-900 mb-2">
+                <h2 className="text-2xl font-black text-gray-900 mb-2">
                   {plan.name}
                 </h2>
                 <p className="text-sm text-gray-500 leading-relaxed mb-6">
@@ -114,26 +114,26 @@ export default function PricingPage() {
       {/* جدول مقایسه */}
       <section className="py-24 bg-gray-50 border-y border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-black text-gray-900 mb-10 text-center">
+          <h2 className="text-4xl font-black text-gray-900 mb-10 text-center">
             مقایسه‌ی امکانات
           </h2>
           <div className="overflow-x-auto rounded-2xl border border-gray-200 bg-white">
-            <table className="w-full min-w-[640px] text-right">
+            <table className="w-full md:min-w-[640px] text-right">
               <caption className="sr-only">
                 جدول مقایسه‌ی امکانات پلن‌های مدیلینک
               </caption>
               <thead>
                 <tr className="border-b border-gray-200 bg-gray-50">
-                  <th scope="col" className="p-4 text-sm font-bold text-gray-900">
+                  <th scope="col" className="p-2 md:p-4 text-xs md:text-sm font-bold text-gray-900">
                     امکانات
                   </th>
-                  <th scope="col" className="p-4 text-sm font-bold text-gray-900 text-center">
+                  <th scope="col" className="p-2 md:p-4 text-xs md:text-sm font-bold text-gray-900 text-center">
                     پایه
                   </th>
-                  <th scope="col" className="p-4 text-sm font-bold text-sky-600 text-center">
+                  <th scope="col" className="p-2 md:p-4 text-xs md:text-sm font-bold text-sky-600 text-center">
                     حرفه‌ای
                   </th>
-                  <th scope="col" className="p-4 text-sm font-bold text-gray-900 text-center">
+                  <th scope="col" className="p-2 md:p-4 text-xs md:text-sm font-bold text-gray-900 text-center">
                     ویژه
                   </th>
                 </tr>
@@ -143,17 +143,17 @@ export default function PricingPage() {
                   <tr key={row.feature}>
                     <th
                       scope="row"
-                      className="p-4 text-sm font-medium text-gray-700 text-right"
+                      className="p-2 md:p-4 text-xs md:text-sm font-medium text-gray-700 text-right"
                     >
                       {row.feature}
                     </th>
-                    <td className="p-4 text-center">
+                    <td className="p-2 md:p-4 text-center">
                       <Cell value={row.basic} />
                     </td>
-                    <td className="p-4 text-center bg-sky-50/40">
+                    <td className="p-2 md:p-4 text-center bg-sky-50/40">
                       <Cell value={row.pro} />
                     </td>
-                    <td className="p-4 text-center">
+                    <td className="p-2 md:p-4 text-center">
                       <Cell value={row.enterprise} />
                     </td>
                   </tr>
@@ -167,7 +167,7 @@ export default function PricingPage() {
       {/* افزودنی‌ها */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-black text-gray-900 mb-10 text-center">
+          <h2 className="text-4xl font-black text-gray-900 mb-10 text-center">
             خدمات افزودنی
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -191,7 +191,7 @@ export default function PricingPage() {
       {/* FAQ تعرفه */}
       <section className="py-24 bg-gray-50 border-t border-gray-100">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-black text-gray-900 mb-10 text-center">
+          <h2 className="text-4xl font-black text-gray-900 mb-10 text-center">
             پرسش‌های مالی رایج
           </h2>
           <Accordion items={pricingFaqs} />

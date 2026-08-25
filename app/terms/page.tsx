@@ -75,7 +75,7 @@ export default function TermsPage() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           {sections.map((section) => (
             <div key={section.title}>
-              <h2 className="text-xl font-black text-gray-900 mb-3">
+              <h2 className="text-2xl font-black text-gray-900 mb-3">
                 {section.title}
               </h2>
               <ul className="space-y-2">

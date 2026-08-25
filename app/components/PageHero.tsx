@@ -20,7 +20,7 @@ export default function PageHero({
             {badge}
           </div>
         )}
-        <h1 className="text-3xl md:text-5xl font-black text-gray-900 mb-4 leading-tight">
+        <h1 className="text-4xl md:text-6xl font-black text-gray-900 mb-4 leading-tight">
           {title}
           {highlight && (
             <>

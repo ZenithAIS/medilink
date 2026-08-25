@@ -57,7 +57,7 @@ export default function BlogPage() {
                 <span>{featured.date}</span>
                 <span>{featured.readingTime}</span>
               </div>
-              <h2 className="text-2xl font-black text-gray-900 mb-3 group-hover:text-sky-600 transition-colors">
+              <h2 className="text-3xl font-black text-gray-900 mb-3 group-hover:text-sky-600 transition-colors">
                 {featured.title}
               </h2>
               <p className="text-gray-500 text-sm leading-relaxed mb-4">

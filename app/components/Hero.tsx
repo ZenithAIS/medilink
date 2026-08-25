@@ -16,7 +16,7 @@ export default function Hero() {
               هوش مصنوعی و اتوماسیون برای کلینیک‌ها
             </div>
 
-            <h1 className="text-4xl md:text-5xl font-black text-gray-900 mb-6 leading-tight">
+            <h1 className="text-5xl md:text-6xl font-black text-gray-900 mb-6 leading-tight">
               کلینیک شما را
               <br />
               <span className="gradient-text">هوشمند می‌کنیم</span>

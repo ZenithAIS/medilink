@@ -90,7 +90,7 @@ export default function ClientsPage() {
       {/* کیس‌استادی */}
       <section className="py-24 bg-gray-50 border-y border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-black text-gray-900 mb-12 text-center">
+          <h2 className="text-4xl font-black text-gray-900 mb-12 text-center">
             داستان‌های موفقیت
           </h2>
 

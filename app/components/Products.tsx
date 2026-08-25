@@ -10,7 +10,7 @@ export default function Products() {
             <span className="w-2 h-2 bg-sky-500 rounded-full"></span>
             محصولات ما
           </div>
-          <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
             پنج سیستم هوشمند
             <br />
             <span className="gradient-text">برای کل مسیر بیمار</span>

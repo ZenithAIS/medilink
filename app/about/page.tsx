@@ -82,7 +82,7 @@ export default function AboutPage() {
       {/* داستان ما */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-black text-gray-900 mb-12 text-center">
+          <h2 className="text-4xl font-black text-gray-900 mb-12 text-center">
             داستان ما
           </h2>
           <ol className="max-w-3xl mx-auto space-y-8">
@@ -110,7 +110,7 @@ export default function AboutPage() {
       {/* ارزش‌ها */}
       <section className="py-24 bg-gray-50 border-y border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-black text-gray-900 mb-12 text-center">
+          <h2 className="text-4xl font-black text-gray-900 mb-12 text-center">
             ارزش‌های ما
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -137,7 +137,7 @@ export default function AboutPage() {
       {/* تیم */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-black text-gray-900 mb-4 text-center">
+          <h2 className="text-4xl font-black text-gray-900 mb-4 text-center">
             تیم مدیلینک
           </h2>
           <p className="text-gray-500 text-center mb-12 text-sm">

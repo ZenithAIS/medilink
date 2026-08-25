@@ -59,7 +59,7 @@ export default async function ProductPage({ params }: Props) {
               <span className="text-sm font-medium text-sky-600">
                 {tagline}
               </span>
-              <h1 className="text-3xl md:text-5xl font-black text-gray-900 mt-2 mb-4 leading-tight">
+              <h1 className="text-4xl md:text-6xl font-black text-gray-900 mt-2 mb-4 leading-tight">
                 {title}
               </h1>
               <p className="text-lg text-gray-600 leading-relaxed mb-8">
@@ -110,7 +110,7 @@ export default async function ProductPage({ params }: Props) {
       {/* قابلیت‌ها */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-black text-gray-900 mb-12 text-center">
+          <h2 className="text-4xl font-black text-gray-900 mb-12 text-center">
             قابلیت‌ها
           </h2>
           <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -137,7 +137,7 @@ export default async function ProductPage({ params }: Props) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl font-black text-gray-900 mb-8">
+              <h2 className="text-4xl font-black text-gray-900 mb-8">
                 نتیجه برای کلینیک شما
               </h2>
               <dl className="grid grid-cols-2 gap-6">
@@ -175,7 +175,7 @@ export default async function ProductPage({ params }: Props) {
       {/* سوالات متداول محصول */}
       <section className="py-24 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-black text-gray-900 mb-10 text-center">
+          <h2 className="text-4xl font-black text-gray-900 mb-10 text-center">
             سوالات متداول {title}
           </h2>
           <Accordion items={faqs} />

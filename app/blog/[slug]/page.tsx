@@ -48,7 +48,7 @@ export default async function BlogPostPage({ params }: Props) {
               <span className="text-gray-700">{post.category}</span>
             </nav>
 
-            <h1 className="text-3xl md:text-4xl font-black text-gray-900 mb-4 leading-tight">
+            <h1 className="text-4xl md:text-5xl font-black text-gray-900 mb-4 leading-tight">
               {post.title}
             </h1>
             <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500">
@@ -102,7 +102,7 @@ export default async function BlogPostPage({ params }: Props) {
 
       <section className="py-16 bg-gray-50 border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-black text-gray-900 mb-8">
+          <h2 className="text-3xl font-black text-gray-900 mb-8">
             مطالب مرتبط
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
