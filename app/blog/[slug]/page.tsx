@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import NewsletterCta from "@/app/components/NewsletterCta";
 import Figure from "@/app/components/Figure";
+import BlogCover from "@/app/components/BlogCover";
 import { posts, getPost } from "@/app/lib/blog";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -61,14 +62,21 @@ export default async function BlogPostPage({ params }: Props) {
         </header>
 
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
-          <Figure
-            src={post.cover}
-            alt={`تصویر شاخص ${post.title}`}
-            placeholder={`جای تصویر شاخص — public/images/blog/${post.slug}.jpg`}
-            className="aspect-[16/9] rounded-2xl"
-            priority
-            sizes="(max-width: 768px) 100vw, 768px"
-          />
+          {post.cover ? (
+            <Figure
+              src={post.cover}
+              alt={`تصویر شاخص ${post.title}`}
+              placeholder=""
+              className="aspect-[16/9] rounded-2xl"
+              priority
+              sizes="(max-width: 768px) 100vw, 768px"
+            />
+          ) : (
+            <BlogCover
+              category={post.category}
+              className="aspect-[16/9] w-full rounded-2xl"
+            />
+          )}
         </div>
 
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
