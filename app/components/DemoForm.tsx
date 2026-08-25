@@ -3,13 +3,14 @@ import { useActionState } from "react";
 import { submitLead, type LeadState } from "@/app/actions/leads";
 import { CLINIC_TYPES } from "@/app/lib/clinic-types";
 import { IconShield } from "./Icons";
+import { contact, socials } from "@/app/lib/site";
 
 const initialState: LeadState = { status: "idle" };
 
 const CONTACT = [
-  { title: "تلفن", value: "۰۲۱-۱۲۳۴۵۶۷۸" },
-  { title: "ایمیل", value: "info@medilink.ir" },
-  { title: "آدرس", value: "تهران، ایران" },
+  { title: "تلفن و واتساپ", value: contact.phone, href: contact.phoneHref },
+  { title: "ایمیل", value: contact.email, href: `mailto:${contact.email}` },
+  { title: "آدرس", value: contact.address },
 ];
 
 export default function DemoForm() {
@@ -36,11 +37,32 @@ export default function DemoForm() {
                 <div key={item.title}>
                   <dt className="text-xs text-gray-400">{item.title}</dt>
                   <dd className="text-sm font-medium text-gray-700">
-                    {item.value}
+                    {item.href ? (
+                      <a href={item.href} className="hover:text-sky-600" dir="ltr">
+                        {item.value}
+                      </a>
+                    ) : (
+                      item.value
+                    )}
                   </dd>
                 </div>
               ))}
             </dl>
+
+            <ul className="flex flex-wrap gap-2 mb-8">
+              {socials.map((s) => (
+                <li key={s.label}>
+                  <a
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 py-2 text-xs font-medium text-gray-600 transition-colors hover:border-sky-300 hover:text-sky-600"
+                  >
+                    {s.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
 
             <div className="flex items-start gap-3 bg-white border border-gray-200 rounded-xl p-4">
               <IconShield className="w-5 h-5 text-sky-600 shrink-0 mt-0.5" />

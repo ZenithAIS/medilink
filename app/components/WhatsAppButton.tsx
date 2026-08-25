@@ -1,7 +1,6 @@
 import { IconWhatsApp } from "./Icons";
+import { contact } from "@/app/lib/site";
 
-/* شماره‌ی واقعی واتساپ را در NEXT_PUBLIC_WHATSAPP_NUMBER تنظیم کنید (فرمت بین‌المللی بدون +). */
-const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "989120000000";
 const text = encodeURIComponent(
   "سلام، برای دریافت دمو سیستم‌های مدیلینک تماس گرفتم."
 );
@@ -9,7 +8,7 @@ const text = encodeURIComponent(
 export default function WhatsAppButton() {
   return (
     <a
-      href={`https://wa.me/${number}?text=${text}`}
+      href={`${contact.whatsapp}?text=${text}`}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="گفتگو در واتساپ"

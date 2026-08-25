@@ -1,13 +1,7 @@
 import Link from "next/link";
 import { products } from "@/app/lib/products";
-import { contact, navLinks } from "@/app/lib/site";
+import { contact, navLinks, socials } from "@/app/lib/site";
 import NewsletterForm from "./NewsletterForm";
-
-const socials = [
-  { label: "اینستاگرام", href: "https://instagram.com/" },
-  { label: "تلگرام", href: "https://t.me/" },
-  { label: "لینکدین", href: "https://linkedin.com/" },
-];
 
 export default function Footer() {
   return (
@@ -85,6 +79,7 @@ export default function Footer() {
                 <a
                   href={contact.phoneHref}
                   className="hover:text-sky-400 transition-colors"
+                  dir="ltr"
                 >
                   {contact.phone}
                 </a>
@@ -93,6 +88,7 @@ export default function Footer() {
                 <a
                   href={`mailto:${contact.email}`}
                   className="hover:text-sky-400 transition-colors"
+                  dir="ltr"
                 >
                   {contact.email}
                 </a>

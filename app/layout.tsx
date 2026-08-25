@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { siteUrl } from "./lib/site";
+import { siteUrl, contact, socials } from "./lib/site";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import WhatsAppButton from "./components/WhatsAppButton";
@@ -67,6 +67,15 @@ const jsonLd = {
       url: siteUrl,
       description,
       areaServed: "IR",
+      email: contact.email,
+      sameAs: socials.map((s) => s.href),
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "sales",
+        telephone: contact.phoneHref.replace("tel:", ""),
+        email: contact.email,
+        availableLanguage: ["fa"],
+      },
     },
     {
       "@type": "SoftwareApplication",
