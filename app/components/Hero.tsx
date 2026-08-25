@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Figure from "./Figure";
-/** موکاپ داشبورد. فایل را در public/images/hero-dashboard.png بگذارید و این خط را از حالت undefined دربیاورید. */
+import DashboardMockup from "./DashboardMockup";
+/** اگر اسکرین‌شات واقعی محصول آماده شد، مسیرش را اینجا بگذارید؛
+ *  در غیر این صورت موکاپ برداری DashboardMockup نمایش داده می‌شود. */
 const heroImage: string | undefined = undefined;
 
 export default function Hero() {
@@ -47,14 +49,18 @@ export default function Hero() {
             </div>
           </div>
 
-          <Figure
-            src={heroImage}
-            alt="پیش‌نمایش داشبورد مدیلینک"
-            placeholder="جای موکاپ داشبورد محصول — public/images/hero-dashboard.png"
-            className="aspect-[4/3] rounded-2xl border border-gray-200 shadow-xl"
-            priority
-            sizes="(max-width: 1024px) 100vw, 50vw"
-          />
+          {heroImage ? (
+            <Figure
+              src={heroImage}
+              alt="پیش‌نمایش داشبورد مدیلینک"
+              placeholder=""
+              className="aspect-[4/3] rounded-2xl border border-gray-200 shadow-xl"
+              priority
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+          ) : (
+            <DashboardMockup className="w-full h-auto rounded-2xl shadow-xl" />
+          )}
         </div>
       </div>
     </section>
