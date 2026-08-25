@@ -5,7 +5,21 @@ import {
   IconChat,
   IconMessage,
   IconChart,
+  IconClock,
+  IconUserMinus,
+  IconShield,
 } from "@/app/components/Icons";
+
+export const FLOW_ICONS = {
+  dashboard: IconDashboard,
+  calendar: IconCalendar,
+  chat: IconChat,
+  message: IconMessage,
+  chart: IconChart,
+  clock: IconClock,
+  user: IconUserMinus,
+  shield: IconShield,
+} as const;
 
 export type Product = {
   slug: string;
@@ -18,6 +32,8 @@ export type Product = {
   features: string[];
   benefits: { value: string; label: string }[];
   useCase: { title: string; body: string };
+  /** سه مرحله‌ی جریان کار محصول، برای دیاگرام «نمونه استفاده». */
+  flow: { icon: keyof typeof FLOW_ICONS; label: string; note: string }[];
   faqs: { q: string; a: string }[];
 };
 
@@ -45,6 +61,11 @@ export const products: Product[] = [
       title: "پلی‌کلینیک سه‌شعبه‌ای",
       body: "مدیر پلی‌کلینیک پیش‌تر برای گزارش ماهانه سه فایل جدا از سه شعبه می‌گرفت. حالا یک داشبورد واحد، درآمد و بار کاری هر شعبه را کنار هم نشان می‌دهد.",
     },
+    flow: [
+      { icon: "user", label: "ثبت مراجعه", note: "در هر شعبه" },
+      { icon: "dashboard", label: "پنل یکپارچه", note: "پرونده و پرداخت" },
+      { icon: "chart", label: "گزارش واحد", note: "مدیر، لحظه‌ای" },
+    ],
     faqs: [
       {
         q: "داده‌های نرم‌افزار فعلی ما منتقل می‌شود؟",
@@ -87,6 +108,11 @@ export const products: Product[] = [
       title: "کلینیک پوست با نوبت‌های پرتقاضا",
       body: "پیش از این، هر نوبت لغوشده یک جای خالی بود. حالا سیستم به‌صورت خودکار به لیست انتظار پیام می‌دهد و جای خالی معمولاً در کمتر از یک ساعت پر می‌شود.",
     },
+    flow: [
+      { icon: "calendar", label: "رزرو آنلاین", note: "۲۴ ساعته" },
+      { icon: "message", label: "یادآوری خودکار", note: "۴۸ ساعت و ۱ روز قبل" },
+      { icon: "shield", label: "حضور بیمار", note: "جای خالی پر می‌شود" },
+    ],
     faqs: [
       {
         q: "یادآوری‌ها از چه سرشماره‌ای ارسال می‌شود؟",
@@ -129,6 +155,11 @@ export const products: Product[] = [
       title: "کلینیک با حجم بالای پیام اینستاگرام",
       body: "روزانه صدها دایرکت درباره‌ی قیمت و شرایط درمان می‌رسید. ربات به سوالات تکراری پاسخ می‌دهد و فقط موارد جدی را به منشی می‌سپارد.",
     },
+    flow: [
+      { icon: "chat", label: "پیام بیمار", note: "واتساپ و اینستاگرام" },
+      { icon: "clock", label: "پاسخ ربات", note: "کمتر از ۱۰ ثانیه" },
+      { icon: "calendar", label: "نوبت ثبت‌شده", note: "بدون دخالت منشی" },
+    ],
     faqs: [
       {
         q: "ربات ممکن است پاسخ اشتباه پزشکی بدهد؟",
@@ -171,6 +202,11 @@ export const products: Product[] = [
       title: "کلینیک دندانپزشکی با درمان‌های دوره‌ای",
       body: "بیمارانی که هر شش ماه به جرم‌گیری نیاز دارند، خودکار در زمان درست یادآوری می‌شوند؛ بدون اینکه کسی فهرست را دستی چک کند.",
     },
+    flow: [
+      { icon: "shield", label: "پایان درمان", note: "ثبت در پرونده" },
+      { icon: "message", label: "پیگیری خودکار", note: "در بازه‌ی تعریف‌شده" },
+      { icon: "user", label: "بازگشت بیمار", note: "در زمان درست" },
+    ],
     faqs: [
       {
         q: "بیمار می‌تواند از دریافت پیام انصراف دهد؟",
@@ -213,6 +249,11 @@ export const products: Product[] = [
       title: "مدیری که نمی‌دانست کدام خدمت سودده است",
       body: "پس از یک ماه، گزارش نشان داد یکی از خدمات پرتبلیغ کمترین حاشیه‌ی سود را دارد. بودجه به خدمت پرسودتر منتقل شد.",
     },
+    flow: [
+      { icon: "dashboard", label: "داده‌ی کلینیک", note: "نوبت، درآمد، خدمات" },
+      { icon: "chart", label: "تحلیل خودکار", note: "۱۲+ شاخص کلیدی" },
+      { icon: "clock", label: "تصمیم مدیر", note: "بر پایه‌ی عدد" },
+    ],
     faqs: [
       {
         q: "داده‌ها از کجا می‌آید؟",

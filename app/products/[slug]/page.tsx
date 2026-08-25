@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Accordion from "@/app/components/Accordion";
 import Figure from "@/app/components/Figure";
+import FlowDiagram from "@/app/components/FlowDiagram";
+import ProductMockup from "@/app/components/ProductMockup";
 import FinalCta from "@/app/components/FinalCta";
 import { products, getProduct } from "@/app/lib/products";
 
@@ -82,14 +84,21 @@ export default async function ProductPage({ params }: Props) {
               </div>
             </div>
 
-            <Figure
-              src={product.image}
-              alt={`اسکرین‌شات ${title}`}
-              placeholder={`جای اسکرین‌شات — public/images/products/${product.slug}.png`}
-              className="aspect-[4/3] rounded-2xl border border-gray-200 shadow-xl"
-              priority
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
+            {product.image ? (
+              <Figure
+                src={product.image}
+                alt={`اسکرین‌شات ${title}`}
+                placeholder=""
+                className="aspect-[4/3] rounded-2xl border border-gray-200 shadow-xl"
+                priority
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            ) : (
+              <ProductMockup
+                slug={product.slug}
+                className="w-full h-auto rounded-2xl shadow-xl"
+              />
+            )}
           </div>
         </div>
       </section>
@@ -144,16 +153,17 @@ export default async function ProductPage({ params }: Props) {
               </dl>
             </div>
 
-            <div className="bg-white rounded-2xl border border-gray-200 p-8">
+            <div className="lg:col-span-3 bg-white rounded-2xl border border-gray-200 p-8">
               <span className="text-xs font-medium text-sky-600">
                 نمونه‌ی استفاده
               </span>
               <h3 className="text-xl font-black text-gray-900 mt-2 mb-3">
                 {useCase.title}
               </h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
+              <p className="text-gray-600 text-sm leading-relaxed mb-6">
                 {useCase.body}
               </p>
+              <FlowDiagram flow={product.flow} />
             </div>
           </div>
         </div>
