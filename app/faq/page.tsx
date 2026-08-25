@@ -6,9 +6,9 @@ import { faqGroups } from "@/app/lib/faq";
 import { siteUrl } from "@/app/lib/site";
 
 export const metadata: Metadata = {
-  title: "سوالات متداول | مدی‌لینک",
+  title: "سوالات متداول | مدیلینک",
   description:
-    "پاسخ پرسش‌های رایج درباره‌ی راه‌اندازی، محصولات، امنیت داده‌ی بیمار و تعرفه‌های مدی‌لینک.",
+    "پاسخ پرسش‌های رایج درباره‌ی راه‌اندازی، محصولات، امنیت داده‌ی بیمار و تعرفه‌های مدیلینک.",
   alternates: { canonical: "/faq" },
 };
 

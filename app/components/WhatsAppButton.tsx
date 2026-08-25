@@ -3,7 +3,7 @@ import { IconWhatsApp } from "./Icons";
 /* شماره‌ی واقعی واتساپ را در NEXT_PUBLIC_WHATSAPP_NUMBER تنظیم کنید (فرمت بین‌المللی بدون +). */
 const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "989120000000";
 const text = encodeURIComponent(
-  "سلام، برای دریافت دمو سیستم‌های مدی‌لینک تماس گرفتم."
+  "سلام، برای دریافت دمو سیستم‌های مدیلینک تماس گرفتم."
 );
 
 export default function WhatsAppButton() {

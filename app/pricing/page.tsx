@@ -11,9 +11,9 @@ import {
 } from "@/app/lib/pricing";
 
 export const metadata: Metadata = {
-  title: "تعرفه‌ها و پلن‌ها | مدی‌لینک",
+  title: "تعرفه‌ها و پلن‌ها | مدیلینک",
   description:
-    "پلن‌های ماهانه‌ی مدی‌لینک برای مطب‌ها، کلینیک‌های تخصصی و مجموعه‌های چندشعبه‌ای. بدون قرارداد حداقل مدت.",
+    "پلن‌های ماهانه‌ی مدیلینک برای مطب‌ها، کلینیک‌های تخصصی و مجموعه‌های چندشعبه‌ای. بدون قرارداد حداقل مدت.",
   alternates: { canonical: "/pricing" },
 };
 
@@ -120,7 +120,7 @@ export default function PricingPage() {
           <div className="overflow-x-auto rounded-2xl border border-gray-200 bg-white">
             <table className="w-full min-w-[640px] text-right">
               <caption className="sr-only">
-                جدول مقایسه‌ی امکانات پلن‌های مدی‌لینک
+                جدول مقایسه‌ی امکانات پلن‌های مدیلینک
               </caption>
               <thead>
                 <tr className="border-b border-gray-200 bg-gray-50">

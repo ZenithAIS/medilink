@@ -13,7 +13,7 @@ const vazirmatn = Vazirmatn({
 });
 
 const title =
-  "مدی‌لینک | سیستم‌های هوش مصنوعی و اتوماسیون کلینیکی و پزشکی";
+  "مدیلینک | سیستم‌های هوش مصنوعی و اتوماسیون کلینیکی و پزشکی";
 const description =
   "کلینیک شما را هوشمند می‌کنیم — از پذیرش تا پیگیری بیمار، با هوش مصنوعی. سامانه‌ی مدیریت کلینیک، نوبت‌دهی خودکار، ربات پاسخ‌گو و گزارش‌های هوشمند.";
 
@@ -27,14 +27,14 @@ export const metadata: Metadata = {
     "نرم‌افزار مدیریت کلینیک",
     "نوبت‌دهی آنلاین کلینیک",
     "ربات پاسخ‌گوی بیمار",
-    "مدی‌لینک",
+    "مدیلینک",
   ],
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "fa_IR",
     url: siteUrl,
-    siteName: "مدی‌لینک",
+    siteName: "مدیلینک",
     title,
     description,
   },
@@ -53,14 +53,14 @@ const jsonLd = {
     {
       "@type": "Organization",
       "@id": `${siteUrl}#organization`,
-      name: "مدی‌لینک",
+      name: "مدیلینک",
       url: siteUrl,
       description,
       areaServed: "IR",
     },
     {
       "@type": "SoftwareApplication",
-      name: "مدی‌لینک",
+      name: "مدیلینک",
       applicationCategory: "BusinessApplication",
       operatingSystem: "Web",
       inLanguage: "fa-IR",

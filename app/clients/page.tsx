@@ -3,9 +3,9 @@ import PageHero from "@/app/components/PageHero";
 import FinalCta from "@/app/components/FinalCta";
 
 export const metadata: Metadata = {
-  title: "نمونه‌کارها و مشتریان | مدی‌لینک",
+  title: "نمونه‌کارها و مشتریان | مدیلینک",
   description:
-    "کلینیک‌هایی که با مدی‌لینک کار می‌کنند و نتایجی که به دست آورده‌اند — از کاهش نرخ عدم‌حضور تا افزایش رزرو آنلاین.",
+    "کلینیک‌هایی که با مدیلینک کار می‌کنند و نتایجی که به دست آورده‌اند — از کاهش نرخ عدم‌حضور تا افزایش رزرو آنلاین.",
   alternates: { canonical: "/clients" },
 };
 
@@ -65,14 +65,14 @@ export default function ClientsPage() {
         badge="نمونه‌کارها"
         title="نتایجی که"
         highlight="قابل اندازه‌گیری‌اند"
-        description="سه نمونه از کلینیک‌هایی که فرآیندهایشان را با مدی‌لینک خودکار کردند."
+        description="سه نمونه از کلینیک‌هایی که فرآیندهایشان را با مدیلینک خودکار کردند."
       />
 
       {/* گرید مشتریان */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-center text-sm text-gray-500 mb-8">
-            بیش از ۱۰۰ کلینیک به مدی‌لینک اعتماد کرده‌اند
+            بیش از ۱۰۰ کلینیک به مدیلینک اعتماد کرده‌اند
           </h2>
           <ul className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {clients.map((client) => (
@@ -114,7 +114,7 @@ export default function ClientsPage() {
                   </div>
                   <div>
                     <span className="text-xs font-bold text-gray-400">
-                      راه‌حل مدی‌لینک
+                      راه‌حل مدیلینک
                     </span>
                     <p className="text-gray-600 text-sm leading-relaxed mt-1">
                       {study.solution}

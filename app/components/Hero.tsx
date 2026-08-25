@@ -23,7 +23,7 @@ export default function Hero() {
             </h1>
 
             <p className="text-lg text-gray-600 max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed">
-              از پذیرش تا پیگیری بیمار، با هوش مصنوعی. مدی‌لینک کارهای تکراری
+              از پذیرش تا پیگیری بیمار، با هوش مصنوعی. مدیلینک کارهای تکراری
               کلینیک شما را خودکار می‌کند تا تیم‌تان روی درمان تمرکز کند.
             </p>
 
@@ -47,7 +47,7 @@ export default function Hero() {
           <div
             className="relative aspect-[4/3] rounded-2xl border border-gray-200 bg-white shadow-xl overflow-hidden"
             role="img"
-            aria-label="پیش‌نمایش داشبورد مدی‌لینک"
+            aria-label="پیش‌نمایش داشبورد مدیلینک"
           >
             <div className="h-9 bg-gray-50 border-b border-gray-200 flex items-center gap-1.5 px-4">
               <span className="w-2.5 h-2.5 rounded-full bg-gray-300"></span>

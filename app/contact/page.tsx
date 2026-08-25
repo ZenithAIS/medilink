@@ -3,9 +3,9 @@ import PageHero from "@/app/components/PageHero";
 import DemoForm from "@/app/components/DemoForm";
 
 export const metadata: Metadata = {
-  title: "تماس و درخواست دمو | مدی‌لینک",
+  title: "تماس و درخواست دمو | مدیلینک",
   description:
-    "فرم درخواست دموی رایگان مدی‌لینک. در کمتر از یک روز کاری با شما تماس می‌گیریم.",
+    "فرم درخواست دموی رایگان مدیلینک. در کمتر از یک روز کاری با شما تماس می‌گیریم.",
   alternates: { canonical: "/contact" },
 };
 

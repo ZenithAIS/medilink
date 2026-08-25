@@ -6,7 +6,7 @@ import { products } from "@/app/lib/products";
 import { IconShield, IconClock, IconChart } from "@/app/components/Icons";
 
 export const metadata: Metadata = {
-  title: "محصولات و خدمات | مدی‌لینک",
+  title: "محصولات و خدمات | مدیلینک",
   description:
     "پنج سیستم هوش مصنوعی و اتوماسیون برای کلینیک‌ها: مدیریت کلینیک، نوبت‌دهی خودکار، ربات پاسخ‌گو، اتوماسیون پیامک و گزارش‌های هوشمند.",
   alternates: { canonical: "/products" },
@@ -76,7 +76,7 @@ export default function ProductsPage() {
       <section className="py-24 bg-gray-50 border-y border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-12 text-center">
-            چرا مدی‌لینک؟
+            چرا مدیلینک؟
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {advantages.map(({ Icon, title, description }) => (

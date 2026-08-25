@@ -7,7 +7,7 @@ export type Plan = {
   features: string[];
 };
 
-/* TODO(content): ارقام تعرفه ساختگی است و باید با قیمت واقعی مدی‌لینک جایگزین شود. */
+/* TODO(content): ارقام تعرفه ساختگی است و باید با قیمت واقعی مدیلینک جایگزین شود. */
 export const plans: Plan[] = [
   {
     name: "پایه",

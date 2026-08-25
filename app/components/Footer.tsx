@@ -17,11 +17,11 @@ export default function Footer() {
           <div className="md:col-span-2">
             <Link href="/">
               <span className="text-2xl font-black gradient-text">
-                مدی‌لینک
+                مدیلینک
               </span>
             </Link>
             <p className="mt-4 text-sm leading-relaxed max-w-sm">
-              مدی‌لینک ارائه‌دهنده‌ی سیستم‌های هوش مصنوعی و اتوماسیون برای
+              مدیلینک ارائه‌دهنده‌ی سیستم‌های هوش مصنوعی و اتوماسیون برای
               کلینیک‌ها و مراکز پزشکی است — از پذیرش تا پیگیری بیمار.
             </p>
 
@@ -103,7 +103,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-gray-800 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs">
-          <p>© ۱۴۰۵ مدی‌لینک. تمامی حقوق محفوظ است.</p>
+          <p>© ۱۴۰۵ مدیلینک. تمامی حقوق محفوظ است.</p>
           <div className="flex gap-4">
             <Link href="/privacy" className="hover:text-sky-400 transition-colors">
               حریم خصوصی

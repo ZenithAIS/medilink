@@ -17,11 +17,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!product) return {};
 
   return {
-    title: `${product.title} | مدی‌لینک`,
+    title: `${product.title} | مدیلینک`,
     description: product.description,
     alternates: { canonical: `/products/${product.slug}` },
     openGraph: {
-      title: `${product.title} | مدی‌لینک`,
+      title: `${product.title} | مدیلینک`,
       description: product.description,
       url: `/products/${product.slug}`,
     },

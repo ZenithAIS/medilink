@@ -1,7 +1,7 @@
 export const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://medilink.ir";
 
-export const siteName = "مدی‌لینک";
+export const siteName = "مدیلینک";
 
 export const contact = {
   phone: "۰۲۱-۱۲۳۴۵۶۷۸",

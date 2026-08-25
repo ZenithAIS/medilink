@@ -5,7 +5,7 @@ import NewsletterCta from "@/app/components/NewsletterCta";
 import { posts, categories } from "@/app/lib/blog";
 
 export const metadata: Metadata = {
-  title: "بلاگ و منابع | مدی‌لینک",
+  title: "بلاگ و منابع | مدیلینک",
   description:
     "مقالاتی درباره‌ی مدیریت کلینیک، هوش مصنوعی در حوزه‌ی سلامت، تحلیل داده و حریم خصوصی داده‌ی بیمار.",
   alternates: { canonical: "/blog" },

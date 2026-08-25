@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post) return {};
 
   return {
-    title: `${post.title} | بلاگ مدی‌لینک`,
+    title: `${post.title} | بلاگ مدیلینک`,
     description: post.excerpt,
     alternates: { canonical: `/blog/${post.slug}` },
     openGraph: {
@@ -87,7 +87,7 @@ export default async function BlogPostPage({ params }: Props) {
               می‌خواهید این‌ها را در کلینیک خودتان پیاده کنید؟
             </h2>
             <p className="text-gray-600 text-sm leading-relaxed mb-4">
-              در یک جلسه‌ی دمو نشان می‌دهیم مدی‌لینک کدام بخش را برای شما خودکار
+              در یک جلسه‌ی دمو نشان می‌دهیم مدیلینک کدام بخش را برای شما خودکار
               می‌کند.
             </p>
             <Link
