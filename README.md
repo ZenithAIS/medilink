@@ -13,7 +13,7 @@
 | استایل | Tailwind CSS v4 |
 | دیتابیس | Supabase (Postgres + RLS) |
 | اعتبارسنجی | Zod |
-| فونت | Vazirmatn از طریق `next/font` (self-hosted) |
+| فونت | Shabnam از طریق `next/font/local` (self-hosted، لایسنس OFL) |
 
 ## راه‌اندازی
 

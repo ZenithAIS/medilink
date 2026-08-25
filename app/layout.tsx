@@ -1,15 +1,25 @@
 import type { Metadata } from "next";
-import { Vazirmatn } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { siteUrl } from "./lib/site";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import WhatsAppButton from "./components/WhatsAppButton";
 
-const vazirmatn = Vazirmatn({
-  subsets: ["arabic", "latin"],
+// Shabnam نسخه‌ی Black ندارد؛ فایل Bold برای وزن ۹۰۰ هم اعلام می‌شود تا
+// مرورگر به‌جای ضخیم‌سازی مصنوعی (که در فارسی بد رندر می‌شود) از گلیف واقعی
+// استفاده کند. یعنی font-black و font-bold یک شکل دیده می‌شوند.
+const shabnam = localFont({
+  src: [
+    { path: "./fonts/Shabnam-Thin.woff2", weight: "100", style: "normal" },
+    { path: "./fonts/Shabnam-Light.woff2", weight: "300", style: "normal" },
+    { path: "./fonts/Shabnam.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/Shabnam-Medium.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/Shabnam-Bold.woff2", weight: "700", style: "normal" },
+    { path: "./fonts/Shabnam-Bold.woff2", weight: "900", style: "normal" },
+  ],
   display: "swap",
-  variable: "--font-vazirmatn",
+  variable: "--font-shabnam",
 });
 
 const title =
@@ -76,7 +86,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fa" dir="rtl" className={vazirmatn.variable}>
+    <html lang="fa" dir="rtl" className={shabnam.variable}>
       <body>
         <Navbar />
         {children}
