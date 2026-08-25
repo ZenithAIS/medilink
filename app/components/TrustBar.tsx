@@ -1,11 +1,5 @@
-/* TODO(asset): لوگوی کلینیک‌های مشتری، نسخه‌ی خاکستری یکدست — بند ۵ بریف */
-const clients = [
-  "کلینیک آرتا",
-  "مرکز درمانی نوین",
-  "کلینیک سپید",
-  "پلی‌کلینیک پارسیان",
-  "دندانپزشکی مهر",
-];
+import ClientLogo from "./ClientLogo";
+import { clients } from "@/app/lib/clients";
 
 export default function TrustBar() {
   return (
@@ -15,12 +9,12 @@ export default function TrustBar() {
           مورد اعتماد کلینیک‌های برتر
         </p>
         <ul className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
-          {clients.map((client) => (
+          {clients.slice(0, 5).map((client) => (
             <li
-              key={client}
-              className="h-10 px-5 flex items-center rounded-lg bg-white border border-gray-200 text-sm font-medium text-gray-400 grayscale"
+              key={client.name}
+              className="h-10 px-5 flex items-center rounded-lg bg-white border border-gray-200 grayscale"
             >
-              {client}
+              <ClientLogo client={client} className="h-8 w-28" />
             </li>
           ))}
         </ul>

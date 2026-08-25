@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import NewsletterCta from "@/app/components/NewsletterCta";
+import Figure from "@/app/components/Figure";
 import { posts, getPost } from "@/app/lib/blog";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -59,15 +60,15 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
         </header>
 
-        {/* TODO(asset): تصویر شاخص مقاله — بند ۵ بریف */}
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 -mt-0 pt-10">
-          <div
-            className="aspect-[16/9] rounded-2xl bg-gradient-to-br from-sky-100 to-teal-100 flex items-center justify-center"
-            role="img"
-            aria-label={`تصویر شاخص ${post.title}`}
-          >
-            <span className="text-xs text-gray-400">جای تصویر شاخص</span>
-          </div>
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
+          <Figure
+            src={post.cover}
+            alt={`تصویر شاخص ${post.title}`}
+            placeholder={`جای تصویر شاخص — public/images/blog/${post.slug}.jpg`}
+            className="aspect-[16/9] rounded-2xl"
+            priority
+            sizes="(max-width: 768px) 100vw, 768px"
+          />
         </div>
 
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

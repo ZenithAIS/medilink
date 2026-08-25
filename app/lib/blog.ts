@@ -5,6 +5,8 @@ export type Post = {
   category: string;
   date: string;
   readingTime: string;
+  /** تصویر شاخص در public/images/blog/. تا اضافه نشدن، جای‌نگهدار نشان داده می‌شود. */
+  cover?: string;
   /** پاراگراف‌های متن مقاله. */
   body: string[];
 };

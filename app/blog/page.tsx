@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/app/components/PageHero";
+import Figure from "@/app/components/Figure";
 import NewsletterCta from "@/app/components/NewsletterCta";
 import { posts, categories } from "@/app/lib/blog";
 
@@ -41,14 +42,13 @@ export default function BlogPage() {
             href={`/blog/${featured.slug}`}
             className="group grid grid-cols-1 lg:grid-cols-2 gap-8 items-center rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow mb-12"
           >
-            {/* TODO(asset): تصویر شاخص مقاله — بند ۵ بریف */}
-            <div
-              className="aspect-[16/10] bg-gradient-to-br from-sky-100 to-teal-100 flex items-center justify-center"
-              role="img"
-              aria-label={`تصویر شاخص ${featured.title}`}
-            >
-              <span className="text-xs text-gray-400">جای تصویر شاخص</span>
-            </div>
+            <Figure
+              src={featured.cover}
+              alt={`تصویر شاخص ${featured.title}`}
+              placeholder={`جای تصویر شاخص — public/images/blog/${featured.slug}.jpg`}
+              className="aspect-[16/10]"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
             <div className="p-6 lg:pe-10">
               <div className="flex items-center gap-3 text-xs text-gray-400 mb-3">
                 <span className="text-sky-600 font-medium">
@@ -77,13 +77,13 @@ export default function BlogPage() {
                 href={`/blog/${post.slug}`}
                 className="group rounded-2xl border border-gray-200 overflow-hidden hover:shadow-md transition-shadow flex flex-col"
               >
-                <div
-                  className="aspect-[16/10] bg-gray-100 flex items-center justify-center"
-                  role="img"
-                  aria-label={`تصویر شاخص ${post.title}`}
-                >
-                  <span className="text-xs text-gray-400">جای تصویر</span>
-                </div>
+                <Figure
+                  src={post.cover}
+                  alt={`تصویر شاخص ${post.title}`}
+                  placeholder={`public/images/blog/${post.slug}.jpg`}
+                  className="aspect-[16/10]"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
                 <div className="p-5 flex flex-col grow">
                   <div className="flex items-center gap-3 text-xs text-gray-400 mb-2">
                     <span className="text-sky-600 font-medium">

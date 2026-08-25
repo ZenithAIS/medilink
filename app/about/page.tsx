@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/app/components/PageHero";
+import Figure from "@/app/components/Figure";
 import FinalCta from "@/app/components/FinalCta";
 import { IconShield, IconChart, IconChat, IconClock } from "@/app/components/Icons";
 
@@ -62,7 +63,8 @@ const values = [
   },
 ];
 
-const team = [
+/** photo: مسیر عکس در public/images/team/ — مثلاً "/images/team/ceo.jpg" */
+const team: { name: string; role: string; photo?: string }[] = [
   { name: "نام و نام خانوادگی", role: "مدیرعامل و هم‌بنیان‌گذار" },
   { name: "نام و نام خانوادگی", role: "مدیر فنی" },
   { name: "نام و نام خانوادگی", role: "مدیر محصول" },
@@ -146,14 +148,13 @@ export default function AboutPage() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {team.map((member, i) => (
               <div key={i} className="text-center">
-                {/* TODO(asset): عکس پرتره‌ی اعضای تیم — بند ۵ بریف */}
-                <div
-                  className="aspect-square rounded-2xl bg-gray-100 border border-gray-200 mb-3 flex items-center justify-center"
-                  role="img"
-                  aria-label={`عکس ${member.role}`}
-                >
-                  <span className="text-xs text-gray-400">جای عکس پرتره</span>
-                </div>
+                <Figure
+                  src={member.photo}
+                  alt={`عکس ${member.role}`}
+                  placeholder="جای عکس پرتره"
+                  className="aspect-square rounded-2xl border border-gray-200 mb-3"
+                  sizes="(max-width: 1024px) 50vw, 25vw"
+                />
                 <div className="font-bold text-gray-900 text-sm">
                   {member.name}
                 </div>

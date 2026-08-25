@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Accordion from "@/app/components/Accordion";
+import Figure from "@/app/components/Figure";
 import FinalCta from "@/app/components/FinalCta";
 import { products, getProduct } from "@/app/lib/products";
 
@@ -81,28 +82,14 @@ export default async function ProductPage({ params }: Props) {
               </div>
             </div>
 
-            {/* TODO(asset): اسکرین‌شات بزرگ محصول روی موکاپ لپ‌تاپ/موبایل — بند ۵ بریف */}
-            <div
-              className="relative aspect-[4/3] rounded-2xl border border-gray-200 bg-white shadow-xl overflow-hidden"
-              role="img"
-              aria-label={`پیش‌نمایش ${title}`}
-            >
-              <div className="h-9 bg-gray-50 border-b border-gray-200 flex items-center gap-1.5 px-4">
-                <span className="w-2.5 h-2.5 rounded-full bg-gray-300"></span>
-                <span className="w-2.5 h-2.5 rounded-full bg-gray-300"></span>
-                <span className="w-2.5 h-2.5 rounded-full bg-gray-300"></span>
-              </div>
-              <div className="p-5 grid grid-cols-3 gap-3">
-                <div className="col-span-2 h-24 rounded-lg bg-gradient-to-br from-sky-100 to-teal-100"></div>
-                <div className="h-24 rounded-lg bg-gray-100"></div>
-                <div className="col-span-3 h-28 rounded-lg bg-gray-100"></div>
-              </div>
-              <div className="absolute inset-0 flex items-end justify-center pb-4">
-                <span className="text-xs text-gray-400">
-                  جای اسکرین‌شات محصول
-                </span>
-              </div>
-            </div>
+            <Figure
+              src={product.image}
+              alt={`اسکرین‌شات ${title}`}
+              placeholder={`جای اسکرین‌شات — public/images/products/${product.slug}.png`}
+              className="aspect-[4/3] rounded-2xl border border-gray-200 shadow-xl"
+              priority
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
           </div>
         </div>
       </section>

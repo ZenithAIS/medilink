@@ -1,4 +1,8 @@
 import Link from "next/link";
+import Figure from "./Figure";
+/** موکاپ داشبورد. فایل را در public/images/hero-dashboard.png بگذارید و این خط را از حالت undefined دربیاورید. */
+const heroImage: string | undefined = undefined;
+
 export default function Hero() {
   return (
     <section
@@ -43,31 +47,14 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* TODO(asset): موکاپ داشبورد محصول روی لپ‌تاپ/موبایل — بند ۵ بریف */}
-          <div
-            className="relative aspect-[4/3] rounded-2xl border border-gray-200 bg-white shadow-xl overflow-hidden"
-            role="img"
-            aria-label="پیش‌نمایش داشبورد مدیلینک"
-          >
-            <div className="h-9 bg-gray-50 border-b border-gray-200 flex items-center gap-1.5 px-4">
-              <span className="w-2.5 h-2.5 rounded-full bg-gray-300"></span>
-              <span className="w-2.5 h-2.5 rounded-full bg-gray-300"></span>
-              <span className="w-2.5 h-2.5 rounded-full bg-gray-300"></span>
-            </div>
-            <div className="p-5 grid grid-cols-3 gap-3">
-              <div className="col-span-2 h-24 rounded-lg bg-gradient-to-br from-sky-100 to-teal-100"></div>
-              <div className="h-24 rounded-lg bg-gray-100"></div>
-              <div className="h-16 rounded-lg bg-gray-100"></div>
-              <div className="h-16 rounded-lg bg-gray-100"></div>
-              <div className="h-16 rounded-lg bg-gray-100"></div>
-              <div className="col-span-3 h-20 rounded-lg bg-gray-100"></div>
-            </div>
-            <div className="absolute inset-0 flex items-end justify-center pb-4">
-              <span className="text-xs text-gray-400">
-                جای موکاپ داشبورد محصول
-              </span>
-            </div>
-          </div>
+          <Figure
+            src={heroImage}
+            alt="پیش‌نمایش داشبورد مدیلینک"
+            placeholder="جای موکاپ داشبورد محصول — public/images/hero-dashboard.png"
+            className="aspect-[4/3] rounded-2xl border border-gray-200 shadow-xl"
+            priority
+            sizes="(max-width: 1024px) 100vw, 50vw"
+          />
         </div>
       </div>
     </section>

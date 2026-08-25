@@ -13,6 +13,8 @@ export type Product = {
   tagline: string;
   description: string;
   Icon: ComponentType<{ className?: string }>;
+  /** اسکرین‌شات محصول در public/images/products/. تا اضافه نشدن، جای‌نگهدار نشان داده می‌شود. */
+  image?: string;
   features: string[];
   benefits: { value: string; label: string }[];
   useCase: { title: string; body: string };

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import PageHero from "@/app/components/PageHero";
+import ClientLogo from "@/app/components/ClientLogo";
+import { clients } from "@/app/lib/clients";
 import FinalCta from "@/app/components/FinalCta";
 
 export const metadata: Metadata = {
@@ -9,17 +11,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "/clients" },
 };
 
-/* TODO(asset): لوگوی رنگی و خاکستری کلینیک‌های مشتری — بند ۵ بریف */
-const clients = [
-  "کلینیک آرتا",
-  "مرکز درمانی نوین",
-  "کلینیک سپید",
-  "پلی‌کلینیک پارسیان",
-  "دندانپزشکی مهر",
-  "کلینیک چشم‌پزشکی دید",
-  "مرکز زیبایی رها",
-  "پلی‌کلینیک سلامت",
-];
 
 /* TODO(content): ارقام کیس‌استادی ساختگی‌اند و پیش از انتشار باید با داده‌ی واقعی و رضایت کتبی مشتری جایگزین شوند. */
 const caseStudies = [
@@ -77,10 +68,10 @@ export default function ClientsPage() {
           <ul className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {clients.map((client) => (
               <li
-                key={client}
-                className="h-20 flex items-center justify-center rounded-xl bg-gray-50 border border-gray-200 text-sm font-medium text-gray-400 grayscale"
+                key={client.name}
+                className="h-20 flex items-center justify-center rounded-xl bg-gray-50 border border-gray-200 grayscale"
               >
-                {client}
+                <ClientLogo client={client} className="h-12 w-32" />
               </li>
             ))}
           </ul>
