@@ -35,7 +35,7 @@ export const socials = [
 export const navLinks = [
   { label: "محصولات", href: "/products" },
   { label: "تعرفه‌ها", href: "/pricing" },
-  { label: "نمونه‌کارها", href: "/clients" },
+  { label: "نتایج", href: "/clients" },
   { label: "بلاگ", href: "/blog" },
   { label: "درباره‌ی ما", href: "/about" },
   { label: "سوالات متداول", href: "/faq" },

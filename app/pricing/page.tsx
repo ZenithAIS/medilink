@@ -43,9 +43,9 @@ export default function PricingPage() {
     <main>
       <PageHero
         badge="تعرفه‌ها"
-        title="تعرفه‌ی شفاف،"
-        highlight="بدون هزینه‌ی پنهان"
-        description="پلن‌ها ماهانه‌اند و هر زمان قابل ارتقا، تنزل یا لغو هستند. راه‌اندازی پایه در همه‌ی پلن‌ها رایگان است."
+        title="تعرفه‌ی متناسب"
+        highlight="با اندازه‌ی کلینیک شما"
+        description="پلن‌ها ماهانه‌اند و هر زمان قابل ارتقا، تنزل یا لغو هستند. تعرفه بر اساس تعداد شعبه و حجم پیام محاسبه و در جلسه‌ی دمو مکتوب اعلام می‌شود."
       />
 
       {/* کارت پلن‌ها */}
@@ -101,9 +101,7 @@ export default function PricingPage() {
                       : "border-2 border-gray-200 text-gray-700 hover:border-sky-400 hover:text-sky-600"
                   }`}
                 >
-                  {plan.price === "تماس بگیرید"
-                    ? "درخواست مشاوره"
-                    : "انتخاب پلن"}
+                  دریافت تعرفه
                 </Link>
               </div>
             ))}

@@ -1,20 +1,30 @@
-import ClientLogo from "./ClientLogo";
-import { clients } from "@/app/lib/clients";
+import { IconShield, IconClock, IconDashboard, IconChart } from "./Icons";
+
+/**
+ * نسخه‌ی پیشین «مورد اعتماد کلینیک‌های برتر» را با نام پنج کلینیک ساختگی
+ * نشان می‌داد. تا وقتی مشتری واقعی اجازه‌ی استفاده از نامش را نداده،
+ * این سکشن تعهدهای خود مدی‌لینک را نشان می‌دهد — چیزی که راست است و
+ * همان کار اعتمادسازی را می‌کند.
+ */
+const commitments = [
+  { Icon: IconShield, text: "داده روی سرور داخل کشور" },
+  { Icon: IconDashboard, text: "کنار نرم‌افزار فعلی کلینیک" },
+  { Icon: IconClock, text: "راه‌اندازی کمتر از یک روز" },
+  { Icon: IconChart, text: "بدون قرارداد حداقل مدت" },
+];
 
 export default function TrustBar() {
   return (
     <section className="py-12 border-y border-gray-100 bg-gray-50/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <p className="text-center text-sm text-gray-500 mb-8">
-          مورد اعتماد کلینیک‌های برتر
-        </p>
-        <ul className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
-          {clients.slice(0, 5).map((client) => (
+        <ul className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          {commitments.map(({ Icon, text }) => (
             <li
-              key={client.name}
-              className="h-10 px-5 flex items-center rounded-lg bg-white border border-gray-200 grayscale"
+              key={text}
+              className="flex items-center gap-3 rounded-xl bg-white border border-gray-200 px-4 py-3"
             >
-              <ClientLogo client={client} className="h-8 w-28" />
+              <Icon className="h-5 w-5 shrink-0 text-sky-600" />
+              <span className="text-sm text-gray-600 leading-snug">{text}</span>
             </li>
           ))}
         </ul>

@@ -4,7 +4,7 @@ import ProblemSolution from "./components/ProblemSolution";
 import Products from "./components/Products";
 import HowItWorks from "./components/HowItWorks";
 import Stats from "./components/Stats";
-import Testimonials from "./components/Testimonials";
+import Commitments from "./components/Commitments";
 import Faq from "./components/Faq";
 import FinalCta from "./components/FinalCta";
 
@@ -17,7 +17,7 @@ export default function Home() {
       <Products />
       <HowItWorks />
       <Stats />
-      <Testimonials />
+      <Commitments />
       <Faq />
       <FinalCta />
     </main>

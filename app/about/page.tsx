@@ -12,27 +12,28 @@ export const metadata: Metadata = {
   alternates: { canonical: "/about" },
 };
 
-/* TODO(content): داستان، تایم‌لاین و اعضای تیم ساختگی‌اند و باید با اطلاعات واقعی جایگزین شوند. */
-const timeline = [
+/*
+ * تایم‌لاین «۱۴۰۲ تا ۱۴۰۵» و نام اعضای تیم پیش‌تر اینجا ساختگی بودند.
+ * داستان شرکت جعلی، ساده‌ترین چیزی است که مخاطب می‌تواند راستی‌آزمایی
+ * کند و اعتماد را از بین می‌برد. تا زمان تأمین متن و عکس واقعی، صفحه
+ * درباره‌ی رویکرد و ماموریت است — چیزی که همین حالا راست است.
+ */
+const approach = [
   {
-    year: "۱۴۰۲",
-    title: "شروع از یک مشکل واقعی",
-    body: "بنیان‌گذاران مدیلینک در پروژه‌ای برای یک کلینیک پوست دیدند که بیش از نیمی از وقت منشی صرف کارهای تکراری می‌شود.",
+    title: "از یک درد مشخص شروع می‌کنیم",
+    body: "به‌جای خودکار کردن همه‌چیز، اول پیدا می‌کنیم بیشترین زمان تیم شما کجا هدر می‌رود و همان را حل می‌کنیم.",
   },
   {
-    year: "۱۴۰۳",
-    title: "اولین نسخه‌ی سامانه",
-    body: "سامانه‌ی مدیریت کلینیک و نوبت‌دهی خودکار در سه کلینیک همکار پیاده‌سازی و آزمایش شد.",
+    title: "کنار سیستم فعلی می‌نشینیم",
+    body: "قرار نیست کلینیک کارش را متوقف کند تا سیستم عوض شود. مدیلینک در کنار نرم‌افزار موجود شما کار می‌کند.",
   },
   {
-    year: "۱۴۰۴",
-    title: "افزوده شدن هوش مصنوعی",
-    body: "ربات پاسخ‌گوی هوشمند و اتوماسیون پیگیری بیمار به مجموعه‌ی محصولات اضافه شد.",
+    title: "با کادر درمان می‌سازیم",
+    body: "هر قابلیت از یک نیاز واقعی پزشک یا منشی آمده است، نه از فهرست ویژگی‌های رقبا.",
   },
   {
-    year: "۱۴۰۵",
-    title: "بیش از ۱۰۰ کلینیک فعال",
-    body: "مدیلینک امروز در کلینیک‌های پوست، دندانپزشکی، چشم‌پزشکی و پلی‌کلینیک‌های چندشعبه‌ای استفاده می‌شود.",
+    title: "نتیجه را قابل سنجش می‌کنیم",
+    body: "شاخص‌ها از روز اول ثبت می‌شوند تا خودتان ببینید چه چیزی تغییر کرده و چه چیزی نه.",
   },
 ];
 
@@ -63,13 +64,11 @@ const values = [
   },
 ];
 
-/** photo: مسیر عکس در public/images/team/ — مثلاً "/images/team/ceo.jpg" */
-const team: { name: string; role: string; photo?: string }[] = [
-  { name: "نام و نام خانوادگی", role: "مدیرعامل و هم‌بنیان‌گذار" },
-  { name: "نام و نام خانوادگی", role: "مدیر فنی" },
-  { name: "نام و نام خانوادگی", role: "مدیر محصول" },
-  { name: "نام و نام خانوادگی", role: "مدیر موفقیت مشتری" },
-];
+/*
+ * بخش «تیم» موقتاً حذف شده است: چهار کارت با نام «نام و نام خانوادگی» و
+ * عکس خالی، بدتر از نبودِ این بخش است. برای بازگرداندن، نام و عکس واقعی
+ * اعضا را در public/images/team/ بگذارید و این سکشن را دوباره اضافه کنید.
+ */
 
 export default function AboutPage() {
   return (
@@ -84,28 +83,27 @@ export default function AboutPage() {
       {/* داستان ما */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-black text-gray-900 mb-12 text-center">
-            داستان ما
+          <h2 className="text-4xl font-black text-gray-900 mb-4 text-center">
+            رویکرد ما
           </h2>
-          <ol className="max-w-3xl mx-auto space-y-8">
-            {timeline.map((item) => (
-              <li key={item.year} className="flex gap-6">
-                <div className="shrink-0 w-16 text-left">
-                  <span className="text-lg font-black gradient-text">
-                    {item.year}
-                  </span>
-                </div>
-                <div className="border-r-2 border-gray-100 ps-0 pe-6 pb-2">
-                  <h3 className="text-base font-bold text-gray-900 mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-500 text-sm leading-relaxed">
-                    {item.body}
-                  </p>
-                </div>
-              </li>
+          <p className="text-gray-500 text-center max-w-xl mx-auto mb-12 text-base leading-relaxed">
+            چهار اصلی که هر پروژه‌ی مدیلینک بر پایه‌ی آن‌ها پیش می‌رود.
+          </p>
+          <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {approach.map((item) => (
+              <div
+                key={item.title}
+                className="rounded-2xl border border-gray-100 bg-gray-50 p-6"
+              >
+                <h3 className="text-base font-bold text-gray-900 mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-gray-500 text-sm leading-relaxed">
+                  {item.body}
+                </p>
+              </div>
             ))}
-          </ol>
+          </div>
         </div>
       </section>
 
@@ -136,43 +134,21 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* تیم */}
       <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-black text-gray-900 mb-4 text-center">
-            تیم مدیلینک
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-4xl font-black text-gray-900 mb-4">
+            با ما کار کنید
           </h2>
-          <p className="text-gray-500 text-center mb-12 text-sm">
-            ترکیبی از مهندسی نرم‌افزار، هوش مصنوعی و تجربه‌ی مدیریت کلینیک.
+          <p className="text-gray-500 leading-relaxed mb-8">
+            چه مدیر کلینیکی باشید که دنبال خودکار کردن فرآیندهایش است، چه
+            متخصصی که می‌خواهد به تیم ما بپیوندد — خوشحال می‌شویم صحبت کنیم.
           </p>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            {team.map((member, i) => (
-              <div key={i} className="text-center">
-                <Figure
-                  src={member.photo}
-                  alt={`عکس ${member.role}`}
-                  placeholder="جای عکس پرتره"
-                  className="aspect-square rounded-2xl border border-gray-200 mb-3"
-                  sizes="(max-width: 1024px) 50vw, 25vw"
-                />
-                <div className="font-bold text-gray-900 text-sm">
-                  {member.name}
-                </div>
-                <div className="text-gray-500 text-xs mt-0.5">
-                  {member.role}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <p className="text-center mt-12">
-            <Link
-              href="/contact"
-              className="text-sky-600 font-bold text-sm hover:underline"
-            >
-              علاقه‌مند به همکاری با ما هستید؟
-            </Link>
-          </p>
+          <Link
+            href="/contact"
+            className="inline-block gradient-primary text-white px-8 py-4 rounded-xl text-base font-bold hover:opacity-90 transition-opacity shadow-lg"
+          >
+            تماس با ما
+          </Link>
         </div>
       </section>
 
