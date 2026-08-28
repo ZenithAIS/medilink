@@ -93,7 +93,6 @@ export default function Footer() {
                   {contact.email}
                 </a>
               </li>
-              <li>{contact.address}</li>
             </ul>
           </div>
         </div>
