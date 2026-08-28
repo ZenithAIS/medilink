@@ -11,7 +11,6 @@ const initialState: LeadState = { status: "idle" };
 const CONTACT = [
   { title: "تلفن و واتساپ", value: contact.phone, href: contact.phoneHref },
   { title: "ایمیل", value: contact.email, href: `mailto:${contact.email}` },
-  { title: "آدرس", value: contact.address },
 ];
 
 export default function DemoForm() {

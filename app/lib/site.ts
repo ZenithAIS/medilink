@@ -11,7 +11,6 @@ export const contact = {
   phoneHref: `tel:+${phoneE164}`,
   whatsapp: `https://wa.me/${phoneE164}`,
   email: "info@dmsafir.com",
-  address: "تهران، ایران",
 };
 
 export const socials = [
