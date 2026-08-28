@@ -3,7 +3,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { navLinks } from "@/app/lib/site";
-import LogoMark from "./LogoMark";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,8 +19,7 @@ export default function Navbar() {
     <nav className="fixed top-0 w-full z-50 glass-card shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link href="/" className="flex flex-shrink-0 items-center gap-2">
-            <LogoMark className="h-8 w-8" />
+          <Link href="/" className="flex-shrink-0">
             <span className="text-2xl font-black gradient-text">مدیلینک</span>
           </Link>
 
