@@ -80,10 +80,10 @@ export default function ClientsPage() {
 
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-black text-gray-900 mb-4 text-center">
+          <h2 className="text-4xl font-black text-ink-900 mb-4 text-center">
             چه چیزی را می‌سنجیم
           </h2>
-          <p className="text-gray-500 text-center max-w-xl mx-auto mb-12 text-base leading-relaxed">
+          <p className="text-ink-400 text-center max-w-xl mx-auto mb-12 text-base leading-relaxed">
             این چهار شاخص برای بیشتر کلینیک‌ها بیشترین اثر مالی را دارند.
           </p>
 
@@ -91,39 +91,39 @@ export default function ClientsPage() {
             {metrics.map(({ Icon, title, body }) => (
               <div
                 key={title}
-                className="bg-gray-50 rounded-2xl p-6 border border-gray-100"
+                className="bg-cream-100 rounded-2xl p-6 border border-cream-200"
               >
-                <div className="w-12 h-12 rounded-xl bg-white border border-gray-200 text-sky-600 flex items-center justify-center mb-4">
+                <div className="w-12 h-12 rounded-xl bg-white border border-cream-300 text-brand-600 flex items-center justify-center mb-4">
                   <Icon className="w-6 h-6" />
                 </div>
-                <h3 className="text-base font-bold text-gray-900 mb-2">
+                <h3 className="text-base font-bold text-ink-900 mb-2">
                   {title}
                 </h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{body}</p>
+                <p className="text-ink-400 text-sm leading-relaxed">{body}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-24 bg-gray-50 border-y border-gray-100">
+      <section className="py-24 bg-cream-100 border-y border-cream-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-black text-gray-900 mb-12 text-center">
+          <h2 className="text-4xl font-black text-ink-900 mb-12 text-center">
             چطور می‌سنجیم
           </h2>
           <ol className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {method.map((m) => (
               <li
                 key={m.step}
-                className="bg-white rounded-2xl p-6 border border-gray-200"
+                className="bg-white rounded-2xl p-6 border border-cream-300"
               >
                 <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl gradient-primary text-lg font-black text-white">
                   {m.step}
                 </span>
-                <h3 className="text-base font-bold text-gray-900 mb-2">
+                <h3 className="text-base font-bold text-ink-900 mb-2">
                   {m.title}
                 </h3>
-                <p className="text-gray-500 text-sm leading-relaxed">
+                <p className="text-ink-400 text-sm leading-relaxed">
                   {m.body}
                 </p>
               </li>
@@ -134,19 +134,19 @@ export default function ClientsPage() {
 
       <section className="py-24 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="rounded-2xl border border-sky-200 bg-sky-50 p-8">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white text-sky-600">
+          <div className="rounded-2xl border border-brand-100 bg-brand-50 p-8">
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white text-brand-600">
               <IconShield className="h-6 w-6" />
             </div>
-            <h2 className="text-2xl font-black text-gray-900 mb-3">
+            <h2 className="text-2xl font-black text-ink-900 mb-3">
               مطالعه‌ی موردی، فقط با داده‌ی واقعی
             </h2>
-            <p className="text-gray-600 text-sm leading-relaxed mb-4">
+            <p className="text-ink-700 text-sm leading-relaxed mb-4">
               ترجیح می‌دهیم این صفحه فعلاً خالی از عدد باشد تا اینکه با ارقام
               ساخته‌شده پر شود. هر مطالعه‌ی موردی که اینجا منتشر شود، بر پایه‌ی
               داده‌ی اندازه‌گیری‌شده و با رضایت کتبی همان کلینیک خواهد بود.
             </p>
-            <p className="text-gray-600 text-sm leading-relaxed">
+            <p className="text-ink-700 text-sm leading-relaxed">
               اگر می‌خواهید بدانید مدیلینک روی کلینیک شما چه اثری می‌گذارد، در
               جلسه‌ی دمو وضعیت فعلی‌تان را با هم بررسی می‌کنیم و صادقانه
               می‌گوییم کجا کمک می‌کند و کجا نه.

@@ -20,12 +20,12 @@ export default function DashboardMockup({
     >
       <defs>
         <linearGradient id="dm-brand" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#0ea5e9" />
-          <stop offset="100%" stopColor="#6366f1" />
+          <stop offset="0%" stopColor="#f2793f" />
+          <stop offset="100%" stopColor="#8b7bd8" />
         </linearGradient>
         <linearGradient id="dm-area" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.28" />
-          <stop offset="100%" stopColor="#0ea5e9" stopOpacity="0" />
+          <stop offset="0%" stopColor="#f2793f" stopOpacity="0.28" />
+          <stop offset="100%" stopColor="#f2793f" stopOpacity="0" />
         </linearGradient>
         <clipPath id="dm-round">
           <rect x="0" y="0" width="800" height="600" rx="16" />
@@ -62,7 +62,7 @@ export default function DashboardMockup({
               width="14"
               height="14"
               rx="4"
-              fill={i === 0 ? "#38bdf8" : "#334155"}
+              fill={i === 0 ? "#f7a06a" : "#334155"}
             />
             <rect
               x={i === 0 ? 690 : 700}
@@ -82,9 +82,9 @@ export default function DashboardMockup({
 
         {/* کارت‌های شاخص */}
         {[
-          { x: 400, label: "مراجعات", w: 52, accent: "#0ea5e9" },
-          { x: 220, label: "نوبت‌ها", w: 44, accent: "#14b8a6" },
-          { x: 40, label: "درآمد", w: 60, accent: "#6366f1" },
+          { x: 400, label: "مراجعات", w: 52, accent: "#f2793f" },
+          { x: 220, label: "نوبت‌ها", w: 44, accent: "#33a877" },
+          { x: 40, label: "درآمد", w: 60, accent: "#8b7bd8" },
         ].map((c) => (
           <g key={c.x}>
             <rect
@@ -125,20 +125,20 @@ export default function DashboardMockup({
         <path
           d="M244 400 L280 384 L316 392 L352 358 L388 366 L424 330 L460 340 L496 306 L536 296"
           fill="none"
-          stroke="#0ea5e9"
+          stroke="#f2793f"
           strokeWidth="3"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-        <circle cx="536" cy="296" r="5" fill="#0ea5e9" stroke="#ffffff" strokeWidth="2.5" />
+        <circle cx="536" cy="296" r="5" fill="#f2793f" stroke="#ffffff" strokeWidth="2.5" className="animate-blink-soft" />
 
         {/* فهرست نوبت‌های امروز */}
         <rect x="40" y="244" width="160" height="200" rx="12" fill="#ffffff" stroke="#e2e8f0" />
         <rect x="120" y="266" width="60" height="10" rx="5" fill="#0f172a" />
         {[300, 336, 372, 408].map((y, i) => (
           <g key={y}>
-            <circle cx="168" cy={y + 8} r="10" fill="#e0f2fe" />
-            <circle cx="168" cy={y + 8} r="4" fill="#0ea5e9" opacity="0.7" />
+            <circle cx="168" cy={y + 8} r="10" fill="#fdeadf" />
+            <circle cx="168" cy={y + 8} r="4" fill="#f2793f" opacity="0.7" />
             <rect x={i === 3 ? 96 : 84} y={y + 1} width={i === 3 ? 56 : 68} height="7" rx="3.5" fill="#334155" />
             <rect x="112" y={y + 14} width="40" height="6" rx="3" fill="#cbd5e1" />
             <rect
@@ -161,8 +161,8 @@ export default function DashboardMockup({
         <rect x="330" y="494" width="150" height="9" rx="4.5" fill="#334155" />
         <rect x="270" y="514" width="210" height="7" rx="3.5" fill="#cbd5e1" />
         <rect x="360" y="530" width="120" height="7" rx="3.5" fill="#cbd5e1" />
-        <rect x="64" y="536" width="92" height="24" rx="12" fill="#0ea5e9" opacity="0.12" />
-        <rect x="80" y="544" width="60" height="8" rx="4" fill="#0ea5e9" opacity="0.75" />
+        <rect x="64" y="536" width="92" height="24" rx="12" fill="#f2793f" opacity="0.12" />
+        <rect x="80" y="544" width="60" height="8" rx="4" fill="#f2793f" opacity="0.75" />
       </g>
 
       <rect x="0.5" y="0.5" width="799" height="599" rx="16" fill="none" stroke="#e2e8f0" />

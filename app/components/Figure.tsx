@@ -32,11 +32,11 @@ export default function Figure({
   if (!src) {
     return (
       <div
-        className={`relative bg-gray-100 flex items-center justify-center ${className}`}
+        className={`relative bg-cream-200 flex items-center justify-center ${className}`}
         role="img"
         aria-label={alt}
       >
-        <span className="text-xs text-gray-400 px-3 text-center">
+        <span className="text-xs text-ink-400 px-3 text-center">
           {placeholder}
         </span>
       </div>
@@ -44,7 +44,7 @@ export default function Figure({
   }
 
   return (
-    <div className={`relative overflow-hidden bg-gray-100 ${className}`}>
+    <div className={`relative overflow-hidden bg-cream-200 ${className}`}>
       <Image
         src={src}
         alt={alt}

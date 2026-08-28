@@ -40,21 +40,21 @@ export default async function BlogPostPage({ params }: Props) {
   return (
     <main>
       <article>
-        <header className="pt-32 pb-12 bg-gray-50 border-b border-gray-100">
+        <header className="pt-32 pb-12 bg-cream-100 border-b border-cream-200">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <nav aria-label="مسیر صفحه" className="text-sm text-gray-500 mb-6">
-              <Link href="/blog" className="hover:text-sky-600">
+            <nav aria-label="مسیر صفحه" className="text-sm text-ink-400 mb-6">
+              <Link href="/blog" className="hover:text-brand-600">
                 بلاگ
               </Link>
               <span className="mx-2">/</span>
-              <span className="text-gray-700">{post.category}</span>
+              <span className="text-ink-700">{post.category}</span>
             </nav>
 
-            <h1 className="text-4xl md:text-5xl font-black text-gray-900 mb-4 leading-tight">
+            <h1 className="text-4xl md:text-5xl font-black text-ink-900 mb-4 leading-tight">
               {post.title}
             </h1>
-            <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500">
-              <span className="text-sky-600 font-medium">{post.category}</span>
+            <div className="flex flex-wrap items-center gap-3 text-sm text-ink-400">
+              <span className="text-brand-600 font-medium">{post.category}</span>
               <span>{post.date}</span>
               <span>{post.readingTime} مطالعه</span>
             </div>
@@ -80,22 +80,22 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
 
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <p className="text-lg text-gray-700 leading-relaxed mb-8 font-medium">
+          <p className="text-lg text-ink-700 leading-relaxed mb-8 font-medium">
             {post.excerpt}
           </p>
           <div className="space-y-6">
             {post.body.map((paragraph, i) => (
-              <p key={i} className="text-gray-600 leading-loose">
+              <p key={i} className="text-ink-700 leading-loose">
                 {paragraph}
               </p>
             ))}
           </div>
 
-          <div className="mt-12 rounded-2xl border border-sky-200 bg-sky-50 p-6">
-            <h2 className="text-lg font-black text-gray-900 mb-2">
+          <div className="mt-12 rounded-2xl border border-brand-100 bg-brand-50 p-6">
+            <h2 className="text-lg font-black text-ink-900 mb-2">
               می‌خواهید این‌ها را در کلینیک خودتان پیاده کنید؟
             </h2>
-            <p className="text-gray-600 text-sm leading-relaxed mb-4">
+            <p className="text-ink-700 text-sm leading-relaxed mb-4">
               در یک جلسه‌ی دمو نشان می‌دهیم مدیلینک کدام بخش را برای شما خودکار
               می‌کند.
             </p>
@@ -109,9 +109,9 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
       </article>
 
-      <section className="py-16 bg-gray-50 border-t border-gray-100">
+      <section className="py-16 bg-cream-100 border-t border-cream-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-black text-gray-900 mb-8">
+          <h2 className="text-3xl font-black text-ink-900 mb-8">
             مطالب مرتبط
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -119,15 +119,15 @@ export default async function BlogPostPage({ params }: Props) {
               <Link
                 key={item.slug}
                 href={`/blog/${item.slug}`}
-                className="group bg-white rounded-2xl border border-gray-200 p-5 hover:shadow-md transition-shadow"
+                className="group bg-white rounded-2xl border border-cream-300 p-5 hover:shadow-md transition-shadow"
               >
-                <span className="text-xs text-sky-600 font-medium">
+                <span className="text-xs text-brand-600 font-medium">
                   {item.category}
                 </span>
-                <h3 className="text-base font-bold text-gray-900 mt-2 mb-2 group-hover:text-sky-600 transition-colors">
+                <h3 className="text-base font-bold text-ink-900 mt-2 mb-2 group-hover:text-brand-600 transition-colors">
                   {item.title}
                 </h3>
-                <p className="text-gray-500 text-sm leading-relaxed">
+                <p className="text-ink-400 text-sm leading-relaxed">
                   {item.excerpt}
                 </p>
               </Link>

@@ -2,6 +2,52 @@
 
 /* فونت با next/font (self-hosted) در app/layout.tsx بارگذاری می‌شود. */
 
+/*
+ * پالت رنگی برگرفته از نمونه‌ی طراحی «دستیار هوشمند مطب» که کارفرما ارائه
+ * داد: کرم گرم + نارنجی به‌عنوان رنگ اصلی برند، به‌علاوه سبز/بنفش/آبی به‌عنوان
+ * رنگ‌های وضعیت که در آن نمونه برای تنوع بصری آیکون‌ها استفاده شده بودند.
+ *
+ * brand-600/700 عمداً از accent اصلی (#f2793f) تیره‌ترند: accent روی سفید
+ * فقط نسبت کنتراست ۲٫۸:۱ دارد (برای متن قابل‌قبول نیست)، در حالی که
+ * brand-600 به ۵:۱ می‌رسد. یعنی برای دکمه‌ی توپر و گرادیانت از خود accent
+ * استفاده می‌شود، ولی برای متن و آیکون رنگی از brand-600/700.
+ */
+@theme {
+  --color-brand-50: #fdeadf;
+  --color-brand-100: #f9d4bd;
+  --color-brand-200: #ffb98a;
+  --color-brand-300: #f7a06a;
+  --color-brand-400: #f2793f;
+  --color-brand-500: #e3672e;
+  --color-brand-600: #b84f22;
+  --color-brand-700: #a8451c;
+
+  --color-cream-100: #f4f2ef;
+  --color-cream-200: #efeae4;
+  --color-cream-300: #e6e0d8;
+
+  --color-ink-400: #94908a;
+  --color-ink-700: #26221e;
+  --color-ink-900: #171310;
+
+  --color-good-50: #e6f5ee;
+  --color-good-500: #2c9366;
+  --color-good-600: #257d55;
+
+  --color-bad-50: #fbe9e6;
+  --color-bad-200: #f2b6a8;
+  --color-bad-300: #eb9686;
+  --color-bad-400: #e0604c;
+  --color-bad-500: #c9523f;
+  --color-bad-600: #b8442f;
+
+  --color-violet-50: #eef0fb;
+  --color-violet-500: #8b7bd8;
+
+  --color-cool-50: #e7f2f9;
+  --color-cool-500: #5aa9d6;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -12,24 +58,85 @@ html {
 }
 
 body {
-  background: #ffffff;
-  color: #1f2937;
+  background: var(--color-cream-100);
+  color: var(--color-ink-700);
 }
 
 .gradient-primary {
-  background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%);
+  background: linear-gradient(135deg, #f2793f 0%, #f7a06a 100%);
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%);
+  background: linear-gradient(135deg, #f2793f 0%, #f7a06a 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(250, 248, 246, 0.85);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(23, 19, 16, 0.08);
+}
+
+/* ===== انیمیشن‌ها ===== */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 var(--pulse-color, rgba(242, 121, 63, 0.4));
+  }
+  70% {
+    box-shadow: 0 0 0 10px var(--pulse-color-fade, rgba(242, 121, 63, 0));
+  }
+  100% {
+    box-shadow: 0 0 0 0 var(--pulse-color-fade, rgba(242, 121, 63, 0));
+  }
+}
+
+@keyframes blink-soft {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-14px) scale(1.04);
+  }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2.4s infinite;
+}
+
+.animate-blink-soft {
+  animation: blink-soft 1.7s infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-pulse-ring,
+  .animate-blink-soft,
+  .animate-float-slow {
+    animation: none;
+  }
 }

@@ -42,30 +42,30 @@ export default async function ProductPage({ params }: Props) {
   return (
     <main>
       {/* Hero محصول */}
-      <section className="relative overflow-hidden pt-32 pb-16 bg-gray-50 border-b border-gray-100">
-        <div className="absolute top-0 left-0 w-72 h-72 bg-teal-200 rounded-full mix-blend-multiply filter blur-3xl opacity-40"></div>
+      <section className="relative overflow-hidden pt-32 pb-16 bg-cream-100 border-b border-cream-200">
+        <div className="absolute top-0 left-0 w-72 h-72 bg-violet-50 rounded-full mix-blend-multiply filter blur-3xl opacity-40"></div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <nav aria-label="مسیر صفحه" className="text-sm text-gray-500 mb-6">
-            <Link href="/products" className="hover:text-sky-600">
+          <nav aria-label="مسیر صفحه" className="text-sm text-ink-400 mb-6">
+            <Link href="/products" className="hover:text-brand-600">
               محصولات
             </Link>
             <span className="mx-2">/</span>
-            <span className="text-gray-700">{title}</span>
+            <span className="text-ink-700">{title}</span>
           </nav>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <div className="w-12 h-12 rounded-xl bg-white border border-gray-200 text-sky-600 flex items-center justify-center mb-4">
+              <div className="w-12 h-12 rounded-xl bg-white border border-cream-300 text-brand-600 flex items-center justify-center mb-4">
                 <Icon className="w-6 h-6" />
               </div>
-              <span className="text-sm font-medium text-sky-600">
+              <span className="text-sm font-medium text-brand-600">
                 {tagline}
               </span>
-              <h1 className="text-4xl md:text-6xl font-black text-gray-900 mt-2 mb-4 leading-tight">
+              <h1 className="text-4xl md:text-6xl font-black text-ink-900 mt-2 mb-4 leading-tight">
                 {title}
               </h1>
-              <p className="text-lg text-gray-600 leading-relaxed mb-8">
+              <p className="text-lg text-ink-700 leading-relaxed mb-8">
                 {description}
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
@@ -77,7 +77,7 @@ export default async function ProductPage({ params }: Props) {
                 </Link>
                 <Link
                   href="/pricing"
-                  className="border-2 border-gray-200 text-gray-700 px-8 py-4 rounded-xl text-base font-bold hover:border-sky-400 hover:text-sky-600 transition-all text-center"
+                  className="border-2 border-cream-300 text-ink-700 px-8 py-4 rounded-xl text-base font-bold hover:border-brand-300 hover:text-brand-600 transition-all text-center"
                 >
                   دریافت تعرفه
                 </Link>
@@ -89,7 +89,7 @@ export default async function ProductPage({ params }: Props) {
                 src={product.image}
                 alt={`اسکرین‌شات ${title}`}
                 placeholder=""
-                className="aspect-[4/3] rounded-2xl border border-gray-200 shadow-xl"
+                className="aspect-[4/3] rounded-2xl border border-cream-300 shadow-xl"
                 priority
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
@@ -106,20 +106,20 @@ export default async function ProductPage({ params }: Props) {
       {/* قابلیت‌ها */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-black text-gray-900 mb-12 text-center">
+          <h2 className="text-4xl font-black text-ink-900 mb-12 text-center">
             قابلیت‌ها
           </h2>
           <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((feature) => (
               <li
                 key={feature}
-                className="flex items-start gap-3 bg-gray-50 rounded-xl p-5"
+                className="flex items-start gap-3 bg-cream-100 rounded-xl p-5"
               >
                 <span
                   aria-hidden
                   className="mt-1 w-5 h-5 shrink-0 rounded-full gradient-primary"
                 ></span>
-                <span className="text-sm text-gray-700 leading-relaxed">
+                <span className="text-sm text-ink-700 leading-relaxed">
                   {feature}
                 </span>
               </li>
@@ -129,23 +129,23 @@ export default async function ProductPage({ params }: Props) {
       </section>
 
       {/* مزایا و نمونه استفاده */}
-      <section className="py-24 bg-gray-50 border-y border-gray-100">
+      <section className="py-24 bg-cream-100 border-y border-cream-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-4xl font-black text-gray-900 mb-8">
+              <h2 className="text-4xl font-black text-ink-900 mb-8">
                 نتیجه برای کلینیک شما
               </h2>
               <dl className="grid grid-cols-2 gap-6">
                 {benefits.map((benefit) => (
                   <div
                     key={benefit.label}
-                    className="bg-white rounded-2xl border border-gray-200 p-6 text-center"
+                    className="bg-white rounded-2xl border border-cream-300 p-6 text-center"
                   >
                     <dd className="text-3xl font-black gradient-text">
                       {benefit.value}
                     </dd>
-                    <dt className="text-sm text-gray-500 mt-1">
+                    <dt className="text-sm text-ink-400 mt-1">
                       {benefit.label}
                     </dt>
                   </div>
@@ -153,14 +153,14 @@ export default async function ProductPage({ params }: Props) {
               </dl>
             </div>
 
-            <div className="lg:col-span-3 bg-white rounded-2xl border border-gray-200 p-8">
-              <span className="text-xs font-medium text-sky-600">
+            <div className="lg:col-span-3 bg-white rounded-2xl border border-cream-300 p-8">
+              <span className="text-xs font-medium text-brand-600">
                 نمونه‌ی استفاده
               </span>
-              <h3 className="text-xl font-black text-gray-900 mt-2 mb-3">
+              <h3 className="text-xl font-black text-ink-900 mt-2 mb-3">
                 {useCase.title}
               </h3>
-              <p className="text-gray-600 text-sm leading-relaxed mb-6">
+              <p className="text-ink-700 text-sm leading-relaxed mb-6">
                 {useCase.body}
               </p>
               <FlowDiagram flow={product.flow} />
@@ -172,7 +172,7 @@ export default async function ProductPage({ params }: Props) {
       {/* سوالات متداول محصول */}
       <section className="py-24 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-black text-gray-900 mb-10 text-center">
+          <h2 className="text-4xl font-black text-ink-900 mb-10 text-center">
             سوالات متداول {title}
           </h2>
           <Accordion items={faqs} />

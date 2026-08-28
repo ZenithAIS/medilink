@@ -5,7 +5,7 @@ import NewsletterForm from "./NewsletterForm";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-400 pt-16 pb-8">
+    <footer className="bg-ink-900 text-ink-400 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           <div className="md:col-span-2">
@@ -28,7 +28,7 @@ export default function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-3 h-9 bg-gray-800 hover:bg-sky-600 text-gray-300 hover:text-white rounded-lg flex items-center justify-center text-xs font-medium transition-colors duration-200"
+                  className="px-3 h-9 bg-ink-900 hover:bg-brand-500 text-ink-400 hover:text-white rounded-lg flex items-center justify-center text-xs font-medium transition-colors duration-200"
                 >
                   {social.label}
                 </a>
@@ -43,7 +43,7 @@ export default function Footer() {
                 <li key={product.slug}>
                   <Link
                     href={`/products/${product.slug}`}
-                    className="hover:text-sky-400 transition-colors duration-200"
+                    className="hover:text-brand-300 transition-colors duration-200"
                   >
                     {product.title}
                   </Link>
@@ -59,7 +59,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="hover:text-sky-400 transition-colors duration-200"
+                    className="hover:text-brand-300 transition-colors duration-200"
                   >
                     {link.label}
                   </Link>
@@ -68,7 +68,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/contact"
-                  className="hover:text-sky-400 transition-colors duration-200"
+                  className="hover:text-brand-300 transition-colors duration-200"
                 >
                   تماس و درخواست دمو
                 </Link>
@@ -78,7 +78,7 @@ export default function Footer() {
               <li>
                 <a
                   href={contact.phoneHref}
-                  className="hover:text-sky-400 transition-colors"
+                  className="hover:text-brand-300 transition-colors"
                   dir="ltr"
                 >
                   {contact.phone}
@@ -87,7 +87,7 @@ export default function Footer() {
               <li>
                 <a
                   href={`mailto:${contact.email}`}
-                  className="hover:text-sky-400 transition-colors"
+                  className="hover:text-brand-300 transition-colors"
                   dir="ltr"
                 >
                   {contact.email}
@@ -98,13 +98,13 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs">
+        <div className="border-t border-ink-700 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs">
           <p>© ۱۴۰۵ مدیلینک. تمامی حقوق محفوظ است.</p>
           <div className="flex gap-4">
-            <Link href="/privacy" className="hover:text-sky-400 transition-colors">
+            <Link href="/privacy" className="hover:text-brand-300 transition-colors">
               حریم خصوصی
             </Link>
-            <Link href="/terms" className="hover:text-sky-400 transition-colors">
+            <Link href="/terms" className="hover:text-brand-300 transition-colors">
               قوانین و مقررات
             </Link>
           </div>

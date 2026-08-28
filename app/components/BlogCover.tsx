@@ -9,13 +9,13 @@
 type Motif = "calendar" | "network" | "shield" | "chart";
 
 const THEMES: Record<string, { from: string; to: string; ink: string; motif: Motif }> = {
-  "مدیریت کلینیک": { from: "#0ea5e9", to: "#0284c7", ink: "#e0f2fe", motif: "calendar" },
-  "هوش مصنوعی": { from: "#6366f1", to: "#7c3aed", ink: "#e0e7ff", motif: "network" },
-  "امنیت و حریم خصوصی": { from: "#14b8a6", to: "#0d9488", ink: "#ccfbf1", motif: "shield" },
-  "تحلیل داده": { from: "#f59e0b", to: "#ea580c", ink: "#fef3c7", motif: "chart" },
+  "مدیریت کلینیک": { from: "#f2793f", to: "#b84f22", ink: "#fdeadf", motif: "calendar" },
+  "هوش مصنوعی": { from: "#8b7bd8", to: "#6f5ec4", ink: "#eef0fb", motif: "network" },
+  "امنیت و حریم خصوصی": { from: "#33a877", to: "#279268", ink: "#e6f5ee", motif: "shield" },
+  "تحلیل داده": { from: "#e0a13a", to: "#c2812c", ink: "#fcf2dd", motif: "chart" },
 };
 
-const FALLBACK = { from: "#0ea5e9", to: "#6366f1", ink: "#e0f2fe", motif: "network" as Motif };
+const FALLBACK = { from: "#f2793f", to: "#8b7bd8", ink: "#fdeadf", motif: "network" as Motif };
 
 export default function BlogCover({
   category,

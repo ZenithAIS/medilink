@@ -25,12 +25,12 @@ export default function ProductMockup({
     >
       <defs>
         <linearGradient id={`pm-${uid}`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#0ea5e9" />
-          <stop offset="100%" stopColor="#6366f1" />
+          <stop offset="0%" stopColor="#f2793f" />
+          <stop offset="100%" stopColor="#8b7bd8" />
         </linearGradient>
         <linearGradient id={`pm-area-${uid}`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.3" />
-          <stop offset="100%" stopColor="#0ea5e9" stopOpacity="0" />
+          <stop offset="0%" stopColor="#f2793f" stopOpacity="0.3" />
+          <stop offset="100%" stopColor="#f2793f" stopOpacity="0" />
         </linearGradient>
         <clipPath id={`pm-clip-${uid}`}>
           <rect width="800" height="600" rx="16" />
@@ -69,7 +69,7 @@ export default function ProductMockup({
             {[0, 1, 2].map((c) =>
               [0, 1, 2, 3, 4].map((r) => (
                 <g key={`i-${c}-${r}`}>
-                  <circle cx={40 + c * 245 + 195} cy={150 + r * 84 + 33} r="13" fill="#e0f2fe" />
+                  <circle cx={40 + c * 245 + 195} cy={150 + r * 84 + 33} r="13" fill="#fdeadf" />
                   <rect x={40 + c * 245 + 30} y={150 + r * 84 + 20} width="120" height="8" rx="4" fill="#334155" />
                   <rect x={40 + c * 245 + 60} y={150 + r * 84 + 38} width="90" height="7" rx="3.5" fill="#cbd5e1" />
                 </g>
@@ -96,8 +96,8 @@ export default function ProductMockup({
                     width="72"
                     height="52"
                     rx="9"
-                    fill={hi ? "#0ea5e9" : busy ? "#e0f2fe" : "#f8fafc"}
-                    stroke={hi ? "#0284c7" : "#eef2f7"}
+                    fill={hi ? "#f2793f" : busy ? "#fdeadf" : "#f8fafc"}
+                    stroke={hi ? "#b84f22" : "#eef2f7"}
                   />
                 );
               })
@@ -166,7 +166,7 @@ export default function ProductMockup({
             <path
               d="M70 480 L130 452 L190 462 L250 410 L310 424 L370 356"
               fill="none"
-              stroke="#0ea5e9"
+              stroke="#f2793f"
               strokeWidth="4"
               strokeLinecap="round"
             />
@@ -204,18 +204,18 @@ export default function ProductMockup({
                   width="42"
                   height={h}
                   rx="8"
-                  fill={i === 5 ? `url(#pm-${uid})` : "#e0f2fe"}
+                  fill={i === 5 ? `url(#pm-${uid})` : "#fdeadf"}
                 />
               );
             })}
             <rect x="530" y="256" width="230" height="304" rx="14" fill="#ffffff" stroke="#e2e8f0" />
-            <circle cx="645" cy="366" r="66" fill="none" stroke="#e0f2fe" strokeWidth="26" />
+            <circle cx="645" cy="366" r="66" fill="none" stroke="#fdeadf" strokeWidth="26" />
             <circle
               cx="645"
               cy="366"
               r="66"
               fill="none"
-              stroke="#0ea5e9"
+              stroke="#f2793f"
               strokeWidth="26"
               strokeDasharray="290 415"
               strokeLinecap="round"
@@ -223,7 +223,7 @@ export default function ProductMockup({
             />
             {[0, 1, 2].map((r) => (
               <g key={r}>
-                <rect x="560" y={470 + r * 30} width="12" height="12" rx="3" fill={["#0ea5e9", "#6366f1", "#e0f2fe"][r]} />
+                <rect x="560" y={470 + r * 30} width="12" height="12" rx="3" fill={["#f2793f", "#8b7bd8", "#fdeadf"][r]} />
                 <rect x="584" y={473 + r * 30} width="120" height="7" rx="3.5" fill="#cbd5e1" />
               </g>
             ))}

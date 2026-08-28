@@ -19,26 +19,26 @@ export default function DemoForm() {
   const inputClass = (error?: string) =>
     `w-full border rounded-xl px-4 py-3 text-sm focus:outline-none transition-colors disabled:opacity-60 ${
       error
-        ? "border-red-300 focus:border-red-400"
-        : "border-gray-200 focus:border-sky-400"
+        ? "border-bad-300 focus:border-bad-400"
+        : "border-cream-300 focus:border-brand-300"
     }`;
 
   return (
-    <section id="demo" className="py-24 bg-gray-50">
+    <section id="demo" className="py-24 bg-cream-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           <div>
-            <h2 className="text-2xl font-black text-gray-900 mb-6">
+            <h2 className="text-2xl font-black text-ink-900 mb-6">
               راه‌های ارتباطی
             </h2>
 
             <dl className="space-y-4 mb-8">
               {CONTACT.map((item) => (
                 <div key={item.title}>
-                  <dt className="text-xs text-gray-400">{item.title}</dt>
-                  <dd className="text-sm font-medium text-gray-700">
+                  <dt className="text-xs text-ink-400">{item.title}</dt>
+                  <dd className="text-sm font-medium text-ink-700">
                     {item.href ? (
-                      <a href={item.href} className="hover:text-sky-600" dir="ltr">
+                      <a href={item.href} className="hover:text-brand-600" dir="ltr">
                         {item.value}
                       </a>
                     ) : (
@@ -56,7 +56,7 @@ export default function DemoForm() {
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 py-2 text-xs font-medium text-gray-600 transition-colors hover:border-sky-300 hover:text-sky-600"
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-cream-300 bg-white px-3 py-2 text-xs font-medium text-ink-700 transition-colors hover:border-brand-200 hover:text-brand-600"
                   >
                     {s.label}
                   </a>
@@ -64,35 +64,35 @@ export default function DemoForm() {
               ))}
             </ul>
 
-            <div className="flex items-start gap-3 bg-white border border-gray-200 rounded-xl p-4">
-              <IconShield className="w-5 h-5 text-sky-600 shrink-0 mt-0.5" />
-              <p className="text-sm text-gray-600 leading-relaxed">
+            <div className="flex items-start gap-3 bg-white border border-cream-300 rounded-xl p-4">
+              <IconShield className="w-5 h-5 text-brand-600 shrink-0 mt-0.5" />
+              <p className="text-sm text-ink-700 leading-relaxed">
                 پاسخ‌گویی در کمتر از یک روز کاری. اطلاعات شما محرمانه می‌ماند و
                 در اختیار هیچ شخص ثالثی قرار نمی‌گیرد.
               </p>
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+          <div className="bg-white rounded-2xl p-8 shadow-sm border border-cream-200">
             {state.status === "success" ? (
               <div className="text-center py-12">
-                <h3 className="text-xl font-black text-gray-900 mb-2">
+                <h3 className="text-xl font-black text-ink-900 mb-2">
                   درخواست شما ثبت شد
                 </h3>
-                <p className="text-gray-500 text-sm">
+                <p className="text-ink-400 text-sm">
                   تیم مدیلینک در کمتر از یک روز کاری با شما تماس می‌گیرد.
                 </p>
               </div>
             ) : (
               <form action={formAction} className="space-y-4">
-                <h3 className="text-lg font-black text-gray-900 mb-6">
+                <h3 className="text-lg font-black text-ink-900 mb-6">
                   فرم درخواست دمو رایگان
                 </h3>
 
                 <div>
                   <label
                     htmlFor="name"
-                    className="block text-sm font-medium text-gray-700 mb-1"
+                    className="block text-sm font-medium text-ink-700 mb-1"
                   >
                     نام و نام خانوادگی
                   </label>
@@ -107,7 +107,7 @@ export default function DemoForm() {
                     className={inputClass(state.fieldErrors?.name)}
                   />
                   {state.fieldErrors?.name && (
-                    <p className="mt-1 text-xs text-red-500">
+                    <p className="mt-1 text-xs text-bad-500">
                       {state.fieldErrors.name}
                     </p>
                   )}
@@ -116,7 +116,7 @@ export default function DemoForm() {
                 <div>
                   <label
                     htmlFor="phone"
-                    className="block text-sm font-medium text-gray-700 mb-1"
+                    className="block text-sm font-medium text-ink-700 mb-1"
                   >
                     شماره تماس
                   </label>
@@ -132,7 +132,7 @@ export default function DemoForm() {
                     className={inputClass(state.fieldErrors?.phone)}
                   />
                   {state.fieldErrors?.phone && (
-                    <p className="mt-1 text-xs text-red-500">
+                    <p className="mt-1 text-xs text-bad-500">
                       {state.fieldErrors.phone}
                     </p>
                   )}
@@ -141,7 +141,7 @@ export default function DemoForm() {
                 <div>
                   <label
                     htmlFor="clinicType"
-                    className="block text-sm font-medium text-gray-700 mb-1"
+                    className="block text-sm font-medium text-ink-700 mb-1"
                   >
                     نوع کلینیک
                   </label>
@@ -166,7 +166,7 @@ export default function DemoForm() {
                     ))}
                   </select>
                   {state.fieldErrors?.clinicType && (
-                    <p className="mt-1 text-xs text-red-500">
+                    <p className="mt-1 text-xs text-bad-500">
                       {state.fieldErrors.clinicType}
                     </p>
                   )}
@@ -175,9 +175,9 @@ export default function DemoForm() {
                 <div>
                   <label
                     htmlFor="message"
-                    className="block text-sm font-medium text-gray-700 mb-1"
+                    className="block text-sm font-medium text-ink-700 mb-1"
                   >
-                    پیام <span className="text-gray-400">(اختیاری)</span>
+                    پیام <span className="text-ink-400">(اختیاری)</span>
                   </label>
                   <textarea
                     id="message"
@@ -185,10 +185,10 @@ export default function DemoForm() {
                     placeholder="چه بخشی از کلینیک بیشترین وقت تیم شما را می‌گیرد؟"
                     rows={4}
                     disabled={pending}
-                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-400 transition-colors resize-none disabled:opacity-60"
+                    className="w-full border border-cream-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-300 transition-colors resize-none disabled:opacity-60"
                   />
                   {state.fieldErrors?.message && (
-                    <p className="mt-1 text-xs text-red-500">
+                    <p className="mt-1 text-xs text-bad-500">
                       {state.fieldErrors.message}
                     </p>
                   )}
@@ -197,7 +197,7 @@ export default function DemoForm() {
                 {state.status === "error" && state.message && (
                   <div
                     role="alert"
-                    className="bg-red-50 border border-red-200 text-red-600 text-sm rounded-xl px-4 py-3"
+                    className="bg-bad-50 border border-bad-200 text-bad-600 text-sm rounded-xl px-4 py-3"
                   >
                     {state.message}
                   </div>

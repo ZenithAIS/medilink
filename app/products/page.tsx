@@ -50,21 +50,21 @@ export default function ProductsPage() {
               <Link
                 key={slug}
                 href={`/products/${slug}`}
-                className="group bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col"
+                className="group bg-white rounded-2xl p-6 shadow-sm border border-cream-200 hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col"
               >
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-sky-50 to-teal-50 text-sky-600 flex items-center justify-center mb-4">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-50 to-violet-50 text-brand-600 flex items-center justify-center mb-4">
                   <Icon className="w-6 h-6" />
                 </div>
-                <span className="text-xs font-medium text-sky-600 mb-1">
+                <span className="text-xs font-medium text-brand-600 mb-1">
                   {tagline}
                 </span>
-                <h2 className="text-lg font-bold text-gray-900 mb-2">
+                <h2 className="text-lg font-bold text-ink-900 mb-2">
                   {title}
                 </h2>
-                <p className="text-gray-500 text-sm leading-relaxed grow">
+                <p className="text-ink-400 text-sm leading-relaxed grow">
                   {description}
                 </p>
-                <span className="mt-4 text-sky-600 font-bold text-sm group-hover:underline">
+                <span className="mt-4 text-brand-600 font-bold text-sm group-hover:underline">
                   جزئیات بیشتر
                 </span>
               </Link>
@@ -73,21 +73,21 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-gray-50 border-y border-gray-100">
+      <section className="py-24 bg-cream-100 border-y border-cream-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-12 text-center">
+          <h2 className="text-4xl md:text-5xl font-black text-ink-900 mb-12 text-center">
             چرا مدیلینک؟
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {advantages.map(({ Icon, title, description }) => (
               <div key={title} className="text-center md:text-right">
-                <div className="w-12 h-12 rounded-xl bg-white border border-gray-200 text-sky-600 flex items-center justify-center mb-4 mx-auto md:mx-0">
+                <div className="w-12 h-12 rounded-xl bg-white border border-cream-300 text-brand-600 flex items-center justify-center mb-4 mx-auto md:mx-0">
                   <Icon className="w-6 h-6" />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">
+                <h3 className="text-lg font-bold text-ink-900 mb-2">
                   {title}
                 </h3>
-                <p className="text-gray-500 text-sm leading-relaxed">
+                <p className="text-ink-400 text-sm leading-relaxed">
                   {description}
                 </p>
               </div>

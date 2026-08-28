@@ -29,7 +29,7 @@ export default function NewsletterForm() {
           required
           disabled={pending}
           placeholder="ایمیل شما"
-          className="flex-1 min-w-0 bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:border-sky-500 disabled:opacity-60"
+          className="flex-1 min-w-0 bg-ink-900 border border-ink-700 rounded-lg px-3 py-2 text-sm text-white placeholder:text-ink-400 focus:outline-none focus:border-brand-400 disabled:opacity-60"
         />
         <button
           type="submit"
@@ -43,7 +43,7 @@ export default function NewsletterForm() {
         <p
           role="status"
           className={`mt-2 text-xs ${
-            state.status === "success" ? "text-sky-400" : "text-red-400"
+            state.status === "success" ? "text-brand-300" : "text-bad-400"
           }`}
         >
           {state.message}

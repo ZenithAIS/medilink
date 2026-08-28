@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Reveal from "./Reveal";
 
 export default function FinalCta({
   title = "کلینیک‌تان را در یک جلسه‌ی ۳۰ دقیقه‌ای ببینید",
@@ -12,18 +13,32 @@ export default function FinalCta({
   return (
     <section className="py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="gradient-primary rounded-3xl px-8 py-14 text-center text-white">
-          <h2 className="text-4xl md:text-5xl font-black mb-4">{title}</h2>
-          <p className="text-white/85 max-w-xl mx-auto mb-8 leading-relaxed">
+        <Reveal
+          className="relative overflow-hidden rounded-3xl gradient-primary px-8 py-14 text-center text-white"
+        >
+          <span
+            aria-hidden
+            className="animate-float-slow absolute -left-10 -top-10 h-52 w-52 rounded-full bg-white/12"
+          ></span>
+          <span
+            aria-hidden
+            className="animate-float-slow absolute -bottom-16 left-16 h-40 w-40 rounded-full bg-white/8"
+            style={{ animationDelay: "2s" }}
+          ></span>
+
+          <h2 className="relative text-4xl md:text-5xl font-black mb-4">
+            {title}
+          </h2>
+          <p className="relative text-white/85 max-w-xl mx-auto mb-8 leading-relaxed">
             {description}
           </p>
           <Link
             href="/contact"
-            className="inline-block bg-white text-sky-700 px-8 py-4 rounded-xl text-base font-bold hover:bg-sky-50 transition-colors shadow-lg"
+            className="relative inline-block bg-white text-brand-700 px-8 py-4 rounded-xl text-base font-bold shadow-lg transition-transform hover:-translate-y-0.5 hover:bg-brand-50"
           >
             {cta}
           </Link>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

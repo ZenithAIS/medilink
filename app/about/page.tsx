@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/app/components/PageHero";
-import Figure from "@/app/components/Figure";
 import FinalCta from "@/app/components/FinalCta";
 import { IconShield, IconChart, IconChat, IconClock } from "@/app/components/Icons";
 
@@ -83,22 +82,22 @@ export default function AboutPage() {
       {/* داستان ما */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-black text-gray-900 mb-4 text-center">
+          <h2 className="text-4xl font-black text-ink-900 mb-4 text-center">
             رویکرد ما
           </h2>
-          <p className="text-gray-500 text-center max-w-xl mx-auto mb-12 text-base leading-relaxed">
+          <p className="text-ink-400 text-center max-w-xl mx-auto mb-12 text-base leading-relaxed">
             چهار اصلی که هر پروژه‌ی مدیلینک بر پایه‌ی آن‌ها پیش می‌رود.
           </p>
           <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6">
             {approach.map((item) => (
               <div
                 key={item.title}
-                className="rounded-2xl border border-gray-100 bg-gray-50 p-6"
+                className="rounded-2xl border border-cream-200 bg-cream-100 p-6"
               >
-                <h3 className="text-base font-bold text-gray-900 mb-2">
+                <h3 className="text-base font-bold text-ink-900 mb-2">
                   {item.title}
                 </h3>
-                <p className="text-gray-500 text-sm leading-relaxed">
+                <p className="text-ink-400 text-sm leading-relaxed">
                   {item.body}
                 </p>
               </div>
@@ -108,24 +107,24 @@ export default function AboutPage() {
       </section>
 
       {/* ارزش‌ها */}
-      <section className="py-24 bg-gray-50 border-y border-gray-100">
+      <section className="py-24 bg-cream-100 border-y border-cream-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-black text-gray-900 mb-12 text-center">
+          <h2 className="text-4xl font-black text-ink-900 mb-12 text-center">
             ارزش‌های ما
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {values.map(({ Icon, title, description }) => (
               <div
                 key={title}
-                className="bg-white rounded-2xl p-6 border border-gray-100"
+                className="bg-white rounded-2xl p-6 border border-cream-200"
               >
-                <div className="w-12 h-12 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center mb-4">
+                <div className="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mb-4">
                   <Icon className="w-6 h-6" />
                 </div>
-                <h3 className="text-base font-bold text-gray-900 mb-2">
+                <h3 className="text-base font-bold text-ink-900 mb-2">
                   {title}
                 </h3>
-                <p className="text-gray-500 text-sm leading-relaxed">
+                <p className="text-ink-400 text-sm leading-relaxed">
                   {description}
                 </p>
               </div>
@@ -136,10 +135,10 @@ export default function AboutPage() {
 
       <section className="py-24 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-black text-gray-900 mb-4">
+          <h2 className="text-4xl font-black text-ink-900 mb-4">
             با ما کار کنید
           </h2>
-          <p className="text-gray-500 leading-relaxed mb-8">
+          <p className="text-ink-400 leading-relaxed mb-8">
             چه مدیر کلینیکی باشید که دنبال خودکار کردن فرآیندهایش است، چه
             متخصصی که می‌خواهد به تیم ما بپیوندد — خوشحال می‌شویم صحبت کنیم.
           </p>

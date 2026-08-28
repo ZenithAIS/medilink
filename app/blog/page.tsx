@@ -31,7 +31,7 @@ export default function BlogPage() {
             {categories.map((category) => (
               <li
                 key={category}
-                className="px-4 py-2 rounded-full bg-gray-50 border border-gray-200 text-sm text-gray-600"
+                className="px-4 py-2 rounded-full bg-cream-100 border border-cream-300 text-sm text-ink-700"
               >
                 {category}
               </li>
@@ -41,7 +41,7 @@ export default function BlogPage() {
           {/* مقاله‌ی شاخص */}
           <Link
             href={`/blog/${featured.slug}`}
-            className="group grid grid-cols-1 lg:grid-cols-2 gap-8 items-center rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow mb-12"
+            className="group grid grid-cols-1 lg:grid-cols-2 gap-8 items-center rounded-2xl border border-cream-300 overflow-hidden hover:shadow-lg transition-shadow mb-12"
           >
             {featured.cover ? (
               <Figure
@@ -58,20 +58,20 @@ export default function BlogPage() {
               />
             )}
             <div className="p-6 lg:pe-10">
-              <div className="flex items-center gap-3 text-xs text-gray-400 mb-3">
-                <span className="text-sky-600 font-medium">
+              <div className="flex items-center gap-3 text-xs text-ink-400 mb-3">
+                <span className="text-brand-600 font-medium">
                   {featured.category}
                 </span>
                 <span>{featured.date}</span>
                 <span>{featured.readingTime}</span>
               </div>
-              <h2 className="text-3xl font-black text-gray-900 mb-3 group-hover:text-sky-600 transition-colors">
+              <h2 className="text-3xl font-black text-ink-900 mb-3 group-hover:text-brand-600 transition-colors">
                 {featured.title}
               </h2>
-              <p className="text-gray-500 text-sm leading-relaxed mb-4">
+              <p className="text-ink-400 text-sm leading-relaxed mb-4">
                 {featured.excerpt}
               </p>
-              <span className="text-sky-600 font-bold text-sm group-hover:underline">
+              <span className="text-brand-600 font-bold text-sm group-hover:underline">
                 مطالعه‌ی مقاله
               </span>
             </div>
@@ -83,7 +83,7 @@ export default function BlogPage() {
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="group rounded-2xl border border-gray-200 overflow-hidden hover:shadow-md transition-shadow flex flex-col"
+                className="group rounded-2xl border border-cream-300 overflow-hidden hover:shadow-md transition-shadow flex flex-col"
               >
                 {post.cover ? (
                   <Figure
@@ -100,19 +100,19 @@ export default function BlogPage() {
                   />
                 )}
                 <div className="p-5 flex flex-col grow">
-                  <div className="flex items-center gap-3 text-xs text-gray-400 mb-2">
-                    <span className="text-sky-600 font-medium">
+                  <div className="flex items-center gap-3 text-xs text-ink-400 mb-2">
+                    <span className="text-brand-600 font-medium">
                       {post.category}
                     </span>
                     <span>{post.readingTime}</span>
                   </div>
-                  <h3 className="text-base font-bold text-gray-900 mb-2 group-hover:text-sky-600 transition-colors">
+                  <h3 className="text-base font-bold text-ink-900 mb-2 group-hover:text-brand-600 transition-colors">
                     {post.title}
                   </h3>
-                  <p className="text-gray-500 text-sm leading-relaxed grow">
+                  <p className="text-ink-400 text-sm leading-relaxed grow">
                     {post.excerpt}
                   </p>
-                  <span className="text-xs text-gray-400 mt-4">
+                  <span className="text-xs text-ink-400 mt-4">
                     {post.date}
                   </span>
                 </div>

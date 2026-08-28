@@ -19,23 +19,23 @@ export default function FlowDiagram({ flow }: { flow: Product["flow"] }) {
             <div
               className={`w-full rounded-2xl border p-4 text-center ${
                 last
-                  ? "border-sky-200 bg-sky-50"
-                  : "border-gray-200 bg-white"
+                  ? "border-brand-100 bg-brand-50"
+                  : "border-cream-300 bg-white"
               }`}
             >
               <span
                 className={`mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-xl ${
                   last
                     ? "gradient-primary text-white"
-                    : "bg-gray-50 text-sky-600"
+                    : "bg-cream-100 text-brand-600"
                 }`}
               >
                 <Icon className="h-5 w-5" />
               </span>
-              <span className="block text-sm font-bold text-gray-900">
+              <span className="block text-sm font-bold text-ink-900">
                 {node.label}
               </span>
-              <span className="mt-1 block text-xs text-gray-500">
+              <span className="mt-1 block text-xs text-ink-400">
                 {node.note}
               </span>
             </div>
@@ -43,7 +43,7 @@ export default function FlowDiagram({ flow }: { flow: Product["flow"] }) {
             {!last && (
               <span
                 aria-hidden
-                className="shrink-0 text-sky-300 sm:-mx-1 sm:self-center"
+                className="shrink-0 text-brand-200 sm:-mx-1 sm:self-center"
               >
                 {/* موبایل: فلش رو به پایین — دسکتاپ: رو به چپ (ادامه‌ی جریان در RTL) */}
                 <svg

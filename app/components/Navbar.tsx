@@ -11,7 +11,7 @@ export default function Navbar() {
   const linkClass = (href: string) => {
     const active = pathname === href || pathname.startsWith(`${href}/`);
     return `text-sm font-medium transition-colors duration-200 ${
-      active ? "text-sky-600" : "text-gray-600 hover:text-sky-600"
+      active ? "text-brand-600" : "text-ink-700 hover:text-brand-600"
     }`;
   };
 
@@ -42,14 +42,14 @@ export default function Navbar() {
           </div>
 
           <button
-            className="lg:hidden p-2 rounded-lg text-gray-600"
+            className="lg:hidden p-2 rounded-lg text-ink-700"
             onClick={() => setIsOpen(!isOpen)}
             aria-label={isOpen ? "بستن منو" : "باز کردن منو"}
             aria-expanded={isOpen}
           >
-            <div className="w-6 h-0.5 bg-gray-600 mb-1.5"></div>
-            <div className="w-6 h-0.5 bg-gray-600 mb-1.5"></div>
-            <div className="w-6 h-0.5 bg-gray-600"></div>
+            <div className="w-6 h-0.5 bg-ink-700 mb-1.5"></div>
+            <div className="w-6 h-0.5 bg-ink-700 mb-1.5"></div>
+            <div className="w-6 h-0.5 bg-ink-700"></div>
           </button>
         </div>
 

@@ -19,18 +19,18 @@ export const metadata: Metadata = {
 
 function Cell({ value }: { value: ComparisonRow["basic"] }) {
   if (typeof value === "string") {
-    return <span className="text-sm text-gray-700">{value}</span>;
+    return <span className="text-sm text-ink-700">{value}</span>;
   }
   return value ? (
     <>
-      <span aria-hidden className="text-sky-600 font-black">
+      <span aria-hidden className="text-brand-600 font-black">
         ✓
       </span>
       <span className="sr-only">دارد</span>
     </>
   ) : (
     <>
-      <span aria-hidden className="text-gray-300 font-black">
+      <span aria-hidden className="text-ink-400 font-black">
         ×
       </span>
       <span className="sr-only">ندارد</span>
@@ -57,8 +57,8 @@ export default function PricingPage() {
                 key={plan.name}
                 className={`rounded-2xl p-8 flex flex-col h-full ${
                   plan.featured
-                    ? "border-2 border-sky-500 shadow-xl relative bg-white"
-                    : "border border-gray-200 bg-white shadow-sm"
+                    ? "border-2 border-brand-400 shadow-xl relative bg-white"
+                    : "border border-cream-300 bg-white shadow-sm"
                 }`}
               >
                 {plan.featured && (
@@ -66,17 +66,17 @@ export default function PricingPage() {
                     پرطرفدار
                   </span>
                 )}
-                <h2 className="text-2xl font-black text-gray-900 mb-2">
+                <h2 className="text-2xl font-black text-ink-900 mb-2">
                   {plan.name}
                 </h2>
-                <p className="text-sm text-gray-500 leading-relaxed mb-6">
+                <p className="text-sm text-ink-400 leading-relaxed mb-6">
                   {plan.summary}
                 </p>
                 <div className="mb-6">
                   <div className="text-3xl font-black gradient-text">
                     {plan.price}
                   </div>
-                  <div className="text-xs text-gray-400 mt-1">
+                  <div className="text-xs text-ink-400 mt-1">
                     {plan.period}
                   </div>
                 </div>
@@ -85,9 +85,9 @@ export default function PricingPage() {
                     <li key={feature} className="flex items-start gap-2">
                       <span
                         aria-hidden
-                        className="mt-1.5 w-1.5 h-1.5 shrink-0 rounded-full bg-sky-500"
+                        className="mt-1.5 w-1.5 h-1.5 shrink-0 rounded-full bg-brand-400"
                       ></span>
-                      <span className="text-sm text-gray-600 leading-relaxed">
+                      <span className="text-sm text-ink-700 leading-relaxed">
                         {feature}
                       </span>
                     </li>
@@ -98,7 +98,7 @@ export default function PricingPage() {
                   className={`block text-center py-3 rounded-xl font-bold transition-opacity ${
                     plan.featured
                       ? "gradient-primary text-white hover:opacity-90 shadow-md"
-                      : "border-2 border-gray-200 text-gray-700 hover:border-sky-400 hover:text-sky-600"
+                      : "border-2 border-cream-300 text-ink-700 hover:border-brand-300 hover:text-brand-600"
                   }`}
                 >
                   دریافت تعرفه
@@ -110,45 +110,45 @@ export default function PricingPage() {
       </section>
 
       {/* جدول مقایسه */}
-      <section className="py-24 bg-gray-50 border-y border-gray-100">
+      <section className="py-24 bg-cream-100 border-y border-cream-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-black text-gray-900 mb-10 text-center">
+          <h2 className="text-4xl font-black text-ink-900 mb-10 text-center">
             مقایسه‌ی امکانات
           </h2>
-          <div className="overflow-x-auto rounded-2xl border border-gray-200 bg-white">
+          <div className="overflow-x-auto rounded-2xl border border-cream-300 bg-white">
             <table className="w-full md:min-w-[640px] text-right">
               <caption className="sr-only">
                 جدول مقایسه‌ی امکانات پلن‌های مدیلینک
               </caption>
               <thead>
-                <tr className="border-b border-gray-200 bg-gray-50">
-                  <th scope="col" className="p-2 md:p-4 text-xs md:text-sm font-bold text-gray-900">
+                <tr className="border-b border-cream-300 bg-cream-100">
+                  <th scope="col" className="p-2 md:p-4 text-xs md:text-sm font-bold text-ink-900">
                     امکانات
                   </th>
-                  <th scope="col" className="p-2 md:p-4 text-xs md:text-sm font-bold text-gray-900 text-center">
+                  <th scope="col" className="p-2 md:p-4 text-xs md:text-sm font-bold text-ink-900 text-center">
                     پایه
                   </th>
-                  <th scope="col" className="p-2 md:p-4 text-xs md:text-sm font-bold text-sky-600 text-center">
+                  <th scope="col" className="p-2 md:p-4 text-xs md:text-sm font-bold text-brand-600 text-center">
                     حرفه‌ای
                   </th>
-                  <th scope="col" className="p-2 md:p-4 text-xs md:text-sm font-bold text-gray-900 text-center">
+                  <th scope="col" className="p-2 md:p-4 text-xs md:text-sm font-bold text-ink-900 text-center">
                     ویژه
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody className="divide-y divide-cream-200">
                 {comparison.map((row) => (
                   <tr key={row.feature}>
                     <th
                       scope="row"
-                      className="p-2 md:p-4 text-xs md:text-sm font-medium text-gray-700 text-right"
+                      className="p-2 md:p-4 text-xs md:text-sm font-medium text-ink-700 text-right"
                     >
                       {row.feature}
                     </th>
                     <td className="p-2 md:p-4 text-center">
                       <Cell value={row.basic} />
                     </td>
-                    <td className="p-2 md:p-4 text-center bg-sky-50/40">
+                    <td className="p-2 md:p-4 text-center bg-brand-50/40">
                       <Cell value={row.pro} />
                     </td>
                     <td className="p-2 md:p-4 text-center">
@@ -165,19 +165,19 @@ export default function PricingPage() {
       {/* افزودنی‌ها */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-black text-gray-900 mb-10 text-center">
+          <h2 className="text-4xl font-black text-ink-900 mb-10 text-center">
             خدمات افزودنی
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {addons.map((addon) => (
               <div
                 key={addon.title}
-                className="bg-gray-50 rounded-2xl p-6 border border-gray-100"
+                className="bg-cream-100 rounded-2xl p-6 border border-cream-200"
               >
-                <h3 className="text-base font-bold text-gray-900 mb-2">
+                <h3 className="text-base font-bold text-ink-900 mb-2">
                   {addon.title}
                 </h3>
-                <p className="text-gray-500 text-sm leading-relaxed">
+                <p className="text-ink-400 text-sm leading-relaxed">
                   {addon.description}
                 </p>
               </div>
@@ -187,9 +187,9 @@ export default function PricingPage() {
       </section>
 
       {/* FAQ تعرفه */}
-      <section className="py-24 bg-gray-50 border-t border-gray-100">
+      <section className="py-24 bg-cream-100 border-t border-cream-200">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-black text-gray-900 mb-10 text-center">
+          <h2 className="text-4xl font-black text-ink-900 mb-10 text-center">
             پرسش‌های مالی رایج
           </h2>
           <Accordion items={pricingFaqs} />

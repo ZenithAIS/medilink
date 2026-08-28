@@ -75,18 +75,18 @@ export default function TermsPage() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           {sections.map((section) => (
             <div key={section.title}>
-              <h2 className="text-2xl font-black text-gray-900 mb-3">
+              <h2 className="text-2xl font-black text-ink-900 mb-3">
                 {section.title}
               </h2>
               <ul className="space-y-2">
                 {section.body.map((line) => (
                   <li
                     key={line}
-                    className="flex items-start gap-2 text-gray-600 text-sm leading-relaxed"
+                    className="flex items-start gap-2 text-ink-700 text-sm leading-relaxed"
                   >
                     <span
                       aria-hidden
-                      className="mt-2 w-1.5 h-1.5 shrink-0 rounded-full bg-sky-500"
+                      className="mt-2 w-1.5 h-1.5 shrink-0 rounded-full bg-brand-400"
                     ></span>
                     <span>{line}</span>
                   </li>
@@ -95,15 +95,15 @@ export default function TermsPage() {
             </div>
           ))}
 
-          <div className="rounded-2xl bg-gray-50 border border-gray-200 p-6">
-            <h2 className="text-lg font-black text-gray-900 mb-2">
+          <div className="rounded-2xl bg-cream-100 border border-cream-300 p-6">
+            <h2 className="text-lg font-black text-ink-900 mb-2">
               پرسش درباره‌ی این شرایط
             </h2>
-            <p className="text-gray-600 text-sm leading-relaxed">
+            <p className="text-ink-700 text-sm leading-relaxed">
               با{" "}
               <a
                 href={`mailto:${contact.email}`}
-                className="text-sky-600 hover:underline"
+                className="text-brand-600 hover:underline"
               >
                 {contact.email}
               </a>{" "}
