@@ -2,6 +2,7 @@ import Link from "next/link";
 import { products } from "@/app/lib/products";
 import { contact, navLinks, socials } from "@/app/lib/site";
 import NewsletterForm from "./NewsletterForm";
+import LogoMark from "./LogoMark";
 
 export default function Footer() {
   return (
@@ -9,7 +10,8 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           <div className="md:col-span-2">
-            <Link href="/">
+            <Link href="/" className="flex items-center gap-2">
+              <LogoMark className="h-8 w-8" />
               <span className="text-2xl font-black gradient-text">
                 مدیلینک
               </span>
