@@ -3,6 +3,7 @@ import Link from "next/link";
 import PageHero from "@/app/components/PageHero";
 import FinalCta from "@/app/components/FinalCta";
 import { IconShield, IconChart, IconChat, IconClock } from "@/app/components/Icons";
+import Reveal from "@/app/components/Reveal";
 
 export const metadata: Metadata = {
   title: "درباره‌ی ما | مدیلینک",
@@ -39,24 +40,28 @@ const approach = [
 const values = [
   {
     Icon: IconShield,
+    tone: "bg-brand-50 text-brand-600",
     title: "محرمانگی، پیش‌فرض نه گزینه",
     description:
       "داده‌ی پزشکی روی سرورهای داخل کشور می‌ماند و هرگز برای آموزش مدل‌های عمومی استفاده نمی‌شود.",
   },
   {
     Icon: IconChart,
+    tone: "bg-good-50 text-good-600",
     title: "ادعا با عدد، نه شعار",
     description:
       "هر محصول شاخص‌های خودش را گزارش می‌کند تا اثرش روی کلینیک قابل سنجش باشد.",
   },
   {
     Icon: IconChat,
+    tone: "bg-violet-50 text-violet-500",
     title: "زبان کادر درمان",
     description:
       "محصول را با پزشک و منشی می‌سازیم، نه فقط برای آن‌ها. هر قابلیت از یک نیاز واقعی آمده است.",
   },
   {
     Icon: IconClock,
+    tone: "bg-cool-50 text-cool-500",
     title: "سادگی بر پیچیدگی",
     description:
       "اگر استفاده از یک قابلیت به آموزش طولانی نیاز داشته باشد، هنوز آماده نیست.",
@@ -89,9 +94,10 @@ export default function AboutPage() {
             چهار اصلی که هر پروژه‌ی مدیلینک بر پایه‌ی آن‌ها پیش می‌رود.
           </p>
           <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {approach.map((item) => (
-              <div
+            {approach.map((item, i) => (
+              <Reveal
                 key={item.title}
+                delay={i * 90}
                 className="rounded-2xl border border-cream-200 bg-cream-100 p-6"
               >
                 <h3 className="text-base font-bold text-ink-900 mb-2">
@@ -100,7 +106,7 @@ export default function AboutPage() {
                 <p className="text-ink-400 text-sm leading-relaxed">
                   {item.body}
                 </p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -113,12 +119,15 @@ export default function AboutPage() {
             ارزش‌های ما
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {values.map(({ Icon, title, description }) => (
-              <div
+            {values.map(({ Icon, title, description, tone }, i) => (
+              <Reveal
                 key={title}
-                className="bg-white rounded-2xl p-6 border border-cream-200"
+                delay={i * 90}
+                className="group bg-white rounded-2xl p-6 border border-cream-200"
               >
-                <div className="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mb-4">
+                <div
+                  className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110 ${tone}`}
+                >
                   <Icon className="w-6 h-6" />
                 </div>
                 <h3 className="text-base font-bold text-ink-900 mb-2">
@@ -127,7 +136,7 @@ export default function AboutPage() {
                 <p className="text-ink-400 text-sm leading-relaxed">
                   {description}
                 </p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PageHero from "@/app/components/PageHero";
 import { contact } from "@/app/lib/site";
+import Reveal from "@/app/components/Reveal";
 
 export const metadata: Metadata = {
   title: "حریم خصوصی | مدیلینک",
@@ -69,8 +70,8 @@ export default function PrivacyPage() {
 
       <section className="py-20 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-          {sections.map((section) => (
-            <div key={section.title}>
+          {sections.map((section, i) => (
+            <Reveal key={section.title} delay={i * 50}>
               <h2 className="text-2xl font-black text-ink-900 mb-3">
                 {section.title}
               </h2>
@@ -88,10 +89,10 @@ export default function PrivacyPage() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </Reveal>
           ))}
 
-          <div className="rounded-2xl bg-cream-100 border border-cream-300 p-6">
+          <Reveal className="rounded-2xl bg-cream-100 border border-cream-300 p-6">
             <h2 className="text-lg font-black text-ink-900 mb-2">
               تماس درباره‌ی حریم خصوصی
             </h2>
@@ -105,7 +106,7 @@ export default function PrivacyPage() {
               </a>{" "}
               در تماس باشید.
             </p>
-          </div>
+          </Reveal>
         </div>
       </section>
     </main>

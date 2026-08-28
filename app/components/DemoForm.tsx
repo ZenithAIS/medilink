@@ -4,6 +4,7 @@ import { submitLead, type LeadState } from "@/app/actions/leads";
 import { CLINIC_TYPES } from "@/app/lib/clinic-types";
 import { IconShield } from "./Icons";
 import { contact, socials } from "@/app/lib/site";
+import Reveal from "./Reveal";
 
 const initialState: LeadState = { status: "idle" };
 
@@ -27,7 +28,7 @@ export default function DemoForm() {
     <section id="demo" className="py-24 bg-cream-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          <div>
+          <Reveal>
             <h2 className="text-2xl font-black text-ink-900 mb-6">
               راه‌های ارتباطی
             </h2>
@@ -71,9 +72,12 @@ export default function DemoForm() {
                 در اختیار هیچ شخص ثالثی قرار نمی‌گیرد.
               </p>
             </div>
-          </div>
+          </Reveal>
 
-          <div className="bg-white rounded-2xl p-8 shadow-sm border border-cream-200">
+          <Reveal
+            delay={120}
+            className="bg-white rounded-2xl p-8 shadow-sm border border-cream-200"
+          >
             {state.status === "success" ? (
               <div className="text-center py-12">
                 <h3 className="text-xl font-black text-ink-900 mb-2">
@@ -212,7 +216,7 @@ export default function DemoForm() {
                 </button>
               </form>
             )}
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

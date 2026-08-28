@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PageHero from "@/app/components/PageHero";
 import Accordion from "@/app/components/Accordion";
+import Reveal from "@/app/components/Reveal";
 import FinalCta from "@/app/components/FinalCta";
 import { faqGroups } from "@/app/lib/faq";
 import { siteUrl } from "@/app/lib/site";
@@ -38,13 +39,13 @@ export default function FaqPage() {
 
       <section className="py-24 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-          {faqGroups.map((group) => (
-            <div key={group.title}>
+          {faqGroups.map((group, i) => (
+            <Reveal key={group.title} delay={i * 80}>
               <h2 className="text-3xl font-black text-ink-900 mb-6">
                 {group.title}
               </h2>
               <Accordion items={group.items} />
-            </div>
+            </Reveal>
           ))}
         </div>
       </section>

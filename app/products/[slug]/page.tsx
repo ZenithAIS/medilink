@@ -6,6 +6,7 @@ import Figure from "@/app/components/Figure";
 import FlowDiagram from "@/app/components/FlowDiagram";
 import ProductMockup from "@/app/components/ProductMockup";
 import FinalCta from "@/app/components/FinalCta";
+import Reveal from "@/app/components/Reveal";
 import { products, getProduct } from "@/app/lib/products";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -110,9 +111,11 @@ export default async function ProductPage({ params }: Props) {
             قابلیت‌ها
           </h2>
           <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {features.map((feature) => (
-              <li
+            {features.map((feature, i) => (
+              <Reveal
+                as="li"
                 key={feature}
+                delay={i * 60}
                 className="flex items-start gap-3 bg-cream-100 rounded-xl p-5"
               >
                 <span
@@ -122,7 +125,7 @@ export default async function ProductPage({ params }: Props) {
                 <span className="text-sm text-ink-700 leading-relaxed">
                   {feature}
                 </span>
-              </li>
+              </Reveal>
             ))}
           </ul>
         </div>
@@ -137,9 +140,10 @@ export default async function ProductPage({ params }: Props) {
                 نتیجه برای کلینیک شما
               </h2>
               <dl className="grid grid-cols-2 gap-6">
-                {benefits.map((benefit) => (
-                  <div
+                {benefits.map((benefit, i) => (
+                  <Reveal
                     key={benefit.label}
+                    delay={i * 100}
                     className="bg-white rounded-2xl border border-cream-300 p-6 text-center"
                   >
                     <dd className="text-3xl font-black gradient-text">
@@ -148,12 +152,15 @@ export default async function ProductPage({ params }: Props) {
                     <dt className="text-sm text-ink-400 mt-1">
                       {benefit.label}
                     </dt>
-                  </div>
+                  </Reveal>
                 ))}
               </dl>
             </div>
 
-            <div className="lg:col-span-3 bg-white rounded-2xl border border-cream-300 p-8">
+            <Reveal
+              delay={150}
+              className="lg:col-span-3 bg-white rounded-2xl border border-cream-300 p-8"
+            >
               <span className="text-xs font-medium text-brand-600">
                 نمونه‌ی استفاده
               </span>
@@ -164,7 +171,7 @@ export default async function ProductPage({ params }: Props) {
                 {useCase.body}
               </p>
               <FlowDiagram flow={product.flow} />
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>

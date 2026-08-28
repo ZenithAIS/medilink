@@ -4,6 +4,7 @@ import PageHero from "@/app/components/PageHero";
 import Figure from "@/app/components/Figure";
 import BlogCover from "@/app/components/BlogCover";
 import NewsletterCta from "@/app/components/NewsletterCta";
+import Reveal from "@/app/components/Reveal";
 import { posts, categories } from "@/app/lib/blog";
 
 export const metadata: Metadata = {
@@ -39,9 +40,10 @@ export default function BlogPage() {
           </ul>
 
           {/* مقاله‌ی شاخص */}
+          <Reveal className="mb-12">
           <Link
             href={`/blog/${featured.slug}`}
-            className="group grid grid-cols-1 lg:grid-cols-2 gap-8 items-center rounded-2xl border border-cream-300 overflow-hidden hover:shadow-lg transition-shadow mb-12"
+            className="group grid grid-cols-1 lg:grid-cols-2 gap-8 items-center rounded-2xl border border-cream-300 overflow-hidden hover:shadow-lg transition-shadow"
           >
             {featured.cover ? (
               <Figure
@@ -76,12 +78,13 @@ export default function BlogPage() {
               </span>
             </div>
           </Link>
+          </Reveal>
 
           {/* شبکه‌ی مقالات */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {rest.map((post) => (
+            {rest.map((post, i) => (
+              <Reveal key={post.slug} delay={i * 80}>
               <Link
-                key={post.slug}
                 href={`/blog/${post.slug}`}
                 className="group rounded-2xl border border-cream-300 overflow-hidden hover:shadow-md transition-shadow flex flex-col"
               >
@@ -117,6 +120,7 @@ export default function BlogPage() {
                   </span>
                 </div>
               </Link>
+              </Reveal>
             ))}
           </div>
         </div>

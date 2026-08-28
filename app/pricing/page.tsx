@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/app/components/PageHero";
 import Accordion from "@/app/components/Accordion";
+import Reveal from "@/app/components/Reveal";
 import {
   plans,
   comparison,
@@ -52,9 +53,10 @@ export default function PricingPage() {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-            {plans.map((plan) => (
-              <div
+            {plans.map((plan, i) => (
+              <Reveal
                 key={plan.name}
+                delay={i * 100}
                 className={`rounded-2xl p-8 flex flex-col h-full ${
                   plan.featured
                     ? "border-2 border-brand-400 shadow-xl relative bg-white"
@@ -103,7 +105,7 @@ export default function PricingPage() {
                 >
                   دریافت تعرفه
                 </Link>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -169,9 +171,10 @@ export default function PricingPage() {
             خدمات افزودنی
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {addons.map((addon) => (
-              <div
+            {addons.map((addon, i) => (
+              <Reveal
                 key={addon.title}
+                delay={i * 80}
                 className="bg-cream-100 rounded-2xl p-6 border border-cream-200"
               >
                 <h3 className="text-base font-bold text-ink-900 mb-2">
@@ -180,7 +183,7 @@ export default function PricingPage() {
                 <p className="text-ink-400 text-sm leading-relaxed">
                   {addon.description}
                 </p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -192,7 +195,9 @@ export default function PricingPage() {
           <h2 className="text-4xl font-black text-ink-900 mb-10 text-center">
             پرسش‌های مالی رایج
           </h2>
-          <Accordion items={pricingFaqs} />
+          <Reveal>
+            <Accordion items={pricingFaqs} />
+          </Reveal>
         </div>
       </section>
     </main>

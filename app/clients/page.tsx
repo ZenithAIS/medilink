@@ -9,6 +9,7 @@ import {
   IconClock,
   IconShield,
 } from "@/app/components/Icons";
+import Reveal from "@/app/components/Reveal";
 
 export const metadata: Metadata = {
   title: "نتایج و سنجش | مدیلینک",
@@ -30,21 +31,25 @@ export const metadata: Metadata = {
 const metrics = [
   {
     Icon: IconCalendar,
+    tone: "bg-brand-50 text-brand-600",
     title: "نرخ عدم‌حضور",
     body: "نسبت نوبت‌هایی که بیمار در آن‌ها حاضر نشده، پیش و پس از فعال شدن یادآوری خودکار.",
   },
   {
     Icon: IconClock,
+    tone: "bg-good-50 text-good-600",
     title: "زمان صرف‌شده‌ی تیم",
     body: "ساعت‌هایی که منشی صرف تماس، یادآوری و ثبت دستی می‌کند و چه سهمی از آن خودکار شده است.",
   },
   {
     Icon: IconChat,
+    tone: "bg-violet-50 text-violet-500",
     title: "پاسخ‌گویی به بیمار",
     body: "تعداد پیام‌های دریافتی، سهم پاسخ خودکار، و میانگین زمان تا اولین پاسخ.",
   },
   {
     Icon: IconChart,
+    tone: "bg-cool-50 text-cool-500",
     title: "بازگشت بیمار",
     body: "نسبت بیمارانی که برای درمان بعدی برمی‌گردند و فاصله‌ی میان مراجعه‌ها.",
   },
@@ -88,19 +93,22 @@ export default function ClientsPage() {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {metrics.map(({ Icon, title, body }) => (
-              <div
+            {metrics.map(({ Icon, title, body, tone }, i) => (
+              <Reveal
                 key={title}
-                className="bg-cream-100 rounded-2xl p-6 border border-cream-200"
+                delay={i * 90}
+                className="group bg-cream-100 rounded-2xl p-6 border border-cream-200"
               >
-                <div className="w-12 h-12 rounded-xl bg-white border border-cream-300 text-brand-600 flex items-center justify-center mb-4">
+                <div
+                  className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110 ${tone}`}
+                >
                   <Icon className="w-6 h-6" />
                 </div>
                 <h3 className="text-base font-bold text-ink-900 mb-2">
                   {title}
                 </h3>
                 <p className="text-ink-400 text-sm leading-relaxed">{body}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -112,9 +120,11 @@ export default function ClientsPage() {
             چطور می‌سنجیم
           </h2>
           <ol className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {method.map((m) => (
-              <li
+            {method.map((m, i) => (
+              <Reveal
+                as="li"
                 key={m.step}
+                delay={i * 100}
                 className="bg-white rounded-2xl p-6 border border-cream-300"
               >
                 <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl gradient-primary text-lg font-black text-white">
@@ -126,7 +136,7 @@ export default function ClientsPage() {
                 <p className="text-ink-400 text-sm leading-relaxed">
                   {m.body}
                 </p>
-              </li>
+              </Reveal>
             ))}
           </ol>
         </div>
@@ -134,7 +144,7 @@ export default function ClientsPage() {
 
       <section className="py-24 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="rounded-2xl border border-brand-100 bg-brand-50 p-8">
+          <Reveal className="rounded-2xl border border-brand-100 bg-brand-50 p-8">
             <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white text-brand-600">
               <IconShield className="h-6 w-6" />
             </div>
@@ -157,7 +167,7 @@ export default function ClientsPage() {
             >
               درخواست دمو رایگان
             </Link>
-          </div>
+          </Reveal>
         </div>
       </section>
 

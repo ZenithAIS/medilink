@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import NewsletterCta from "@/app/components/NewsletterCta";
 import Figure from "@/app/components/Figure";
 import BlogCover from "@/app/components/BlogCover";
+import Reveal from "@/app/components/Reveal";
 import { posts, getPost } from "@/app/lib/blog";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -115,22 +116,23 @@ export default async function BlogPostPage({ params }: Props) {
             مطالب مرتبط
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {related.map((item) => (
-              <Link
-                key={item.slug}
-                href={`/blog/${item.slug}`}
-                className="group bg-white rounded-2xl border border-cream-300 p-5 hover:shadow-md transition-shadow"
-              >
-                <span className="text-xs text-brand-600 font-medium">
-                  {item.category}
-                </span>
-                <h3 className="text-base font-bold text-ink-900 mt-2 mb-2 group-hover:text-brand-600 transition-colors">
-                  {item.title}
-                </h3>
-                <p className="text-ink-400 text-sm leading-relaxed">
-                  {item.excerpt}
-                </p>
-              </Link>
+            {related.map((item, i) => (
+              <Reveal key={item.slug} delay={i * 80}>
+                <Link
+                  href={`/blog/${item.slug}`}
+                  className="group block bg-white rounded-2xl border border-cream-300 p-5 hover:shadow-md transition-shadow"
+                >
+                  <span className="text-xs text-brand-600 font-medium">
+                    {item.category}
+                  </span>
+                  <h3 className="text-base font-bold text-ink-900 mt-2 mb-2 group-hover:text-brand-600 transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-ink-400 text-sm leading-relaxed">
+                    {item.excerpt}
+                  </p>
+                </Link>
+              </Reveal>
             ))}
           </div>
         </div>
