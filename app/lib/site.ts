@@ -3,6 +3,13 @@ export const siteUrl =
 
 export const siteName = "مدیلینک";
 
+/**
+ * آدرس پنل کلینیک (پروژه‌ی جدای medilink-app). موقتاً روی دامنه‌ی Vercel است؛
+ * وقتی app.medilink.ir در Vercel وصل شد، فقط همین یک مقدار عوض شود.
+ */
+export const panelUrl =
+  process.env.NEXT_PUBLIC_PANEL_URL ?? "https://medilink-app-henna.vercel.app";
+
 /** شماره‌ی تماس در فرمت بین‌المللی، بدون + و بدون فاصله. مبنای لینک تلفن و واتساپ. */
 const phoneE164 = "989051881128";
 

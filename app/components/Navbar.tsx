@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { navLinks } from "@/app/lib/site";
+import { navLinks, panelUrl } from "@/app/lib/site";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,6 +33,12 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
+            <Link
+              href={panelUrl}
+              className="text-sm font-bold text-ink-700 hover:text-brand-600 transition-colors duration-200"
+            >
+              ورود به پنل
+            </Link>
             <Link
               href="/contact"
               className="gradient-primary text-white px-5 py-2 rounded-lg text-sm font-bold hover:opacity-90 transition-opacity shadow-md"
@@ -65,6 +71,13 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
+            <Link
+              href={panelUrl}
+              className="text-sm font-bold text-ink-700 py-1"
+              onClick={() => setIsOpen(false)}
+            >
+              ورود به پنل
+            </Link>
             <Link
               href="/contact"
               className="gradient-primary text-white px-5 py-2.5 rounded-lg text-sm font-bold text-center"
