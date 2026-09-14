@@ -229,6 +229,92 @@ export default function ProductMockup({
             ))}
           </g>
         )}
+        {slug === "medical-seo" && (
+          <g>
+            <rect x="40" y="150" width="720" height="60" rx="14" fill="#ffffff" stroke="#e2e8f0" />
+            <circle cx="72" cy="180" r="10" fill="#f8fafc" stroke="#cbd5e1" />
+            <path d="M76 184 82 190" stroke="#94a3b8" strokeWidth="2" strokeLinecap="round" />
+            <rect x="100" y="174" width="420" height="12" rx="6" fill="#e2e8f0" />
+
+            {[0, 1, 2, 3].map((i) => {
+              const top = i === 0;
+              return (
+                <g key={i}>
+                  <rect
+                    x="40"
+                    y={230 + i * 78}
+                    width="720"
+                    height="66"
+                    rx="12"
+                    fill={top ? "#fdeadf" : "#ffffff"}
+                    stroke={top ? "#f7a06a" : "#e2e8f0"}
+                  />
+                  {top && (
+                    <rect x="60" y={230 + i * 78 + 14} width="64" height="16" rx="8" fill="#f2793f" />
+                  )}
+                  <rect
+                    x={top ? 136 : 60}
+                    y={230 + i * 78 + 18}
+                    width="300"
+                    height="10"
+                    rx="5"
+                    fill={top ? "#b84f22" : "#334155"}
+                  />
+                  <rect
+                    x={top ? 136 : 60}
+                    y={230 + i * 78 + 38}
+                    width="480"
+                    height="7"
+                    rx="3.5"
+                    fill={top ? "#e3672e" : "#cbd5e1"}
+                    opacity={top ? 0.7 : 1}
+                  />
+                </g>
+              );
+            })}
+          </g>
+        )}
+
+        {slug === "ai-website-design" && (
+          <g>
+            <rect x="40" y="150" width="470" height="410" rx="14" fill="#ffffff" stroke="#e2e8f0" />
+            <rect x="66" y="176" width="418" height="120" rx="10" fill={`url(#pm-${uid})`} opacity="0.15" />
+            <rect x="90" y="206" width="220" height="14" rx="7" fill="#0f172a" />
+            <rect x="90" y="232" width="280" height="9" rx="4.5" fill="#94a3b8" />
+            <rect x="90" y="262" width="110" height="30" rx="8" fill={`url(#pm-${uid})`} />
+            {[0, 1, 2].map((i) => (
+              <g key={i}>
+                <rect x={66 + i * 145} y="322" width="128" height="100" rx="10" fill="#f8fafc" stroke="#eef2f7" />
+                <circle cx={66 + i * 145 + 20} cy="344" r="10" fill="#fdeadf" />
+                <rect x={66 + i * 145 + 16} y="368" width="96" height="8" rx="4" fill="#334155" />
+                <rect x={66 + i * 145 + 16} y="384" width="70" height="6" rx="3" fill="#cbd5e1" />
+              </g>
+            ))}
+            <rect x="66" y="446" width="418" height="86" rx="10" fill="#f8fafc" stroke="#eef2f7" />
+
+            <g>
+              <rect x="530" y="150" width="230" height="330" rx="16" fill="#ffffff" stroke="#e2e8f0" />
+              <rect x="530" y="150" width="230" height="44" rx="16" fill={`url(#pm-${uid})`} />
+              <circle cx="552" cy="172" r="9" fill="#ffffff" opacity="0.9" />
+              <rect x="570" y="167" width="90" height="10" rx="5" fill="#ffffff" opacity="0.9" />
+
+              <rect x="550" y="212" width="150" height="44" rx="12" fill="#f8fafc" />
+              <rect x="562" y="222" width="120" height="8" rx="4" fill="#94a3b8" />
+              <rect x="562" y="236" width="90" height="7" rx="3.5" fill="#cbd5e1" />
+
+              <rect x="560" y="272" width="150" height="52" rx="12" fill={`url(#pm-${uid})`} />
+              <rect x="572" y="284" width="120" height="8" rx="4" fill="#ffffff" opacity="0.9" />
+              <rect x="572" y="300" width="90" height="7" rx="3.5" fill="#ffffff" opacity="0.7" />
+
+              <rect x="550" y="340" width="150" height="44" rx="12" fill="#f8fafc" />
+              <rect x="562" y="350" width="110" height="8" rx="4" fill="#94a3b8" />
+              <rect x="562" y="364" width="80" height="7" rx="3.5" fill="#cbd5e1" />
+
+              <rect x="546" y="440" width="198" height="30" rx="15" fill="#ffffff" stroke="#e2e8f0" />
+              <circle cx="722" cy="455" r="10" fill={`url(#pm-${uid})`} />
+            </g>
+          </g>
+        )}
       </g>
 
       <rect x="0.5" y="0.5" width="799" height="599" rx="16" fill="none" stroke="#e2e8f0" />

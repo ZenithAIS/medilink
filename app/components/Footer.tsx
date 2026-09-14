@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { products } from "@/app/lib/products";
+import { services } from "@/app/lib/services";
 import { contact, navLinks, socials } from "@/app/lib/site";
 import NewsletterForm from "./NewsletterForm";
 
@@ -7,7 +8,7 @@ export default function Footer() {
   return (
     <footer className="bg-ink-900 text-ink-400 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-10 mb-12">
           <div className="md:col-span-2">
             <Link href="/">
               <span className="text-2xl font-black gradient-text">
@@ -46,6 +47,22 @@ export default function Footer() {
                     className="hover:text-brand-300 transition-colors duration-200"
                   >
                     {product.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-white font-bold mb-4">خدمات</h4>
+            <ul className="space-y-2 text-sm">
+              {services.map((service) => (
+                <li key={service.slug}>
+                  <Link
+                    href={`/services/${service.slug}`}
+                    className="hover:text-brand-300 transition-colors duration-200"
+                  >
+                    {service.title}
                   </Link>
                 </li>
               ))}

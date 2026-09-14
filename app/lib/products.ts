@@ -8,6 +8,8 @@ import {
   IconClock,
   IconUserMinus,
   IconShield,
+  IconSearch,
+  IconAI,
 } from "@/app/components/Icons";
 
 export const FLOW_ICONS = {
@@ -19,6 +21,9 @@ export const FLOW_ICONS = {
   clock: IconClock,
   user: IconUserMinus,
   shield: IconShield,
+  // برای دیاگرام‌های «نمونه استفاده»ی صفحات خدمات (app/lib/services.ts).
+  search: IconSearch,
+  ai: IconAI,
 } as const;
 
 export type Product = {

@@ -97,6 +97,25 @@ export function IconShield({ className }: IconProps) {
   );
 }
 
+export function IconSearch({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <circle cx="10.5" cy="10.5" r="6.5" />
+      <path d="m20 20-4.35-4.35" />
+    </svg>
+  );
+}
+
+export function IconAI({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <rect x="7" y="7" width="10" height="10" rx="2" />
+      <circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none" />
+      <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.8 5.8l2 2M16.2 16.2l2 2M5.8 18.2l2-2M16.2 7.8l2-2" />
+    </svg>
+  );
+}
+
 export function IconWhatsApp({ className }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className={className}>

@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { siteUrl } from "./lib/site";
 import { products } from "./lib/products";
+import { services } from "./lib/services";
 import { posts } from "./lib/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -9,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: siteUrl, changeFrequency: "weekly", priority: 1 },
     { url: `${siteUrl}/products`, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${siteUrl}/services`, changeFrequency: "monthly", priority: 0.9 },
     { url: `${siteUrl}/pricing`, changeFrequency: "monthly", priority: 0.9 },
     { url: `${siteUrl}/contact`, changeFrequency: "monthly", priority: 0.9 },
     { url: `${siteUrl}/clients`, changeFrequency: "monthly", priority: 0.7 },
@@ -23,6 +25,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...staticRoutes.map((route) => ({ ...route, lastModified: now })),
     ...products.map((product) => ({
       url: `${siteUrl}/products/${product.slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
+    ...services.map((service) => ({
+      url: `${siteUrl}/services/${service.slug}`,
       lastModified: now,
       changeFrequency: "monthly" as const,
       priority: 0.8,

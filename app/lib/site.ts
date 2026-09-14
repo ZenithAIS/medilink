@@ -40,6 +40,7 @@ export const socials = [
 
 export const navLinks = [
   { label: "محصولات", href: "/products" },
+  { label: "خدمات", href: "/services" },
   { label: "تعرفه‌ها", href: "/pricing" },
   { label: "نتایج", href: "/clients" },
   { label: "بلاگ", href: "/blog" },
