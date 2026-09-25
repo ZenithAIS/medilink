@@ -8,6 +8,7 @@ import ProductMockup from "@/app/components/ProductMockup";
 import FinalCta from "@/app/components/FinalCta";
 import Reveal from "@/app/components/Reveal";
 import { products, getProduct } from "@/app/lib/products";
+import { checkoutHrefForSlug } from "@/app/lib/packages";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -77,10 +78,10 @@ export default async function ProductPage({ params }: Props) {
                   درخواست دمو رایگان
                 </Link>
                 <Link
-                  href="/pricing"
+                  href={checkoutHrefForSlug(product.slug)}
                   className="border-2 border-cream-300 text-ink-700 px-8 py-4 rounded-xl text-base font-bold hover:border-brand-300 hover:text-brand-600 transition-all text-center"
                 >
-                  دریافت تعرفه
+                  خرید آنلاین
                 </Link>
               </div>
             </div>
