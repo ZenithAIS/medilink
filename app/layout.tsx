@@ -2,9 +2,7 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { siteUrl, contact, socials } from "./lib/site";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import WhatsAppButton from "./components/WhatsAppButton";
+import SiteChrome from "./components/SiteChrome";
 
 // Shabnam نسخه‌ی Black ندارد؛ فایل Bold برای وزن ۹۰۰ هم اعلام می‌شود تا
 // مرورگر به‌جای ضخیم‌سازی مصنوعی (که در فارسی بد رندر می‌شود) از گلیف واقعی
@@ -101,10 +99,7 @@ export default function RootLayout({
   return (
     <html lang="fa" dir="rtl" className={shabnam.variable}>
       <body>
-        <Navbar />
-        {children}
-        <Footer />
-        <WhatsAppButton />
+        <SiteChrome>{children}</SiteChrome>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
