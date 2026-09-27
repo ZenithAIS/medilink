@@ -1,8 +1,11 @@
 import { createAdminClient } from "@/app/lib/supabase/admin";
+import { requireSiteAdmin } from "@/app/lib/app-db/admin-guard";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminLeadsPage() {
+  // داده در دیتابیس خود سایت است؛ دسترسی را حساب ادمین دیتابیس اپ تعیین می‌کند.
+  await requireSiteAdmin();
   const supabase = createAdminClient();
   const { data: leads, error } = await supabase
     .from("leads")

@@ -12,7 +12,7 @@ const facts = [
   { Icon: IconDashboard, value: "۵", label: "سیستم یکپارچه", tone: "bg-brand-50 text-brand-600" },
   { Icon: IconChat, value: "۲۴/۷", label: "پاسخ‌گویی خودکار", tone: "bg-good-50 text-good-600" },
   { Icon: IconClock, value: "< ۱ روز", label: "زمان راه‌اندازی", tone: "bg-violet-50 text-violet-500" },
-  { Icon: IconShield, value: "داخل کشور", label: "محل نگهداری داده", tone: "bg-cool-50 text-cool-500" },
+  { Icon: IconShield, value: "۱۴ روز", label: "دوره‌ی آزمایشی رایگان", tone: "bg-cool-50 text-cool-500" },
 ];
 
 export default function Stats() {

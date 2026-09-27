@@ -1,25 +1,30 @@
 import { createAdminClient } from "@/app/lib/supabase/admin";
+import { requireSiteAdmin } from "@/app/lib/app-db/admin-guard";
 import { formatToman } from "@/app/lib/packages";
 
 export const dynamic = "force-dynamic";
 
 async function getStats() {
-  const supabase = createAdminClient();
+  const { supabase: appDb } = await requireSiteAdmin();
+  const siteDb = createAdminClient();
 
-  const [{ count: leadsCount }, { count: newsletterCount }, { data: orders }] =
+  const [{ count: leadsCount }, { count: newsletterCount }, { data: orders }, { count: postsCount }] =
     await Promise.all([
-      supabase.from("leads").select("*", { count: "exact", head: true }),
-      supabase.from("newsletter_subscribers").select("*", { count: "exact", head: true }),
-      supabase.from("orders").select("status, amount_toman"),
+      siteDb.from("leads").select("*", { count: "exact", head: true }),
+      siteDb.from("newsletter_subscribers").select("*", { count: "exact", head: true }),
+      appDb.from("orders").select("status, amount_toman"),
+      appDb.from("blog_posts").select("*", { count: "exact", head: true }).eq("published", true),
     ]);
 
-  const paidOrders = orders?.filter((o) => o.status === "paid") ?? [];
-  const pendingOrders = orders?.filter((o) => o.status === "pending") ?? [];
+  const rows = (orders ?? []) as { status: string; amount_toman: number }[];
+  const paidOrders = rows.filter((o) => o.status === "paid");
+  const pendingOrders = rows.filter((o) => o.status === "pending");
   const revenue = paidOrders.reduce((sum, o) => sum + o.amount_toman, 0);
 
   return {
     leadsCount: leadsCount ?? 0,
     newsletterCount: newsletterCount ?? 0,
+    postsCount: postsCount ?? 0,
     paidCount: paidOrders.length,
     pendingCount: pendingOrders.length,
     revenue,
@@ -47,6 +52,7 @@ export default async function AdminDashboardPage() {
         <StatCard label="سفارش در انتظار پرداخت" value={String(stats.pendingCount)} />
         <StatCard label="درخواست دمو" value={String(stats.leadsCount)} />
         <StatCard label="عضو خبرنامه" value={String(stats.newsletterCount)} />
+        <StatCard label="مقاله‌ی منتشرشده" value={String(stats.postsCount)} />
       </div>
     </div>
   );

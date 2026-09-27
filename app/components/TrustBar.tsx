@@ -11,7 +11,7 @@ import Reveal from "./Reveal";
  * (برند/سبز/بنفش/آبی)، تا کارت‌ها یکدست و خسته‌کننده نباشند.
  */
 const commitments = [
-  { Icon: IconShield, text: "داده روی سرور داخل کشور", tone: "bg-brand-50 text-brand-600" },
+  { Icon: IconShield, text: "۱۴ روز رایگان، بدون پرداخت", tone: "bg-brand-50 text-brand-600" },
   { Icon: IconDashboard, text: "کنار نرم‌افزار فعلی کلینیک", tone: "bg-good-50 text-good-600" },
   { Icon: IconClock, text: "راه‌اندازی کمتر از یک روز", tone: "bg-violet-50 text-violet-500" },
   { Icon: IconChart, text: "بدون قرارداد حداقل مدت", tone: "bg-cool-50 text-cool-500" },

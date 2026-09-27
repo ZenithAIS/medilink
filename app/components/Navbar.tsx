@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { navLinks, panelUrl } from "@/app/lib/site";
+import { navLinks, panelUrl, trialUrl } from "@/app/lib/site";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,12 +39,12 @@ export default function Navbar() {
             >
               ورود به پنل
             </Link>
-            <Link
-              href="/contact"
+            <a
+              href={trialUrl}
               className="gradient-primary text-white px-5 py-2 rounded-lg text-sm font-bold hover:opacity-90 transition-opacity shadow-md"
             >
-              درخواست دمو رایگان
-            </Link>
+              ۱۴ روز رایگان
+            </a>
           </div>
 
           <button
@@ -78,13 +78,13 @@ export default function Navbar() {
             >
               ورود به پنل
             </Link>
-            <Link
-              href="/contact"
+            <a
+              href={trialUrl}
               className="gradient-primary text-white px-5 py-2.5 rounded-lg text-sm font-bold text-center"
               onClick={() => setIsOpen(false)}
             >
-              درخواست دمو رایگان
-            </Link>
+              ۱۴ روز رایگان
+            </a>
           </div>
         )}
       </div>

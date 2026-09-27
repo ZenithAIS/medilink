@@ -46,7 +46,7 @@ export default async function Image() {
             letterSpacing: 2,
           }}
         >
-          medilink.ir
+          medilinkapp.online
         </div>
         <div
           style={{

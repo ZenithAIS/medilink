@@ -26,6 +26,8 @@ export type SellablePackage = {
   /** برای لینک به صفحه‌ی محصول/خدمت مرتبط، در صورت وجود. */
   relatedHref?: string;
   note?: string;
+  /** بسته‌ای که با ثبت‌نام در پنل، دوره‌ی آزمایشی رایگان دارد. */
+  hasTrial?: boolean;
   tiers: PackageTier[];
 };
 
@@ -34,7 +36,8 @@ export const packages: SellablePackage[] = [
     key: "clinic-automation",
     title: "اتوماسیون مطب",
     relatedHref: "/products/clinic-management",
-    note: "بدون هزینه‌ی راه‌اندازی. هزینه‌ی پیامک مصرفی و دامنه جداگانه است.",
+    note: "۱۴ روز رایگان امتحان کنید. بدون هزینه‌ی راه‌اندازی. هزینه‌ی پیامک مصرفی و دامنه جداگانه است.",
+    hasTrial: true,
     tiers: [
       {
         key: "single-doctor",

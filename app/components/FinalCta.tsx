@@ -1,10 +1,11 @@
 import Link from "next/link";
 import Reveal from "./Reveal";
+import { trialUrl } from "@/app/lib/site";
 
 export default function FinalCta({
-  title = "کلینیک‌تان را در یک جلسه‌ی ۳۰ دقیقه‌ای ببینید",
-  description = "بدون تعهد و بدون هزینه. نشان می‌دهیم مدیلینک دقیقاً روی فرآیندهای کلینیک شما چطور کار می‌کند.",
-  cta = "درخواست دمو رایگان",
+  title = "۱۴ روز رایگان، روی کلینیک خودتان",
+  description = "بدون پرداخت و بدون تعهد ثبت‌نام کنید و پنل را با بیماران و نوبت‌های واقعی خودتان امتحان کنید. ترجیح می‌دهید اول ببینید؟ یک جلسه‌ی دموی ۳۰ دقیقه‌ای رزرو کنید.",
+  cta = "درخواست دمو",
 }: {
   title?: string;
   description?: string;
@@ -32,12 +33,20 @@ export default function FinalCta({
           <p className="relative text-white/85 max-w-xl mx-auto mb-8 leading-relaxed">
             {description}
           </p>
-          <Link
-            href="/contact"
-            className="relative inline-block bg-white text-brand-700 px-8 py-4 rounded-xl text-base font-bold shadow-lg transition-transform hover:-translate-y-0.5 hover:bg-brand-50"
-          >
-            {cta}
-          </Link>
+          <div className="relative flex flex-col sm:flex-row gap-3 justify-center">
+            <a
+              href={trialUrl}
+              className="inline-block bg-white text-brand-700 px-8 py-4 rounded-xl text-base font-bold shadow-lg transition-transform hover:-translate-y-0.5 hover:bg-brand-50"
+            >
+              شروع ۱۴ روز رایگان
+            </a>
+            <Link
+              href="/contact"
+              className="inline-block border-2 border-white/60 text-white px-8 py-4 rounded-xl text-base font-bold transition-colors hover:bg-white/10"
+            >
+              {cta}
+            </Link>
+          </div>
         </Reveal>
       </div>
     </section>

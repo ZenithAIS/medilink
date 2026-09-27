@@ -29,12 +29,14 @@ npm install
 cp .env.example .env.local
 ```
 
-سپس مقادیر را از مسیر Supabase › Project Settings › API Keys پر کنید:
+سپس مقادیر را از مسیر Supabase › Project Settings › API Keys پر کنید (بخش «دو دیتابیس» پایین‌تر):
 
-- `NEXT_PUBLIC_SUPABASE_URL`
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `NEXT_PUBLIC_SUPABASE_URL` (دیتابیس سایت)
 - `SUPABASE_SERVICE_ROLE_KEY` — **فقط سمت سرور.** هرگز پیشوند `NEXT_PUBLIC_` نگیرد و در گیت کامیت نشود.
-- `NEXT_PUBLIC_SITE_URL` — دامنه سایت، برای تگ‌های canonical و Open Graph (اختیاری؛ پیش‌فرض `https://medilink.ir`).
+- `NEXT_PUBLIC_SITE_URL` — دامنه سایت، برای تگ‌های canonical و Open Graph (اختیاری؛ پیش‌فرض `https://medilinkapp.online`).
+- `NEXT_PUBLIC_PANEL_URL` — آدرس پنل کلینیک (اختیاری؛ پیش‌فرض `https://app.medilinkapp.online`).
+- `APP_SUPABASE_URL`، `APP_SUPABASE_ANON_KEY`، `APP_SUPABASE_SERVICE_ROLE_KEY` — دیتابیس اپ، فقط سمت سرور.
+- `ZARINPAL_MERCHANT_ID`، `ZARINPAL_SANDBOX` — درگاه پرداخت.
 
 - `NEXT_PUBLIC_WHATSAPP_NUMBER` — شماره‌ی دکمه‌ی شناور واتساپ، فرمت بین‌المللی بدون `+` (اختیاری).
 
@@ -86,45 +88,67 @@ app/
   actions/
     leads.ts              # Server Action فرم دمو (اعتبارسنجی Zod + درج در دیتابیس)
     newsletter.ts         # Server Action عضویت خبرنامه
+    checkout.ts           # ثبت سفارش و انتقال به زرین‌پال
+    blog.ts               # ذخیره/حذف مقاله از پنل ادمین
+    auth.ts               # ورود/خروج پنل ادمین
+  admin/                  # پنل ادمین سایت
+  checkout/               # فرم خرید، تأیید پرداخت، صفحات نتیجه
   components/             # کامپوننت‌های مشترک و سکشن‌های صفحات
   lib/
     site.ts               # اطلاعات تماس، منوی ناوبری، آدرس سایت
     products.ts           # داده‌ی ۵ محصول (منبع مشترک صفحات و sitemap)
-    pricing.ts            # پلن‌ها، جدول مقایسه و افزودنی‌ها
-    blog.ts               # مقالات بلاگ
+    packages.ts           # بسته‌ها و قیمت‌های قابل خرید (منبع واقعی قیمت)
+    pricing.ts            # سوالات مالی صفحه‌ی تعرفه
+    blog.ts               # خواندن مقالات منتشرشده از دیتابیس اپ
+    zarinpal.ts           # کلاینت درگاه زرین‌پال
     faq.ts                # سوالات متداول
     clinic-types.ts       # فهرست انواع کلینیک برای فرم دمو
-  lib/supabase/
-    env.ts                # خواندن متغیرهای محیطی با خطای شفاف
-    client.ts             # کلاینت مرورگر (کلید anon، محدود به RLS)
-    server.ts             # کلاینت سرور مبتنی بر کوکی نشست
-    admin.ts             # کلاینت service_role — server-only، RLS را دور می‌زند
+  lib/supabase/           # دیتابیس سایت (لیدها، خبرنامه)
+    env.ts
+    admin.ts              # کلاینت service_role — server-only
+  lib/app-db/             # دیتابیس اپ (سفارش‌ها، بلاگ، ادمین)
+    server.ts             # کلاینت نشست، عمومی و service_role
+    admin-guard.ts        # بررسی ادمین پلتفرم
+    middleware.ts         # محافظت از /admin (از proxy.ts)
   layout.tsx              # هدر، فوتر و دکمه‌ی واتساپ مشترک همه‌ی صفحات
   sitemap.ts, robots.ts   # سئو
-supabase/migrations/      # اسکیمای دیتابیس
+supabase/migrations/      # اسکیمای دیتابیس سایت
 ```
 
-> محتوای فعلی (تعرفه‌ها، مقالات، کیس‌استادی‌ها، اعضای تیم) و همه‌ی تصاویر **placeholder** هستند
-> و با کامنت‌های `TODO(asset)`، `TODO(content)` و `TODO(legal)` در کد علامت‌گذاری شده‌اند.
+> تصاویر محصول هنوز ماکاپ برداری‌اند؛ اسکرین‌شات واقعی را در `public/images/products/` بگذارید.
 
 ## نکات امنیتی
 
-- جدول‌های `leads`، `newsletter_subscribers` و `orders` با RLS فعال‌اند و **هیچ policy‌ای برای نقش `anon` تعریف نشده**؛ یعنی از مرورگر نه خواندنی ممکن است و نه نوشتنی.
+- جدول‌های `leads` و `newsletter_subscribers` با RLS فعال‌اند و **هیچ policy‌ای برای نقش `anon` تعریف نشده**؛ یعنی از مرورگر نه خواندنی ممکن است و نه نوشتنی.
 - درج داده فقط در Server Action و با کلید `service_role` انجام می‌شود که RLS را دور می‌زند. فایل `app/lib/supabase/admin.ts` با `server-only` علامت‌گذاری شده تا اگر تصادفاً از یک کامپوننت کلاینتی import شود، بیلد خطا بدهد.
 - پیام خطای دیتابیس هرگز به کاربر برگردانده نمی‌شود؛ فقط در لاگ سرور ثبت می‌شود.
 
+## دو دیتابیس
+
+- **دیتابیس خود سایت** (`NEXT_PUBLIC_SUPABASE_URL`، `SUPABASE_SERVICE_ROLE_KEY`): فقط لیدهای فرم دمو و خبرنامه.
+- **دیتابیس اپ** (`APP_SUPABASE_URL`، `APP_SUPABASE_ANON_KEY`، `APP_SUPABASE_SERVICE_ROLE_KEY`؛ همه فقط سمت سرور): سفارش‌ها، بلاگ و حساب ادمین‌ها. اسکیمای آن در ریپوی `medilink-app` است (`supabase/migrations/0017_*`، `0018_*`). این‌طور پرداخت «اتوماسیون مطب» مستقیم به اشتراک همان کلینیک در اپ وصل می‌شود و یک حساب ادمین هر دو پنل را باز می‌کند.
+
 ## خرید آنلاین (زرین‌پال)
 
-بسته‌های قابل‌خرید (اتوماسیون مطب، طراحی سایت، سئو) و قیمت‌هایشان در `app/lib/packages.ts` تعریف شده‌اند — منبع واقعیِ قیمت است، نه صفحه‌ی `/pricing`. جریان خرید: `/checkout` سفارش را در جدول `orders` ثبت می‌کند، کاربر را به درگاه زرین‌پال می‌فرستد، و `/checkout/verify` (Route Handler، مقصد callback زرین‌پال) پرداخت را verify و وضعیت سفارش را به‌روز می‌کند.
+بسته‌ها و قیمت‌ها در `app/lib/packages.ts` تعریف شده‌اند — منبع واقعی قیمت است. `/checkout` سفارش را در جدول `orders` دیتابیس اپ ثبت می‌کند و خریدار را به زرین‌پال می‌فرستد؛ `/checkout/verify` پرداخت را تأیید می‌کند. آدرس بازگشت از درگاه از خود درخواست ساخته می‌شود، پس روی هر دامنه‌ای درست کار می‌کند.
 
-نکته‌ی مهم: زرین‌پال شارژ خودکارِ دوره‌ای (subscription) ندارد — API استاندارد فقط پرداخت لحظه‌ای است. بسته‌های ماهانه فعلاً فقط دوره‌ی اول را از همین مسیر می‌گیرند؛ تمدید خودکار واقعی نیاز به سرویس جداگانه‌ی «پیمان» (direct debit، قرارداد جدا با بانک) دارد.
+زرین‌پال شارژ خودکار دوره‌ای ندارد؛ هر دوره‌ی ماهانه جدا پرداخت می‌شود و ادمین از پنل اپ اشتراک را تمدید می‌کند.
 
-نیاز به `ZARINPAL_MERCHANT_ID` (از پنل merchant.zarinpal.com) دارد؛ `ZARINPAL_SANDBOX=true` برای تست بدون تراکنش واقعی.
+نیاز به `ZARINPAL_MERCHANT_ID` (از merchant.zarinpal.com) دارد؛ `ZARINPAL_SANDBOX=true` برای تست بدون تراکنش واقعی.
 
-## پنل ادمین
+## دوره‌ی آزمایشی
 
-مسیر `/admin` (محافظت‌شده با Supabase Auth، در `proxy.ts` + `app/lib/supabase/middleware.ts`) سفارش‌ها، درخواست‌های دمو و اعضای خبرنامه را نشان می‌دهد. این سایت ثبت‌نام عمومی ندارد — حساب ادمین را دستی در **Supabase Dashboard › Authentication › Users › Add user** بسازید.
+دکمه‌های «۱۴ روز رایگان» به `/signup` پنل (`NEXT_PUBLIC_PANEL_URL`) می‌روند. خود دوره در دیتابیس اپ ساخته و اعمال می‌شود (تریگر `start_clinic_trial`).
+
+## پنل ادمین (`/admin`)
+
+سفارش‌ها، **بلاگ** (نوشتن، ویرایش، انتشار، تصویر شاخص)، درخواست‌های دمو و خبرنامه. ورود با حساب ادمین پلتفرم در دیتابیس اپ — همان حسابی که `/admin` پنل اپ را باز می‌کند. ساخت حساب ادمین:
+
+1. Supabase اپ › Authentication › Users › Add user (ایمیل و رمز).
+2. در SQL Editor: `insert into public.platform_admins (user_id) select id from auth.users where email = 'ایمیل@ادمین';`
+
+مقاله‌های بلاگ از پنل منتشر می‌شوند و صفحه‌های `/blog` بلافاصله تازه می‌شوند.
 
 ## دیپلوی
 
-روی Vercel: مخزن را وصل کنید و متغیرهای محیطی بالا (Supabase + زرین‌پال) را در تنظیمات پروژه ثبت کنید.
+روی Vercel: متغیرهای محیطی بالا (هر دو دیتابیس + زرین‌پال) را در تنظیمات پروژه ثبت کنید. دامنه: `medilinkapp.online` (سایت) و `app.medilinkapp.online` (پنل).

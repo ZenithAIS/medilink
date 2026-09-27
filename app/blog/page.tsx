@@ -5,7 +5,7 @@ import Figure from "@/app/components/Figure";
 import BlogCover from "@/app/components/BlogCover";
 import NewsletterCta from "@/app/components/NewsletterCta";
 import Reveal from "@/app/components/Reveal";
-import { posts, categories } from "@/app/lib/blog";
+import { getPublishedPosts } from "@/app/lib/blog";
 
 export const metadata: Metadata = {
   title: "بلاگ و منابع | مدیلینک",
@@ -14,7 +14,13 @@ export const metadata: Metadata = {
   alternates: { canonical: "/blog" },
 };
 
-export default function BlogPage() {
+// مقاله‌ها از پنل ادمین منتشر می‌شوند؛ انتشار خودش صفحه را تازه می‌کند (revalidatePath)،
+// این عدد فقط پشتیبان است.
+export const revalidate = 300;
+
+export default async function BlogPage() {
+  const posts = await getPublishedPosts();
+  const categories = Array.from(new Set(posts.map((p) => p.category)));
   const [featured, ...rest] = posts;
 
   return (
@@ -39,7 +45,14 @@ export default function BlogPage() {
             ))}
           </ul>
 
+          {!featured && (
+            <p className="text-center text-ink-400 py-16">
+              به‌زودی اولین مقاله‌ها منتشر می‌شوند.
+            </p>
+          )}
+
           {/* مقاله‌ی شاخص */}
+          {featured && (
           <Reveal className="mb-12">
           <Link
             href={`/blog/${featured.slug}`}
@@ -79,6 +92,7 @@ export default function BlogPage() {
             </div>
           </Link>
           </Reveal>
+          )}
 
           {/* شبکه‌ی مقالات */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

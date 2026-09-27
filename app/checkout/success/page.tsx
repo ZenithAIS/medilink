@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/app/components/PageHero";
-import { createAdminClient } from "@/app/lib/supabase/admin";
+import { createAppDbServiceClient } from "@/app/lib/app-db/server";
 import { formatToman } from "@/app/lib/packages";
 import { contact } from "@/app/lib/site";
 
@@ -16,7 +16,7 @@ export default async function CheckoutSuccessPage({ searchParams }: Props) {
   const { order: orderId } = await searchParams;
 
   const order = orderId
-    ? await createAdminClient()
+    ? await createAppDbServiceClient()
         .from("orders")
         .select("package_label, amount_toman, zarinpal_ref_id, status")
         .eq("id", orderId)

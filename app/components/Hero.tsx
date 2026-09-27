@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { trialUrl } from "@/app/lib/site";
 import Figure from "./Figure";
 import DashboardMockup from "./DashboardMockup";
 /** اگر اسکرین‌شات واقعی محصول آماده شد، مسیرش را اینجا بگذارید؛
@@ -37,19 +38,22 @@ export default function Hero() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-stretch sm:items-center">
-              <Link
-                href="/contact"
+              <a
+                href={trialUrl}
                 className="gradient-primary text-white px-8 py-4 rounded-xl text-base font-bold hover:opacity-90 transition-all shadow-lg text-center"
               >
-                درخواست دمو رایگان
-              </Link>
+                ۱۴ روز رایگان امتحان کنید
+              </a>
               <Link
-                href="/products"
+                href="/contact"
                 className="border-2 border-cream-300 text-ink-700 px-8 py-4 rounded-xl text-base font-bold hover:border-brand-300 hover:text-brand-600 transition-all text-center"
               >
-                مشاهده‌ی محصولات
+                درخواست دمو
               </Link>
             </div>
+            <p className="mt-3 text-sm text-ink-400 text-center lg:text-right">
+              بدون نیاز به پرداخت · راه‌اندازی در چند دقیقه
+            </p>
           </div>
 
           {heroImage ? (

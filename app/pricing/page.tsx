@@ -5,6 +5,7 @@ import Accordion from "@/app/components/Accordion";
 import Reveal from "@/app/components/Reveal";
 import { pricingFaqs } from "@/app/lib/pricing";
 import { packages, isBuyable, formatToman } from "@/app/lib/packages";
+import { trialUrl, TRIAL_DAYS } from "@/app/lib/site";
 
 export const metadata: Metadata = {
   title: "تعرفه‌ها و خرید آنلاین | مدیلینک",
@@ -87,6 +88,20 @@ export default function PricingPage() {
                   </div>
                 ))}
               </div>
+              {pkg.hasTrial && (
+                <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl border border-brand-100 bg-brand-50 px-6 py-5">
+                  <p className="text-sm text-ink-700 leading-relaxed">
+                    <strong className="text-ink-900">{TRIAL_DAYS.toLocaleString("fa-IR")} روز رایگان، بدون پرداخت.</strong>{" "}
+                    در پنل ثبت‌نام کنید و همه‌ی امکانات را روی کلینیک خودتان امتحان کنید؛ اطلاعات پس از خرید حفظ می‌شود.
+                  </p>
+                  <a
+                    href={trialUrl}
+                    className="shrink-0 gradient-primary text-white px-6 py-3 rounded-xl text-sm font-bold hover:opacity-90 shadow-md"
+                  >
+                    شروع دوره‌ی رایگان
+                  </a>
+                </div>
+              )}
             </Reveal>
           ))}
         </div>

@@ -5,17 +5,21 @@ import NewsletterCta from "@/app/components/NewsletterCta";
 import Figure from "@/app/components/Figure";
 import BlogCover from "@/app/components/BlogCover";
 import Reveal from "@/app/components/Reveal";
-import { posts, getPost } from "@/app/lib/blog";
+import { getPublishedPosts, getPost } from "@/app/lib/blog";
 
 type Props = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
+export const revalidate = 300;
+
+// مقاله‌های جدیدِ منتشرشده بعد از بیلد، در اولین درخواست ساخته می‌شوند (dynamicParams پیش‌فرض).
+export async function generateStaticParams() {
+  const posts = await getPublishedPosts();
   return posts.map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPost(slug);
+  const post = await getPost(slug);
   if (!post) return {};
 
   return {
@@ -33,9 +37,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const post = getPost(slug);
+  const post = await getPost(slug);
   if (!post) notFound();
 
+  const posts = await getPublishedPosts();
   const related = posts.filter((p) => p.slug !== post.slug).slice(0, 3);
 
   return (
@@ -110,6 +115,7 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
       </article>
 
+      {related.length > 0 && (
       <section className="py-16 bg-cream-100 border-t border-cream-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-black text-ink-900 mb-8">
@@ -137,6 +143,7 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
         </div>
       </section>
+      )}
 
       <NewsletterCta />
     </main>

@@ -1,8 +1,8 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
-import { supabaseAnonKey, supabaseUrl } from "./env";
+import { appDbAnonKey, appDbUrl } from "./env";
 
-// تنها بخش محافظت‌شده‌ی سایت، پنل ادمین است. بقیه‌ی سایت (خانه، محصولات،
+// تنها بخش محافظت‌شده‌ی سایت، پنل ادمین است (حساب از دیتابیس اپ). بقیه‌ی سایت (خانه، محصولات،
 // خدمات، چک‌اوت و ...) کاملاً عمومی می‌ماند و نیازی به نشست ندارد.
 const ADMIN_PREFIX = "/admin";
 const GUEST_ONLY_ROUTE = "/admin/login";
@@ -10,7 +10,7 @@ const GUEST_ONLY_ROUTE = "/admin/login";
 export async function updateSession(request: NextRequest) {
   let response = NextResponse.next({ request });
 
-  const supabase = createServerClient(supabaseUrl(), supabaseAnonKey(), {
+  const supabase = createServerClient(appDbUrl(), appDbAnonKey(), {
     cookies: {
       getAll() {
         return request.cookies.getAll();
@@ -37,8 +37,10 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   const isGuestOnlyRoute = path === GUEST_ONLY_ROUTE;
+  // فقط ادمین پلتفرم؛ کاربر عادی اپ (مالک کلینیک) هم نشست معتبر دارد ولی ادمین نیست.
+  const isAdmin = user ? (await supabase.rpc("is_platform_admin")).data === true : false;
 
-  if (!user && !isGuestOnlyRoute) {
+  if (!isAdmin && !isGuestOnlyRoute) {
     const url = request.nextUrl.clone();
     url.pathname = GUEST_ONLY_ROUTE;
     const redirectResponse = NextResponse.redirect(url);
@@ -48,7 +50,7 @@ export async function updateSession(request: NextRequest) {
     return redirectResponse;
   }
 
-  if (user && isGuestOnlyRoute) {
+  if (isAdmin && isGuestOnlyRoute) {
     const url = request.nextUrl.clone();
     url.pathname = ADMIN_PREFIX;
     const redirectResponse = NextResponse.redirect(url);

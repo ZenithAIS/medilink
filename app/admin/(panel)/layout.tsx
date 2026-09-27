@@ -2,15 +2,19 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { logout } from "@/app/actions/auth";
 import { siteName } from "@/app/lib/site";
+import { requireSiteAdmin } from "@/app/lib/app-db/admin-guard";
 
 const NAV = [
   { href: "/admin", label: "داشبورد" },
   { href: "/admin/orders", label: "سفارش‌ها" },
+  { href: "/admin/blog", label: "بلاگ" },
   { href: "/admin/leads", label: "درخواست‌های دمو" },
   { href: "/admin/newsletter", label: "خبرنامه" },
 ];
 
-export default function AdminLayout({ children }: { children: ReactNode }) {
+export default async function AdminLayout({ children }: { children: ReactNode }) {
+  await requireSiteAdmin();
+
   return (
     <div className="min-h-screen bg-cream-100">
       <header className="bg-white border-b border-cream-200">

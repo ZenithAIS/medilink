@@ -1,19 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createAdminClient } from "@/app/lib/supabase/admin";
+import { createAppDbServiceClient } from "@/app/lib/app-db/server";
 import { verifyPayment } from "@/app/lib/zarinpal";
-import { siteUrl } from "@/app/lib/site";
 
 export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
+  const { searchParams, origin } = new URL(req.url);
   const orderId = searchParams.get("order");
   const authority = searchParams.get("Authority");
   const status = searchParams.get("Status");
 
   if (!orderId || !authority) {
-    return NextResponse.redirect(`${siteUrl}/checkout/failed`);
+    return NextResponse.redirect(`${origin}/checkout/failed`);
   }
 
-  const supabase = createAdminClient();
+  const supabase = createAppDbServiceClient();
   const { data: order } = await supabase
     .from("orders")
     .select("id, amount_toman, status, zarinpal_authority")
@@ -21,16 +20,16 @@ export async function GET(req: NextRequest) {
     .single();
 
   if (!order || order.zarinpal_authority !== authority) {
-    return NextResponse.redirect(`${siteUrl}/checkout/failed`);
+    return NextResponse.redirect(`${origin}/checkout/failed`);
   }
 
   if (order.status === "paid") {
-    return NextResponse.redirect(`${siteUrl}/checkout/success?order=${order.id}`);
+    return NextResponse.redirect(`${origin}/checkout/success?order=${order.id}`);
   }
 
   if (status !== "OK") {
     await supabase.from("orders").update({ status: "canceled" }).eq("id", order.id);
-    return NextResponse.redirect(`${siteUrl}/checkout/failed`);
+    return NextResponse.redirect(`${origin}/checkout/failed`);
   }
 
   try {
@@ -38,7 +37,7 @@ export async function GET(req: NextRequest) {
 
     if (!result.ok) {
       await supabase.from("orders").update({ status: "failed" }).eq("id", order.id);
-      return NextResponse.redirect(`${siteUrl}/checkout/failed`);
+      return NextResponse.redirect(`${origin}/checkout/failed`);
     }
 
     await supabase
@@ -50,9 +49,9 @@ export async function GET(req: NextRequest) {
       })
       .eq("id", order.id);
 
-    return NextResponse.redirect(`${siteUrl}/checkout/success?order=${order.id}`);
+    return NextResponse.redirect(`${origin}/checkout/success?order=${order.id}`);
   } catch (err) {
     console.error("[checkout/verify]", err);
-    return NextResponse.redirect(`${siteUrl}/checkout/failed`);
+    return NextResponse.redirect(`${origin}/checkout/failed`);
   }
 }

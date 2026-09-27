@@ -2,10 +2,10 @@
 
 import { z } from "zod";
 import { redirect } from "next/navigation";
-import { createAdminClient } from "@/app/lib/supabase/admin";
+import { headers } from "next/headers";
+import { createAppDbServiceClient } from "@/app/lib/app-db/server";
 import { requestPayment } from "@/app/lib/zarinpal";
 import { getPackage, getTier, isBuyable } from "@/app/lib/packages";
-import { siteUrl } from "@/app/lib/site";
 
 const CheckoutSchema = z.object({
   packageKey: z.string().min(1),
@@ -23,6 +23,14 @@ const CheckoutSchema = z.object({
     .optional()
     .or(z.literal("")),
 });
+
+// آدرس بازگشت از درگاه باید همان دامنه‌ای باشد که خریدار رویش است (دامنه‌ی اصلی،
+// آدرس موقت Vercel یا پیش‌نمایش)، نه یک مقدار ثابت.
+async function requestOrigin() {
+  const h = await headers();
+  const proto = h.get("x-forwarded-proto") ?? "https";
+  return `${proto}://${h.get("host")}`;
+}
 
 type FieldName = "contactName" | "clinicName" | "phone" | "email";
 
@@ -68,7 +76,7 @@ export async function startCheckout(
     };
   }
 
-  const supabase = createAdminClient();
+  const supabase = createAppDbServiceClient();
   const { data: order, error: insertError } = await supabase
     .from("orders")
     .insert({
@@ -98,7 +106,7 @@ export async function startCheckout(
     const payment = await requestPayment({
       amountToman: tier.amountToman,
       description: `${pkg.title} — ${tier.label} — مدیلینک`,
-      callbackUrl: `${siteUrl}/checkout/verify?order=${order.id}`,
+      callbackUrl: `${await requestOrigin()}/checkout/verify?order=${order.id}`,
       mobile: parsed.data.phone,
       email: parsed.data.email || undefined,
     });

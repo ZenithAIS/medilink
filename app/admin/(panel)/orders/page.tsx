@@ -1,4 +1,4 @@
-import { createAdminClient } from "@/app/lib/supabase/admin";
+import { requireSiteAdmin } from "@/app/lib/app-db/admin-guard";
 import { formatToman } from "@/app/lib/packages";
 
 export const dynamic = "force-dynamic";
@@ -18,7 +18,7 @@ const STATUS_CLASS: Record<string, string> = {
 };
 
 export default async function AdminOrdersPage() {
-  const supabase = createAdminClient();
+  const { supabase } = await requireSiteAdmin();
   const { data: orders, error } = await supabase
     .from("orders")
     .select(
