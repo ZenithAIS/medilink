@@ -8,6 +8,19 @@ import "server-only";
  * بر اساس این فیلد تفسیر می‌کند، پس نیازی به ضرب در ۱۰ نیست.
  */
 
+/**
+ * تا وقتی مرچنت زرین‌پال تأیید و ZARINPAL_MERCHANT_ID ست نشده، خرید به‌صورت «ثبت سفارش» انجام
+ * می‌شود: سفارش در وضعیت pending ثبت می‌شود و تیم برای پرداخت (کارت‌به‌کارت/فاکتور) تماس می‌گیرد؛
+ * ادمین از پنل اپ آن را «پرداخت شد» می‌کند. با ست‌کردن متغیر و redeploy، درگاه خودکار فعال می‌شود.
+ */
+export function isOnlinePaymentEnabled() {
+  return Boolean(process.env.ZARINPAL_MERCHANT_ID);
+}
+
+export function buyLabel() {
+  return isOnlinePaymentEnabled() ? "خرید آنلاین" : "ثبت سفارش";
+}
+
 function isSandbox() {
   return process.env.ZARINPAL_SANDBOX === "true";
 }

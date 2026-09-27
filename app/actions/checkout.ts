@@ -4,7 +4,7 @@ import { z } from "zod";
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 import { createAppDbServiceClient } from "@/app/lib/app-db/server";
-import { requestPayment } from "@/app/lib/zarinpal";
+import { requestPayment, isOnlinePaymentEnabled } from "@/app/lib/zarinpal";
 import { getPackage, getTier, isBuyable } from "@/app/lib/packages";
 
 const CheckoutSchema = z.object({
@@ -99,6 +99,10 @@ export async function startCheckout(
       status: "error",
       message: "ثبت سفارش ناموفق بود. لطفاً دوباره تلاش کنید.",
     };
+  }
+
+  if (!isOnlinePaymentEnabled()) {
+    redirect(`/checkout/success?order=${order.id}`);
   }
 
   let payUrl: string;

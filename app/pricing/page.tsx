@@ -6,11 +6,12 @@ import Reveal from "@/app/components/Reveal";
 import { pricingFaqs } from "@/app/lib/pricing";
 import { packages, isBuyable, formatToman } from "@/app/lib/packages";
 import { trialUrl, TRIAL_DAYS } from "@/app/lib/site";
+import { buyLabel, isOnlinePaymentEnabled } from "@/app/lib/zarinpal";
 
 export const metadata: Metadata = {
-  title: "تعرفه‌ها و خرید آنلاین | مدیلینک",
+  title: "تعرفه‌ها و خرید | مدیلینک",
   description:
-    "تعرفه‌ی اتوماسیون مطب، طراحی سایت و سئوی پزشکی مدیلینک — با پرداخت آنلاین و امن از طریق زرین‌پال.",
+    "تعرفه‌ی اتوماسیون مطب، طراحی سایت و سئوی پزشکی مدیلینک — با امکان سفارش آنلاین.",
   alternates: { canonical: "/pricing" },
 };
 
@@ -21,7 +22,11 @@ export default function PricingPage() {
         badge="تعرفه‌ها"
         title="هر بخش را جداگانه"
         highlight="سفارش بدهید"
-        description="قیمت‌ها بدون احتساب مالیات بر ارزش افزوده است. خرید آنلاین و امن از طریق درگاه زرین‌پال."
+        description={
+          isOnlinePaymentEnabled()
+            ? "قیمت‌ها بدون احتساب مالیات بر ارزش افزوده است. خرید آنلاین و امن از طریق درگاه زرین‌پال."
+            : "قیمت‌ها بدون احتساب مالیات بر ارزش افزوده است. سفارش را ثبت کنید تا برای پرداخت و راه‌اندازی با شما تماس بگیریم."
+        }
       />
 
       <section className="py-24 bg-white">
@@ -75,7 +80,7 @@ export default function PricingPage() {
                         href={`/checkout?package=${pkg.key}&tier=${tier.key}`}
                         className="block text-center py-3 rounded-xl font-bold gradient-primary text-white hover:opacity-90 shadow-md transition-opacity"
                       >
-                        خرید آنلاین
+                        {buyLabel()}
                       </Link>
                     ) : (
                       <Link

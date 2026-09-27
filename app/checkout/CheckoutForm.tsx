@@ -10,9 +10,11 @@ const initialState: CheckoutState = { status: "idle" };
 export default function CheckoutForm({
   pkg,
   tier,
+  onlinePayment,
 }: {
   pkg: SellablePackage;
   tier: PackageTier & { amountToman: number };
+  onlinePayment: boolean;
 }) {
   const [state, formAction, pending] = useActionState(startCheckout, initialState);
 
@@ -127,11 +129,13 @@ export default function CheckoutForm({
         disabled={pending}
         className="w-full gradient-primary text-white py-3 rounded-xl font-bold hover:opacity-90 transition-opacity shadow-md disabled:opacity-60 disabled:cursor-not-allowed"
       >
-        {pending ? "در حال اتصال به درگاه..." : "پرداخت و رفتن به درگاه"}
+        {pending ? "در حال ثبت..." : onlinePayment ? "پرداخت و رفتن به درگاه" : "ثبت سفارش"}
       </button>
 
       <p className="text-xs text-ink-400 text-center leading-relaxed">
-        پرداخت از طریق درگاه امن زرین‌پال انجام می‌شود.
+        {onlinePayment
+          ? "پرداخت از طریق درگاه امن زرین‌پال انجام می‌شود."
+          : "پس از ثبت سفارش، تیم مدیلینک برای پرداخت (کارت‌به‌کارت یا فاکتور رسمی) با شما تماس می‌گیرد."}
         {tier.billing === "monthly" && " این پرداخت برای دوره‌ی اول است؛ تمدید ماهانه جداگانه اطلاع‌رسانی می‌شود."}
       </p>
     </form>

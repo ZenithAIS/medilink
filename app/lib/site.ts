@@ -15,10 +15,10 @@ export const trialUrl = `${panelUrl}/signup`;
 export const TRIAL_DAYS = 14;
 
 /** شماره‌ی تماس در فرمت بین‌المللی، بدون + و بدون فاصله. مبنای لینک تلفن و واتساپ. */
-const phoneE164 = "989051881128";
+const phoneE164 = "989051881129";
 
 export const contact = {
-  phone: "۰۹۰۵ ۱۸۸ ۱۱۲۸",
+  phone: "۰۹۰۵ ۱۸۸ ۱۱۲۹",
   phoneHref: `tel:+${phoneE164}`,
   whatsapp: `https://wa.me/${phoneE164}`,
   email: "info@dmsafir.com",

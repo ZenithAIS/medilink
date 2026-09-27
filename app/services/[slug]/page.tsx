@@ -9,6 +9,7 @@ import FinalCta from "@/app/components/FinalCta";
 import Reveal from "@/app/components/Reveal";
 import { services, getService } from "@/app/lib/services";
 import { checkoutHrefForSlug } from "@/app/lib/packages";
+import { buyLabel } from "@/app/lib/zarinpal";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -81,7 +82,7 @@ export default async function ServiceDetailPage({ params }: Props) {
                   href={checkoutHrefForSlug(service.slug)}
                   className="border-2 border-cream-300 text-ink-700 px-8 py-4 rounded-xl text-base font-bold hover:border-brand-300 hover:text-brand-600 transition-all text-center"
                 >
-                  خرید آنلاین
+                  {buyLabel()}
                 </Link>
               </div>
             </div>

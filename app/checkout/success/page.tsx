@@ -25,17 +25,21 @@ export default async function CheckoutSuccessPage({ searchParams }: Props) {
     : null;
 
   const paid = order?.status === "paid";
+  // pending این‌جا یعنی «ثبت سفارش» بدون درگاه (زرین‌پال هنوز فعال نیست).
+  const awaitingPayment = order?.status === "pending";
 
   return (
     <main>
       <PageHero
-        badge={paid ? "پرداخت موفق" : "وضعیت پرداخت"}
+        badge={paid ? "پرداخت موفق" : awaitingPayment ? "سفارش ثبت شد" : "وضعیت پرداخت"}
         title={paid ? "خرید شما" : "سفارش شما"}
         highlight={paid ? "با موفقیت ثبت شد" : "ثبت شد"}
         description={
           paid
             ? "تیم مدیلینک در کمتر از یک روز کاری برای راه‌اندازی با شما تماس می‌گیرد."
-            : "برای پیگیری وضعیت پرداخت با پشتیبانی مدیلینک تماس بگیرید."
+            : awaitingPayment
+              ? "تیم مدیلینک در کمتر از یک روز کاری برای هماهنگی پرداخت (کارت‌به‌کارت یا فاکتور رسمی) و راه‌اندازی با شما تماس می‌گیرد."
+              : "برای پیگیری وضعیت پرداخت با پشتیبانی مدیلینک تماس بگیرید."
         }
       />
       <section className="py-16 bg-white">

@@ -5,6 +5,7 @@ import Reveal from "@/app/components/Reveal";
 import CheckoutForm from "./CheckoutForm";
 import { packages, getPackage, getTier, isBuyable, formatToman } from "@/app/lib/packages";
 import { contact } from "@/app/lib/site";
+import { isOnlinePaymentEnabled, buyLabel } from "@/app/lib/zarinpal";
 
 export const metadata: Metadata = {
   title: "خرید بسته | مدیلینک",
@@ -17,7 +18,7 @@ function PackagePicker() {
   return (
     <main>
       <PageHero
-        badge="خرید آنلاین"
+        badge="خرید"
         title="کدام بسته را"
         highlight="می‌خواهید بخرید؟"
         description="یکی از بسته‌ها را انتخاب کنید تا به فرم پرداخت بروید."
@@ -46,7 +47,7 @@ function PackagePicker() {
                         href={`/checkout?package=${pkg.key}&tier=${tier.key}`}
                         className="mt-auto text-center gradient-primary text-white py-2.5 rounded-xl font-bold text-sm hover:opacity-90 transition-opacity"
                       >
-                        خرید
+                        {buyLabel()}
                       </Link>
                     ) : (
                       <Link
@@ -81,7 +82,7 @@ export default async function CheckoutPage({ searchParams }: Props) {
     return (
       <main>
         <PageHero
-          badge="خرید آنلاین"
+          badge="خرید"
           title="این بسته آنلاین"
           highlight="قابل خرید نیست"
           description="برای این مورد، ابتدا با تیم مدیلینک تماس بگیرید تا تعرفه‌ی دقیق را اعلام کنیم."
@@ -106,15 +107,19 @@ export default async function CheckoutPage({ searchParams }: Props) {
   return (
     <main>
       <PageHero
-        badge="خرید آنلاین"
+        badge="خرید"
         title="تکمیل خرید"
         highlight={pkg.title}
-        description="اطلاعات زیر را کامل کنید تا به درگاه پرداخت زرین‌پال منتقل شوید."
+        description={
+          isOnlinePaymentEnabled()
+            ? "اطلاعات زیر را کامل کنید تا به درگاه پرداخت زرین‌پال منتقل شوید."
+            : "اطلاعات زیر را کامل کنید؛ تیم مدیلینک برای پرداخت و راه‌اندازی با شما تماس می‌گیرد."
+        }
       />
       <section className="py-16 bg-white">
         <div className="max-w-md mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal className="bg-white rounded-2xl p-8 shadow-sm border border-cream-200">
-            <CheckoutForm pkg={pkg} tier={tier} />
+            <CheckoutForm pkg={pkg} tier={tier} onlinePayment={isOnlinePaymentEnabled()} />
           </Reveal>
           <p className="text-center text-xs text-ink-400 mt-6">
             سوالی دارید؟{" "}
