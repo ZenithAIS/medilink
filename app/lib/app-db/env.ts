@@ -1,7 +1,6 @@
 import "server-only";
 
-// دیتابیس اپ (medilink-app): مرکز سفارش‌ها، اشتراک‌ها، بلاگ و حساب ادمین‌های پلتفرم.
-// دیتابیس خود سایت (app/lib/supabase) فقط لیدها و خبرنامه را نگه می‌دارد.
+// سایت فقط به دیتابیس اپ (medilink-app) وصل است: سفارش‌ها، بلاگ، لیدها، خبرنامه و حساب ادمین‌ها.
 function required(name: string) {
   const value = process.env[name];
   if (!value) {

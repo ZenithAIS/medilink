@@ -1,7 +1,7 @@
 "use server";
 
 import { z } from "zod";
-import { createAdminClient } from "@/app/lib/supabase/admin";
+import { createAppDbServiceClient } from "@/app/lib/app-db/server";
 import { CLINIC_TYPES } from "@/app/lib/clinic-types";
 
 
@@ -48,7 +48,7 @@ export async function submitLead(
   }
 
   try {
-    const supabase = createAdminClient();
+    const supabase = createAppDbServiceClient();
     const { error } = await supabase.from("leads").insert({
       name: parsed.data.name,
       clinic_type: parsed.data.clinicType,

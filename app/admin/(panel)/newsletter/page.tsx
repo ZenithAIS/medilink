@@ -1,12 +1,9 @@
-import { createAdminClient } from "@/app/lib/supabase/admin";
 import { requireSiteAdmin } from "@/app/lib/app-db/admin-guard";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminNewsletterPage() {
-  // داده در دیتابیس خود سایت است؛ دسترسی را حساب ادمین دیتابیس اپ تعیین می‌کند.
-  await requireSiteAdmin();
-  const supabase = createAdminClient();
+  const { supabase } = await requireSiteAdmin();
   const { data: subscribers, error } = await supabase
     .from("newsletter_subscribers")
     .select("id, email, created_at")

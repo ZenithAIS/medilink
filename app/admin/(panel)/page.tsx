@@ -1,4 +1,3 @@
-import { createAdminClient } from "@/app/lib/supabase/admin";
 import { requireSiteAdmin } from "@/app/lib/app-db/admin-guard";
 import { formatToman } from "@/app/lib/packages";
 
@@ -6,12 +5,11 @@ export const dynamic = "force-dynamic";
 
 async function getStats() {
   const { supabase: appDb } = await requireSiteAdmin();
-  const siteDb = createAdminClient();
 
   const [{ count: leadsCount }, { count: newsletterCount }, { data: orders }, { count: postsCount }] =
     await Promise.all([
-      siteDb.from("leads").select("*", { count: "exact", head: true }),
-      siteDb.from("newsletter_subscribers").select("*", { count: "exact", head: true }),
+      appDb.from("leads").select("*", { count: "exact", head: true }),
+      appDb.from("newsletter_subscribers").select("*", { count: "exact", head: true }),
       appDb.from("orders").select("status, amount_toman"),
       appDb.from("blog_posts").select("*", { count: "exact", head: true }).eq("published", true),
     ]);

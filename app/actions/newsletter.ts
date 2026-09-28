@@ -1,7 +1,7 @@
 "use server";
 
 import { z } from "zod";
-import { createAdminClient } from "@/app/lib/supabase/admin";
+import { createAppDbServiceClient } from "@/app/lib/app-db/server";
 
 const EmailSchema = z
   .string()
@@ -26,7 +26,7 @@ export async function subscribeNewsletter(
   }
 
   try {
-    const supabase = createAdminClient();
+    const supabase = createAppDbServiceClient();
     const { error } = await supabase
       .from("newsletter_subscribers")
       .insert({ email: parsed.data });

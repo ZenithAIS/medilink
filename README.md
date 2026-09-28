@@ -29,13 +29,11 @@ npm install
 cp .env.example .env.local
 ```
 
-سپس مقادیر را از مسیر Supabase › Project Settings › API Keys پر کنید (بخش «دو دیتابیس» پایین‌تر):
+سپس مقادیر را از Supabaseِ پروژه‌ی **اپ** (Project Settings › API Keys) پر کنید:
 
-- `NEXT_PUBLIC_SUPABASE_URL` (دیتابیس سایت)
-- `SUPABASE_SERVICE_ROLE_KEY` — **فقط سمت سرور.** هرگز پیشوند `NEXT_PUBLIC_` نگیرد و در گیت کامیت نشود.
 - `NEXT_PUBLIC_SITE_URL` — دامنه سایت، برای تگ‌های canonical و Open Graph (اختیاری؛ پیش‌فرض `https://medilinkapp.online`).
 - `NEXT_PUBLIC_PANEL_URL` — آدرس پنل کلینیک (اختیاری؛ پیش‌فرض `https://app.medilinkapp.online`).
-- `APP_SUPABASE_URL`، `APP_SUPABASE_ANON_KEY`، `APP_SUPABASE_SERVICE_ROLE_KEY` — دیتابیس اپ، فقط سمت سرور.
+- `APP_SUPABASE_URL`، `APP_SUPABASE_ANON_KEY` (کلید publishable)، `APP_SUPABASE_SERVICE_ROLE_KEY` (کلید secret) — **فقط سمت سرور.** هرگز پیشوند `NEXT_PUBLIC_` نگیرند و در گیت کامیت نشوند.
 - `ZARINPAL_MERCHANT_ID`، `ZARINPAL_SANDBOX` — درگاه پرداخت.
 
 - `NEXT_PUBLIC_WHATSAPP_NUMBER` — شماره‌ی دکمه‌ی شناور واتساپ، فرمت بین‌المللی بدون `+` (اختیاری).
@@ -103,30 +101,25 @@ app/
     zarinpal.ts           # کلاینت درگاه زرین‌پال
     faq.ts                # سوالات متداول
     clinic-types.ts       # فهرست انواع کلینیک برای فرم دمو
-  lib/supabase/           # دیتابیس سایت (لیدها، خبرنامه)
-    env.ts
-    admin.ts              # کلاینت service_role — server-only
-  lib/app-db/             # دیتابیس اپ (سفارش‌ها، بلاگ، ادمین)
+  lib/app-db/             # دیتابیس اپ (سفارش، بلاگ، لید، خبرنامه، ادمین)
     server.ts             # کلاینت نشست، عمومی و service_role
     admin-guard.ts        # بررسی ادمین پلتفرم
     middleware.ts         # محافظت از /admin (از proxy.ts)
   layout.tsx              # هدر، فوتر و دکمه‌ی واتساپ مشترک همه‌ی صفحات
   sitemap.ts, robots.ts   # سئو
-supabase/migrations/      # اسکیمای دیتابیس سایت
 ```
 
 > تصاویر محصول هنوز ماکاپ برداری‌اند؛ اسکرین‌شات واقعی را در `public/images/products/` بگذارید.
 
 ## نکات امنیتی
 
-- جدول‌های `leads` و `newsletter_subscribers` با RLS فعال‌اند و **هیچ policy‌ای برای نقش `anon` تعریف نشده**؛ یعنی از مرورگر نه خواندنی ممکن است و نه نوشتنی.
-- درج داده فقط در Server Action و با کلید `service_role` انجام می‌شود که RLS را دور می‌زند. فایل `app/lib/supabase/admin.ts` با `server-only` علامت‌گذاری شده تا اگر تصادفاً از یک کامپوننت کلاینتی import شود، بیلد خطا بدهد.
+- همه‌ی جدول‌ها با RLS فعال‌اند و نقش `anon` جز خواندن مقالات منتشرشده به هیچ‌چیز دسترسی ندارد؛ خواندن لید، سفارش و خبرنامه فقط برای ادمین پلتفرم است.
+- درج داده فقط در Server Action و با کلید `service_role` انجام می‌شود که RLS را دور می‌زند. فایل‌های `app/lib/app-db/` با `server-only` علامت‌گذاری شده‌اند تا اگر تصادفاً از یک کامپوننت کلاینتی import شود، بیلد خطا بدهد.
 - پیام خطای دیتابیس هرگز به کاربر برگردانده نمی‌شود؛ فقط در لاگ سرور ثبت می‌شود.
 
-## دو دیتابیس
+## دیتابیس
 
-- **دیتابیس خود سایت** (`NEXT_PUBLIC_SUPABASE_URL`، `SUPABASE_SERVICE_ROLE_KEY`): فقط لیدهای فرم دمو و خبرنامه.
-- **دیتابیس اپ** (`APP_SUPABASE_URL`، `APP_SUPABASE_ANON_KEY`، `APP_SUPABASE_SERVICE_ROLE_KEY`؛ همه فقط سمت سرور): سفارش‌ها، بلاگ و حساب ادمین‌ها. اسکیمای آن در ریپوی `medilink-app` است (`supabase/migrations/0017_*`، `0018_*`). این‌طور پرداخت «اتوماسیون مطب» مستقیم به اشتراک همان کلینیک در اپ وصل می‌شود و یک حساب ادمین هر دو پنل را باز می‌کند.
+سایت دیتابیس جداگانه ندارد و فقط به **دیتابیس اپ** وصل است: سفارش‌ها، بلاگ، لیدهای فرم دمو، خبرنامه و حساب ادمین‌ها. اسکیما در ریپوی `medilink-app` است (`supabase/migrations/0017`، `0018`، `0019`). پرداخت «اتوماسیون مطب» مستقیم به اشتراک همان کلینیک وصل می‌شود و یک حساب ادمین هر دو پنل را باز می‌کند.
 
 ## خرید آنلاین (زرین‌پال)
 
@@ -151,4 +144,4 @@ supabase/migrations/      # اسکیمای دیتابیس سایت
 
 ## دیپلوی
 
-روی Vercel: متغیرهای محیطی بالا (هر دو دیتابیس + زرین‌پال) را در تنظیمات پروژه ثبت کنید. دامنه: `medilinkapp.online` (سایت) و `app.medilinkapp.online` (پنل).
+روی Vercel: متغیرهای محیطی بالا (دیتابیس اپ + زرین‌پال) را در تنظیمات پروژه ثبت کنید. دامنه: `medilinkapp.online` (سایت) و `app.medilinkapp.online` (پنل).
