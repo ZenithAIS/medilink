@@ -2,13 +2,13 @@ import "server-only";
 import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
 import { createClient } from "@supabase/supabase-js";
-import { appDbAnonKey, appDbServiceRoleKey, appDbUrl } from "./env";
+import { appDbPublishableKey, appDbServiceRoleKey, appDbUrl } from "./env";
 
 /** نشست کاربر (ادمین) با کوکی؛ همه‌ی کوئری‌ها زیر RLS دیتابیس اپ اجرا می‌شوند. */
 export async function createAppDbSessionClient() {
   const cookieStore = await cookies();
 
-  return createServerClient(appDbUrl(), appDbAnonKey(), {
+  return createServerClient(appDbUrl(), appDbPublishableKey(), {
     cookies: {
       getAll() {
         return cookieStore.getAll();
@@ -28,7 +28,7 @@ export async function createAppDbSessionClient() {
 
 /** خواندن عمومی (مثلاً مقالات منتشرشده) بدون کوکی تا صفحه قابل کش ماند. */
 export function createAppDbPublicClient() {
-  return createClient(appDbUrl(), appDbAnonKey(), {
+  return createClient(appDbUrl(), appDbPublishableKey(), {
     auth: { persistSession: false, autoRefreshToken: false },
   });
 }

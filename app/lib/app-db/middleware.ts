@@ -1,6 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
-import { appDbAnonKey, appDbUrl } from "./env";
+import { appDbPublishableKey, appDbUrl } from "./env";
 
 // تنها بخش محافظت‌شده‌ی سایت، پنل ادمین است (حساب از دیتابیس اپ). بقیه‌ی سایت (خانه، محصولات،
 // خدمات، چک‌اوت و ...) کاملاً عمومی می‌ماند و نیازی به نشست ندارد.
@@ -10,7 +10,7 @@ const GUEST_ONLY_ROUTE = "/admin/login";
 export async function updateSession(request: NextRequest) {
   let response = NextResponse.next({ request });
 
-  const supabase = createServerClient(appDbUrl(), appDbAnonKey(), {
+  const supabase = createServerClient(appDbUrl(), appDbPublishableKey(), {
     cookies: {
       getAll() {
         return request.cookies.getAll();

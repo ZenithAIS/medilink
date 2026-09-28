@@ -10,5 +10,5 @@ function required(name: string) {
 }
 
 export const appDbUrl = () => required("APP_SUPABASE_URL");
-export const appDbAnonKey = () => required("APP_SUPABASE_ANON_KEY");
+export const appDbPublishableKey = () => required("APP_SUPABASE_PUBLISHABLE_KEY");
 export const appDbServiceRoleKey = () => required("APP_SUPABASE_SERVICE_ROLE_KEY");

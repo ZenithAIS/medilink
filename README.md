@@ -33,7 +33,7 @@ cp .env.example .env.local
 
 - `NEXT_PUBLIC_SITE_URL` — دامنه سایت، برای تگ‌های canonical و Open Graph (اختیاری؛ پیش‌فرض `https://medilinkapp.online`).
 - `NEXT_PUBLIC_PANEL_URL` — آدرس پنل کلینیک (اختیاری؛ پیش‌فرض `https://app.medilinkapp.online`).
-- `APP_SUPABASE_URL`، `APP_SUPABASE_ANON_KEY` (کلید publishable)، `APP_SUPABASE_SERVICE_ROLE_KEY` (کلید secret) — **فقط سمت سرور.** هرگز پیشوند `NEXT_PUBLIC_` نگیرند و در گیت کامیت نشوند.
+- `APP_SUPABASE_URL`، `APP_SUPABASE_PUBLISHABLE_KEY` (کلید publishable، `sb_publishable_…`)، `APP_SUPABASE_SERVICE_ROLE_KEY` (کلید secret) — **فقط سمت سرور.** هرگز پیشوند `NEXT_PUBLIC_` نگیرند و در گیت کامیت نشوند.
 - `ZARINPAL_MERCHANT_ID`، `ZARINPAL_SANDBOX` — درگاه پرداخت.
 
 - `NEXT_PUBLIC_WHATSAPP_NUMBER` — شماره‌ی دکمه‌ی شناور واتساپ، فرمت بین‌المللی بدون `+` (اختیاری).
