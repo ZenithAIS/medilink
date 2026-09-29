@@ -6,7 +6,6 @@ import { siteUrl, contact, socials } from "./lib/site";
 import SiteChrome from "./components/SiteChrome";
 
 const GTM_ID = "GTM-K47MTWQ7";
-const GA_ID = "G-X4JM3DZVS8";
 
 // Shabnam نسخه‌ی Black ندارد؛ فایل Bold برای وزن ۹۰۰ هم اعلام می‌شود تا
 // مرورگر به‌جای ضخیم‌سازی مصنوعی (که در فارسی بد رندر می‌شود) از گلیف واقعی
@@ -129,18 +128,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
-        {/* Google Analytics 4 (gtag.js) */}
-        <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
-        <Script
-          id="ga4-init"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', '${GA_ID}');`,
-          }}
-        />
         <SiteChrome>{children}</SiteChrome>
         <script
           type="application/ld+json"
