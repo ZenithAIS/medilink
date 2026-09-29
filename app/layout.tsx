@@ -42,7 +42,10 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/" },
   verification: {
-    google: "sEkBpXcec5SVNzDMLkFdpjy6IOXIiZJFA59WAhzFIKs",
+    google: [
+      "sEkBpXcec5SVNzDMLkFdpjy6IOXIiZJFA59WAhzFIKs",
+      "SQ4XYORRgu5JnZH0C1-BWfXHMnC4hMVecG83IHxt2ys",
+    ],
   },
   openGraph: {
     type: "website",
