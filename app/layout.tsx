@@ -1,8 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import Script from "next/script";
 import "./globals.css";
 import { siteUrl, contact, socials } from "./lib/site";
 import SiteChrome from "./components/SiteChrome";
+
+const GTM_ID = "GTM-K47MTWQ7";
 
 // Shabnam نسخه‌ی Black ندارد؛ فایل Bold برای وزن ۹۰۰ هم اعلام می‌شود تا
 // مرورگر به‌جای ضخیم‌سازی مصنوعی (که در فارسی بد رندر می‌شود) از گلیف واقعی
@@ -38,6 +41,9 @@ export const metadata: Metadata = {
     "مدیلینک",
   ],
   alternates: { canonical: "/" },
+  verification: {
+    google: "sEkBpXcec5SVNzDMLkFdpjy6IOXIiZJFA59WAhzFIKs",
+  },
   openGraph: {
     type: "website",
     locale: "fa_IR",
@@ -99,6 +105,26 @@ export default function RootLayout({
   return (
     <html lang="fa" dir="rtl" className={shabnam.variable}>
       <body>
+        {/* Google Tag Manager — باید همین ابتدای body باشد (دستور رسمی گوگل). */}
+        <Script
+          id="gtm-script"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${GTM_ID}');`,
+          }}
+        />
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
         <SiteChrome>{children}</SiteChrome>
         <script
           type="application/ld+json"
