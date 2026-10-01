@@ -45,6 +45,7 @@ export const metadata: Metadata = {
     google: [
       "sEkBpXcec5SVNzDMLkFdpjy6IOXIiZJFA59WAhzFIKs",
       "SQ4XYORRgu5JnZH0C1-BWfXHMnC4hMVecG83IHxt2ys",
+      "lODv7Apso_g1A021qPZXSn1S9znUnQKfguOWZcOPyEo",
     ],
   },
   openGraph: {
