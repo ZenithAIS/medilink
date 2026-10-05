@@ -1,11 +1,16 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import Script from "next/script";
 import "./globals.css";
 import { siteUrl, contact, socials } from "./lib/site";
 import SiteChrome from "./components/SiteChrome";
+import GtmFallback from "./components/GtmFallback";
+import { GTM_ID, GTM_HEAD_SNIPPET } from "./lib/gtm";
 
-const GTM_ID = "GTM-K47MTWQ7";
+// Google Tag Manager: قطعه‌ی رسمی در app/lib/gtm.ts. عمداً <script> ساده‌ی درون <head> است، نه next/script:
+// next/script با strategy="afterInteractive" فقط بعد از Hydration در مرورگر تزریق می‌شود (در HTMLِ خام اصلاً <script>
+// نیست و ابزارهای تأیید/Tag Assistant آن را نمی‌بینند)، و با "beforeInteractive" هم بدنه در صفِ __next_s می‌نشیند و
+// دیرتر اجرا می‌شود. این لایه‌ی ریشه برای «همه‌ی» مسیرها یک بار رندر می‌شود (admin و not-found هم زیر همین layout
+// هستند)، پس GTM هیچ‌جا دوبار بارگذاری نمی‌شود.
 
 // Shabnam نسخه‌ی Black ندارد؛ فایل Bold برای وزن ۹۰۰ هم اعلام می‌شود تا
 // مرورگر به‌جای ضخیم‌سازی مصنوعی (که در فارسی بد رندر می‌شود) از گلیف واقعی
@@ -108,19 +113,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fa" dir="rtl" className={shabnam.variable}>
+      <head>
+        {/* Google Tag Manager — head (دستور رسمی گوگل: تا حد امکان بالای head) */}
+        <script id="gtm-script" dangerouslySetInnerHTML={{ __html: GTM_HEAD_SNIPPET }} />
+        {/* End Google Tag Manager */}
+      </head>
       <body>
-        {/* Google Tag Manager — باید همین ابتدای body باشد (دستور رسمی گوگل). */}
-        <Script
-          id="gtm-script"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','${GTM_ID}');`,
-          }}
-        />
+        {/* Google Tag Manager (noscript) — فوراً بعد از بازشدنِ body */}
         <noscript>
           <iframe
             src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
@@ -129,7 +128,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
+        {/* End Google Tag Manager (noscript) */}
         <SiteChrome>{children}</SiteChrome>
+        <GtmFallback />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
