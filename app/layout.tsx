@@ -4,6 +4,7 @@ import "./globals.css";
 import { siteUrl, contact, socials } from "./lib/site";
 import SiteChrome from "./components/SiteChrome";
 import GtmFallback from "./components/GtmFallback";
+import PageSchema from "./components/PageSchema";
 import { GTM_ID, GTM_HEAD_SNIPPET } from "./lib/gtm";
 
 // Google Tag Manager: قطعه‌ی رسمی در app/lib/gtm.ts. عمداً <script> ساده‌ی درون <head> است، نه next/script:
@@ -131,6 +132,7 @@ export default function RootLayout({
         {/* End Google Tag Manager (noscript) */}
         <SiteChrome>{children}</SiteChrome>
         <GtmFallback />
+        <PageSchema />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
