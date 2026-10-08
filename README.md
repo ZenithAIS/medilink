@@ -87,9 +87,6 @@ app/
     leads.ts              # Server Action فرم دمو (اعتبارسنجی Zod + درج در دیتابیس)
     newsletter.ts         # Server Action عضویت خبرنامه
     checkout.ts           # ثبت سفارش و انتقال به زرین‌پال
-    blog.ts               # ذخیره/حذف مقاله از پنل ادمین
-    auth.ts               # ورود/خروج پنل ادمین
-  admin/                  # پنل ادمین سایت
   checkout/               # فرم خرید، تأیید پرداخت، صفحات نتیجه
   components/             # کامپوننت‌های مشترک و سکشن‌های صفحات
   lib/
@@ -101,10 +98,9 @@ app/
     zarinpal.ts           # کلاینت درگاه زرین‌پال
     faq.ts                # سوالات متداول
     clinic-types.ts       # فهرست انواع کلینیک برای فرم دمو
-  lib/app-db/             # دیتابیس اپ (سفارش، بلاگ، لید، خبرنامه، ادمین)
-    server.ts             # کلاینت نشست، عمومی و service_role
-    admin-guard.ts        # بررسی ادمین پلتفرم
-    middleware.ts         # محافظت از /admin (از proxy.ts)
+    legacy-admin-redirect.ts  # نگاشتِ مسیرهای قدیمیِ /admin/** به پنلِ ادمین اپ (فقط Redirect؛ از proxy.ts)
+  lib/app-db/             # دیتابیس اپ (سفارش، بلاگ، لید، خبرنامه)
+    server.ts             # کلاینت عمومی (publishable) و service_role — بدونِ نشستِ کاربر
   layout.tsx              # هدر، فوتر و دکمه‌ی واتساپ مشترک همه‌ی صفحات
   sitemap.ts, robots.ts   # سئو
 ```
@@ -144,14 +140,18 @@ ZARINPAL_SANDBOX=true
 
 دکمه‌های «۱۴ روز رایگان» به `/signup` پنل (`NEXT_PUBLIC_PANEL_URL`) می‌روند. خود دوره در دیتابیس اپ ساخته و اعمال می‌شود (تریگر `start_clinic_trial`).
 
-## پنل ادمین (`/admin`)
+## مدیریت (فقط در پنل اپ)
 
-سفارش‌ها، **بلاگ** (نوشتن، ویرایش، انتشار، تصویر شاخص)، درخواست‌های دمو و خبرنامه. ورود با حساب ادمین پلتفرم در دیتابیس اپ — همان حسابی که `/admin` پنل اپ را باز می‌کند. ساخت حساب ادمین:
+این ریپو دیگر رابطِ ادمین ندارد. سفارش‌ها، **بلاگ** (نوشتن، ویرایش، انتشار، تصویر شاخص)، درخواست‌های دمو و خبرنامه همه در Admin Hub اپ مدیریت می‌شوند: `https://app.medilinkapp.online/admin` (با حساب ادمین پلتفرم در دیتابیس اپ). لینکِ «ورود مدیریت» در فوتر سایت مستقیم به همان‌جا می‌رود.
+
+آدرس‌های قدیمیِ `/admin/**` در سایت فقط Redirect هستند (`proxy.ts` + `app/lib/legacy-admin-redirect.ts`): GET/HEAD به مسیرِ معادل در پنل اپ می‌رود (`/admin/orders` ← `/admin/payments`، `/admin/blog` ← `/admin/site/blog`، `/admin/leads` ← `/admin/site/leads`، `/admin/newsletter` ← `/admin/site/newsletter`، بقیه ← `/admin`) و هر درخواستِ غیر GET/HEAD با 405 رد می‌شود. سایت هیچ احرازِ هویتِ ادمینی انجام نمی‌دهد.
+
+مقاله‌هایی که از پنلِ اپ منتشر می‌شوند، چون اپ نمی‌تواند Cache سایت را مستقیم باطل کند، با تأخیر روی سایت دیده می‌شوند: صفحه‌های `/blog` تا حدود ۵ دقیقه (`revalidate = 300`) و `sitemap.xml` تا حدود ۱ ساعت.
+
+ساختِ حسابِ ادمین (دیتابیس اپ):
 
 1. Supabase اپ › Authentication › Users › Add user (ایمیل و رمز).
 2. در SQL Editor: `insert into public.platform_admins (user_id) select id from auth.users where email = 'ایمیل@ادمین';`
-
-مقاله‌های بلاگ از پنل منتشر می‌شوند و صفحه‌های `/blog` بلافاصله تازه می‌شوند.
 
 ## دیپلوی
 

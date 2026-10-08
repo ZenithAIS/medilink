@@ -1,30 +1,9 @@
 import "server-only";
-import { cookies } from "next/headers";
-import { createServerClient } from "@supabase/ssr";
 import { createClient } from "@supabase/supabase-js";
 import { appDbPublishableKey, appDbServiceRoleKey, appDbUrl } from "./env";
 
-/** نشست کاربر (ادمین) با کوکی؛ همه‌ی کوئری‌ها زیر RLS دیتابیس اپ اجرا می‌شوند. */
-export async function createAppDbSessionClient() {
-  const cookieStore = await cookies();
-
-  return createServerClient(appDbUrl(), appDbPublishableKey(), {
-    cookies: {
-      getAll() {
-        return cookieStore.getAll();
-      },
-      setAll(cookiesToSet) {
-        try {
-          for (const { name, value, options } of cookiesToSet) {
-            cookieStore.set(name, value, options);
-          }
-        } catch {
-          // از Server Component صدا زده شده؛ proxy نشست را تازه می‌کند.
-        }
-      },
-    },
-  });
-}
+// کلاینتِ «نشستِ کاربر/ادمین» (کوکی‌محور) از این‌جا برداشته شد: ادمینِ سایت بازنشسته است و مدیریت فقط در پنلِ اپ انجام می‌شود.
+// سایت فقط دو کلاینتِ بدونِ نشست دارد: خواندنِ عمومی (publishable) و درجِ سروری (service_role).
 
 /** خواندن عمومی (مثلاً مقالات منتشرشده) بدون کوکی تا صفحه قابل کش ماند. */
 export function createAppDbPublicClient() {
