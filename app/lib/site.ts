@@ -10,6 +10,9 @@ export const siteName = "مدیلینک";
 export const panelUrl =
   process.env.NEXT_PUBLIC_PANEL_URL ?? "https://app.medilinkapp.online";
 
+/** ورود به مدیریت مدیلینک (Admin Hub در اپ). فقط یک لینک است، نه کنترلِ امنیتی؛ احرازِ ادمین در خودِ اپ انجام می‌شود. */
+export const adminUrl = `${panelUrl}/admin`;
+
 /** ثبت‌نام در پنل = شروع خودکار ۱۴ روز آزمایشی رایگان (تریگر start_clinic_trial در دیتابیس اپ). */
 export const trialUrl = `${panelUrl}/signup`;
 export const TRIAL_DAYS = 14;

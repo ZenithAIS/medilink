@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { products } from "@/app/lib/products";
 import { services } from "@/app/lib/services";
-import { contact, navLinks, socials } from "@/app/lib/site";
+import { adminUrl, contact, navLinks, socials } from "@/app/lib/site";
 import NewsletterForm from "./NewsletterForm";
 
 export default function Footer() {
@@ -123,6 +123,9 @@ export default function Footer() {
             <Link href="/terms" className="hover:text-brand-300 transition-colors">
               قوانین و مقررات
             </Link>
+            <a href={adminUrl} rel="nofollow noopener" className="hover:text-brand-300 transition-colors">
+              ورود مدیریت
+            </a>
           </div>
         </div>
       </div>
