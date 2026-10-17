@@ -5,7 +5,7 @@ import NewsletterCta from "@/app/components/NewsletterCta";
 import Figure from "@/app/components/Figure";
 import BlogCover from "@/app/components/BlogCover";
 import Reveal from "@/app/components/Reveal";
-import { getPublishedPosts, getPost } from "@/app/lib/blog";
+import { getPublishedPosts, getPost, type Post } from "@/app/lib/blog";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -33,6 +33,87 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: `/blog/${post.slug}`,
     },
   };
+}
+
+// هر بلوک متن (جداشده با خط خالی) می‌تواند تیتر «## »/«### »، لیست «- »، تصویر «![alt](url)» یا پاراگراف باشد.
+function renderBlock(block: string, key: number) {
+  if (block.startsWith("### ")) {
+    return (
+      <h3 key={key} className="text-xl font-bold text-ink-900 pt-2">
+        {block.slice(4)}
+      </h3>
+    );
+  }
+  if (block.startsWith("## ")) {
+    return (
+      <h2 key={key} className="text-2xl font-black text-ink-900 pt-6">
+        {block.slice(3)}
+      </h2>
+    );
+  }
+  const image = block.match(/^!\[([^\]]*)\]\(([^)\s]+)\)$/);
+  if (image) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        key={key}
+        src={image[2]}
+        alt={image[1]}
+        width={1200}
+        height={800}
+        loading="lazy"
+        className="w-full h-auto rounded-2xl"
+      />
+    );
+  }
+  const lines = block.split("\n");
+  if (lines.every((l) => l.startsWith("- "))) {
+    return (
+      <ul key={key} className="list-disc pr-6 space-y-2 text-ink-700 leading-loose">
+        {lines.map((l, j) => (
+          <li key={j}>{l.slice(2)}</li>
+        ))}
+      </ul>
+    );
+  }
+  return (
+    <p key={key} className="text-ink-700 leading-loose">
+      {block}
+    </p>
+  );
+}
+
+// سؤال‌های بخش «سوالات متداول» (تیترهای ### بعد از آن) برای FAQPage استخراج می‌شوند.
+function articleSchema(post: Post) {
+  const url = `https://medilinkapp.online/blog/${post.slug}`;
+  const graph: Record<string, unknown>[] = [
+    {
+      "@type": "BlogPosting",
+      headline: post.title,
+      description: post.excerpt,
+      ...(post.cover ? { image: post.cover } : {}),
+      inLanguage: "fa-IR",
+      mainEntityOfPage: url,
+      author: { "@type": "Organization", name: "مدیلینک", url: "https://medilinkapp.online" },
+      publisher: { "@type": "Organization", name: "مدیلینک", url: "https://medilinkapp.online" },
+    },
+  ];
+  const faqStart = post.body.findIndex((b) => b.startsWith("## سوالات متداول"));
+  if (faqStart >= 0) {
+    const faq: Record<string, unknown>[] = [];
+    for (let i = faqStart + 1; i < post.body.length && !post.body[i].startsWith("## "); i++) {
+      const next = post.body[i + 1];
+      if (post.body[i].startsWith("### ") && next && !next.startsWith("#")) {
+        faq.push({
+          "@type": "Question",
+          name: post.body[i].slice(4),
+          acceptedAnswer: { "@type": "Answer", text: next },
+        });
+      }
+    }
+    if (faq.length) graph.push({ "@type": "FAQPage", mainEntity: faq });
+  }
+  return { "@context": "https://schema.org", "@graph": graph };
 }
 
 export default async function BlogPostPage({ params }: Props) {
@@ -89,12 +170,12 @@ export default async function BlogPostPage({ params }: Props) {
           <p className="text-lg text-ink-700 leading-relaxed mb-8 font-medium">
             {post.excerpt}
           </p>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema(post)) }}
+          />
           <div className="space-y-6">
-            {post.body.map((paragraph, i) => (
-              <p key={i} className="text-ink-700 leading-loose">
-                {paragraph}
-              </p>
-            ))}
+            {post.body.map((block, i) => renderBlock(block, i))}
           </div>
 
           <div className="mt-12 rounded-2xl border border-brand-100 bg-brand-50 p-6">
