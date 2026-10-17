@@ -1,6 +1,6 @@
 // Google Tag Manager — تنها منبعِ شناسه‌ی کانتینر و قطعه‌ی رسمیِ head. هم app/layout.tsx (رندر سمتِ سرور داخلِ <head>)
 // و هم GtmFallback (فقط وقتی قطعه‌ی سرور اجرا نشد) از همین ثابت‌ها استفاده می‌کنند؛ پس نه شناسه‌ای تکرار می‌شود و نه کدی.
-export const GTM_ID = "GTM-K47MTWQ7";
+export const GTM_ID = "GTM-N9TGMXT7";
 
 // قطعه‌ی رسمیِ Google Tag Manager (بخش head) — «بدون هیچ تغییری» جز جایگزینیِ شناسه‌ی کانتینر.
 export const GTM_HEAD_SNIPPET = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
