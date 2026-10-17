@@ -1,4 +1,6 @@
 import "server-only";
+import { readFileSync, readdirSync } from "fs";
+import path from "path";
 import { createAppDbPublicClient } from "./app-db/server";
 
 export type Post = {
@@ -45,6 +47,26 @@ function toPost(row: PostRow): Post {
   };
 }
 
+// مقاله‌های داخل ریپو (content/blog/<slug>.json) کنار مقاله‌های پنل ادمین نمایش داده می‌شوند؛
+// اگر اسلاگ تکراری بود، نسخه‌ی دیتابیس اولویت دارد.
+function getFilePosts(): PostRow[] {
+  const dir = path.join(process.cwd(), "content", "blog");
+  try {
+    return readdirSync(dir)
+      .filter((f) => f.endsWith(".json"))
+      .map((f) => JSON.parse(readFileSync(path.join(dir, f), "utf8")) as PostRow);
+  } catch {
+    return [];
+  }
+}
+
+function mergeRows(dbRows: PostRow[]): PostRow[] {
+  const seen = new Set(dbRows.map((r) => r.slug));
+  return [...dbRows, ...getFilePosts().filter((r) => !seen.has(r.slug))].sort((a, b) =>
+    (b.published_at ?? "").localeCompare(a.published_at ?? ""),
+  );
+}
+
 // خطای دیتابیس نباید بیلد یا کل صفحه‌ی بلاگ را از کار بیندازد؛ فقط لاگ می‌شود.
 export async function getPublishedPosts(): Promise<Post[]> {
   try {
@@ -54,10 +76,10 @@ export async function getPublishedPosts(): Promise<Post[]> {
       .eq("published", true)
       .order("published_at", { ascending: false });
     if (error) throw error;
-    return (data as PostRow[]).map(toPost);
+    return mergeRows(data as PostRow[]).map(toPost);
   } catch (err) {
     console.error("[blog] reading posts failed:", err);
-    return [];
+    return mergeRows([]).map(toPost);
   }
 }
 
@@ -70,9 +92,10 @@ export async function getPost(slug: string): Promise<Post | null> {
       .eq("slug", slug)
       .maybeSingle<PostRow>();
     if (error) throw error;
-    return data ? toPost(data) : null;
+    if (data) return toPost(data);
   } catch (err) {
     console.error("[blog] reading post failed:", err);
-    return null;
   }
+  const file = getFilePosts().find((r) => r.slug === slug);
+  return file ? toPost(file) : null;
 }
