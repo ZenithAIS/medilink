@@ -35,6 +35,35 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+// لینک «[متن](آدرس)» و پررنگ «**متن**» داخل پاراگراف و آیتم لیست؛ لینک‌های داخلی سایت با Link باز می‌شوند.
+function inline(text: string) {
+  const parts = text.split(/(\[[^\]]+\]\([^)\s]+\)|\*\*[^*]+\*\*)/g);
+  return parts.map((part, i) => {
+    const link = part.match(/^\[([^\]]+)\]\(([^)\s]+)\)$/);
+    if (link) {
+      const [, label, href] = link;
+      const local = href.startsWith("/") || href.startsWith("https://medilinkapp.online");
+      const cls = "text-brand-600 underline underline-offset-4 hover:text-brand-700";
+      return local ? (
+        <Link key={i} href={href.replace("https://medilinkapp.online", "") || "/"} className={cls}>
+          {label}
+        </Link>
+      ) : (
+        <a key={i} href={href} className={cls} target="_blank" rel="noopener">
+          {label}
+        </a>
+      );
+    }
+    if (part.startsWith("**") && part.endsWith("**")) return <strong key={i}>{part.slice(2, -2)}</strong>;
+    return part;
+  });
+}
+
+/** متن ساده برای اسکیما: لینک‌ها و علامت پررنگ حذف می‌شوند. */
+function plain(text: string) {
+  return text.replace(/\[([^\]]+)\]\([^)\s]+\)/g, "$1").replace(/\*\*/g, "");
+}
+
 // هر بلوک متن (جداشده با خط خالی) می‌تواند تیتر «## »/«### »، لیست «- »، تصویر «![alt](url)» یا پاراگراف باشد.
 function renderBlock(block: string, key: number) {
   if (block.startsWith("### ")) {
@@ -71,14 +100,14 @@ function renderBlock(block: string, key: number) {
     return (
       <ul key={key} className="list-disc pr-6 space-y-2 text-ink-700 leading-loose">
         {lines.map((l, j) => (
-          <li key={j}>{l.slice(2)}</li>
+          <li key={j}>{inline(l.slice(2))}</li>
         ))}
       </ul>
     );
   }
   return (
     <p key={key} className="text-ink-700 leading-loose">
-      {block}
+      {inline(block)}
     </p>
   );
 }
@@ -107,7 +136,7 @@ function articleSchema(post: Post) {
         faq.push({
           "@type": "Question",
           name: post.body[i].slice(4),
-          acceptedAnswer: { "@type": "Answer", text: next },
+          acceptedAnswer: { "@type": "Answer", text: plain(next) },
         });
       }
     }
