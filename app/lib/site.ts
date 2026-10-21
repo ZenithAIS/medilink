@@ -29,6 +29,11 @@ export const contact = {
 
 export const socials = [
   {
+    label: "لینکدین",
+    handle: "medilinkapp",
+    href: "https://www.linkedin.com/company/medilinkapp/",
+  },
+  {
     label: "اینستاگرام",
     handle: "medilink_agency",
     href: "https://instagram.com/medilink_agency",
