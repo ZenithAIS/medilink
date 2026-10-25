@@ -5,6 +5,7 @@ import Reveal from "@/app/components/Reveal";
 import FinalCta from "@/app/components/FinalCta";
 import { faqGroups } from "@/app/lib/faq";
 import { siteUrl } from "@/app/lib/site";
+import { jsonLdScriptProps } from "@/app/lib/json-ld";
 
 export const metadata: Metadata = {
   title: "سوالات متداول | مدیلینک",
@@ -56,10 +57,7 @@ export default function FaqPage() {
         cta="تماس با ما"
       />
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-      />
+      <script {...jsonLdScriptProps(faqJsonLd)} />
     </main>
   );
 }

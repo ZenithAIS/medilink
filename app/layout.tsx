@@ -6,6 +6,7 @@ import SiteChrome from "./components/SiteChrome";
 import GtmFallback from "./components/GtmFallback";
 import PageSchema from "./components/PageSchema";
 import { GTM_ID, GTM_HEAD_SNIPPET } from "./lib/gtm";
+import { jsonLdScriptProps } from "./lib/json-ld";
 
 // Google Tag Manager: قطعه‌ی رسمی در app/lib/gtm.ts. عمداً <script> ساده‌ی درون <head> است، نه next/script:
 // next/script با strategy="afterInteractive" فقط بعد از Hydration در مرورگر تزریق می‌شود (در HTMLِ خام اصلاً <script>
@@ -133,10 +134,7 @@ export default function RootLayout({
         <SiteChrome>{children}</SiteChrome>
         <GtmFallback />
         <PageSchema />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        <script {...jsonLdScriptProps(jsonLd)} />
       </body>
     </html>
   );

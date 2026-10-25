@@ -5,7 +5,9 @@ import NewsletterCta from "@/app/components/NewsletterCta";
 import Figure from "@/app/components/Figure";
 import BlogCover from "@/app/components/BlogCover";
 import Reveal from "@/app/components/Reveal";
-import { getPublishedPosts, getPost, type Post } from "@/app/lib/blog";
+import { getPublishedPosts, getPost } from "@/app/lib/blog";
+import { jsonLdScriptProps } from "@/app/lib/json-ld";
+import { articleSchema, classifyHref, safeImageSrc } from "@/app/lib/blog-markup";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -42,14 +44,16 @@ function inline(text: string) {
     const link = part.match(/^\[([^\]]+)\]\(([^)\s]+)\)$/);
     if (link) {
       const [, label, href] = link;
-      const local = href.startsWith("/") || href.startsWith("https://medilinkapp.online");
+      const target = classifyHref(href);
+      // لینکِ ناامن (javascript:، data:، //host، http: ...) هرگز href نمی‌شود؛ فقط برچسبِ متن می‌ماند.
+      if (!target) return label;
       const cls = "text-brand-600 underline underline-offset-4 hover:text-brand-700";
-      return local ? (
-        <Link key={i} href={href.replace("https://medilinkapp.online", "") || "/"} className={cls}>
+      return target.local ? (
+        <Link key={i} href={target.href} className={cls}>
           {label}
         </Link>
       ) : (
-        <a key={i} href={href} className={cls} target="_blank" rel="noopener">
+        <a key={i} href={target.href} className={cls} target="_blank" rel="noopener noreferrer">
           {label}
         </a>
       );
@@ -57,11 +61,6 @@ function inline(text: string) {
     if (part.startsWith("**") && part.endsWith("**")) return <strong key={i}>{part.slice(2, -2)}</strong>;
     return part;
   });
-}
-
-/** متن ساده برای اسکیما: لینک‌ها و علامت پررنگ حذف می‌شوند. */
-function plain(text: string) {
-  return text.replace(/\[([^\]]+)\]\([^)\s]+\)/g, "$1").replace(/\*\*/g, "");
 }
 
 // هر بلوک متن (جداشده با خط خالی) می‌تواند تیتر «## »/«### »، لیست «- »، تصویر «![alt](url)» یا پاراگراف باشد.
@@ -82,11 +81,13 @@ function renderBlock(block: string, key: number) {
   }
   const image = block.match(/^!\[([^\]]*)\]\(([^)\s]+)\)$/);
   if (image) {
+    const src = safeImageSrc(image[2]);
+    if (!src) return null;
     return (
       // eslint-disable-next-line @next/next/no-img-element
       <img
         key={key}
-        src={image[2]}
+        src={src}
         alt={image[1]}
         width={1200}
         height={800}
@@ -110,39 +111,6 @@ function renderBlock(block: string, key: number) {
       {inline(block)}
     </p>
   );
-}
-
-// سؤال‌های بخش «سوالات متداول» (تیترهای ### بعد از آن) برای FAQPage استخراج می‌شوند.
-function articleSchema(post: Post) {
-  const url = `https://medilinkapp.online/blog/${post.slug}`;
-  const graph: Record<string, unknown>[] = [
-    {
-      "@type": "BlogPosting",
-      headline: post.title,
-      description: post.excerpt,
-      ...(post.cover ? { image: post.cover } : {}),
-      inLanguage: "fa-IR",
-      mainEntityOfPage: url,
-      author: { "@type": "Organization", name: "مدیلینک", url: "https://medilinkapp.online" },
-      publisher: { "@type": "Organization", name: "مدیلینک", url: "https://medilinkapp.online" },
-    },
-  ];
-  const faqStart = post.body.findIndex((b) => b.startsWith("## سوالات متداول"));
-  if (faqStart >= 0) {
-    const faq: Record<string, unknown>[] = [];
-    for (let i = faqStart + 1; i < post.body.length && !post.body[i].startsWith("## "); i++) {
-      const next = post.body[i + 1];
-      if (post.body[i].startsWith("### ") && next && !next.startsWith("#")) {
-        faq.push({
-          "@type": "Question",
-          name: post.body[i].slice(4),
-          acceptedAnswer: { "@type": "Answer", text: plain(next) },
-        });
-      }
-    }
-    if (faq.length) graph.push({ "@type": "FAQPage", mainEntity: faq });
-  }
-  return { "@context": "https://schema.org", "@graph": graph };
 }
 
 export default async function BlogPostPage({ params }: Props) {
@@ -199,10 +167,7 @@ export default async function BlogPostPage({ params }: Props) {
           <p className="text-lg text-ink-700 leading-relaxed mb-8 font-medium">
             {post.excerpt}
           </p>
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema(post)) }}
-          />
+          <script {...jsonLdScriptProps(articleSchema(post))} />
           <div className="space-y-6">
             {post.body.map((block, i) => renderBlock(block, i))}
           </div>
