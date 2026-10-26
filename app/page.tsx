@@ -8,6 +8,9 @@ import Stats from "./components/Stats";
 import Commitments from "./components/Commitments";
 import Faq from "./components/Faq";
 import FinalCta from "./components/FinalCta";
+import LatestPosts from "./components/LatestPosts";
+
+export const revalidate = 300;
 
 export default function Home() {
   return (
@@ -20,6 +23,7 @@ export default function Home() {
       <HowItWorks />
       <Stats />
       <Commitments />
+      <LatestPosts />
       <Faq />
       <FinalCta />
     </main>
