@@ -34,7 +34,7 @@ function segmentName(segment: string): string {
 
 export function pageSchema(path: string) {
   const segs = path.split("/").filter(Boolean);
-  const crumbs = [{ name: "مدیلینک", url: siteUrl }];
+  const crumbs = [{ name: "مدیلینک", url: `${siteUrl}/` }];
   let acc = "";
   for (const s of segs) {
     acc += "/" + s;
@@ -50,7 +50,8 @@ export function pageSchema(path: string) {
         url,
         name: crumbs[crumbs.length - 1].name,
         inLanguage: "fa-IR",
-        isPartOf: { "@id": `${siteUrl}#organization` },
+        isPartOf: { "@id": `${siteUrl}#website` },
+        about: { "@id": `${siteUrl}#organization` },
       },
       {
         "@type": "BreadcrumbList",

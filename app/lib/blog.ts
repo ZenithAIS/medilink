@@ -7,6 +7,8 @@ export type Post = {
   excerpt: string;
   category: string;
   date: string;
+  /** تاریخ انتشار ISO برای اسکیما (datePublished)؛ `date` نسخه‌ی نمایشی شمسی است. */
+  publishedAt?: string;
   readingTime: string;
   /** URL عمومی تصویر شاخص؛ نبودنش یعنی کاور برداری دسته‌بندی نشان داده شود. */
   cover?: string;
@@ -37,6 +39,7 @@ function toPost(row: PostRow): Post {
     excerpt: row.excerpt,
     category: row.category,
     date: row.published_at ? new Date(row.published_at).toLocaleDateString("fa-IR") : "",
+    publishedAt: row.published_at ? new Date(row.published_at).toISOString() : undefined,
     readingTime: `${minutes.toLocaleString("fa-IR")} دقیقه`,
     cover: row.cover_image ?? undefined,
     body: row.content

@@ -84,6 +84,8 @@ const jsonLd = {
       "@id": `${siteUrl}#organization`,
       name: "مدیلینک",
       url: siteUrl,
+      // app/apple-icon.tsx renders the 180px brand mark — the only square logo asset the site serves.
+      logo: { "@type": "ImageObject", url: `${siteUrl}/apple-icon`, width: 180, height: 180 },
       description,
       areaServed: "IR",
       email: contact.email,
@@ -95,6 +97,14 @@ const jsonLd = {
         email: contact.email,
         availableLanguage: ["fa"],
       },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}#website`,
+      url: siteUrl,
+      name: "مدیلینک",
+      inLanguage: "fa-IR",
+      publisher: { "@id": `${siteUrl}#organization` },
     },
     {
       "@type": "SoftwareApplication",

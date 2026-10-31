@@ -50,10 +50,12 @@ export function articleSchema(post: Post) {
       headline: post.title,
       description: post.excerpt,
       ...(post.cover ? { image: post.cover } : {}),
+      ...(post.publishedAt ? { datePublished: post.publishedAt, dateModified: post.publishedAt } : {}),
       inLanguage: "fa-IR",
-      mainEntityOfPage: url,
-      author: { "@type": "Organization", name: "مدیلینک", url: "https://medilinkapp.online" },
-      publisher: { "@type": "Organization", name: "مدیلینک", url: "https://medilinkapp.online" },
+      // WebPage/BreadcrumbList come from PageSchema and Organization from the layout — link by @id, don't repeat.
+      mainEntityOfPage: { "@id": `${url}#webpage` },
+      author: { "@id": "https://medilinkapp.online#organization" },
+      publisher: { "@id": "https://medilinkapp.online#organization" },
     },
   ];
   const faqStart = post.body.findIndex((b) => b.startsWith("## سوالات متداول"));
