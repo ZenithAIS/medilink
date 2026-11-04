@@ -2,7 +2,7 @@
 
 import { z } from "zod";
 import { createAppDbServiceClient } from "@/app/lib/app-db/server";
-import { sendTelegramMessage, sendTelegramSticker } from "@/app/lib/telegram";
+import { latinDigits, sendTelegramMessage, sendTelegramSticker } from "@/app/lib/telegram";
 import { siteUrl } from "@/app/lib/site";
 
 const DemoSchema = z.object({
@@ -21,9 +21,6 @@ export type DemoState = {
   message?: string;
   fieldErrors?: Partial<Record<FieldName, string>>;
 };
-
-const latinDigits = (value: string) =>
-  value.replace(/[۰-۹]/g, (d) => String("۰۱۲۳۴۵۶۷۸۹".indexOf(d)));
 
 export async function submitDemoRequest(
   _prev: DemoState,

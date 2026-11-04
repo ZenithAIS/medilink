@@ -40,3 +40,6 @@ export async function sendTelegramMessage(text: string): Promise<boolean> {
     return false;
   }
 }
+
+export const latinDigits = (value: string) =>
+  value.replace(/[۰-۹]/g, (d) => String("۰۱۲۳۴۵۶۷۸۹".indexOf(d)));

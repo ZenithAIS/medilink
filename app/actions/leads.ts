@@ -3,6 +3,8 @@
 import { z } from "zod";
 import { createAppDbServiceClient } from "@/app/lib/app-db/server";
 import { CLINIC_TYPES } from "@/app/lib/clinic-types";
+import { siteUrl } from "@/app/lib/site";
+import { latinDigits, sendTelegramMessage, sendTelegramSticker } from "@/app/lib/telegram";
 
 
 const LeadSchema = z.object({
@@ -47,27 +49,35 @@ export async function submitLead(
     };
   }
 
+  const { name, clinicType, phone, message } = parsed.data;
+
+  // مثل فرم دمو: با موفق‌شدنِ ثبت یا اعلانِ تلگرام، درخواست از دست نمی‌رود.
+  let saved = false;
   try {
     const supabase = createAppDbServiceClient();
     const { error } = await supabase.from("leads").insert({
-      name: parsed.data.name,
-      clinic_type: parsed.data.clinicType,
-      phone: parsed.data.phone,
-      message: parsed.data.message || null,
+      name,
+      clinic_type: clinicType,
+      phone,
+      message: message || null,
     });
-
-    if (error) {
-      console.error("[submitLead] insert failed:", error.message);
-      return {
-        status: "error",
-        message: "ثبت درخواست ناموفق بود. لطفاً دوباره تلاش کنید.",
-      };
-    }
+    if (error) console.error("[submitLead] insert failed:", error.message);
+    else saved = true;
   } catch (err) {
     console.error("[submitLead]", err);
+  }
+
+  await sendTelegramSticker(`${siteUrl}/images/telegram-sticker.webp`);
+  const notified = await sendTelegramMessage(
+    `درخواست جدید از فرم سایت\n\nنام: ${name}\nشماره تماس: ${latinDigits(phone)}\nنوع کلینیک: ${clinicType}${
+      message ? `\nپیام: ${message}` : ""
+    }`
+  );
+
+  if (!saved && !notified) {
     return {
       status: "error",
-      message: "سرویس در دسترس نیست. لطفاً بعداً تلاش کنید.",
+      message: "ثبت درخواست ناموفق بود. لطفاً دوباره تلاش کنید.",
     };
   }
 
