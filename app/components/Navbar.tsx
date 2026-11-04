@@ -1,4 +1,5 @@
 "use client";
+import DemoRequestButton from "./DemoRequestButton";
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -39,14 +40,18 @@ export default function Navbar() {
             >
               ورود به پنل
             </Link>
+            <DemoRequestButton className="gradient-primary text-white px-5 py-2 rounded-lg text-sm font-bold hover:opacity-90 transition-opacity shadow-md cursor-pointer" />
             <a
               href={trialUrl}
-              className="gradient-primary text-white px-5 py-2 rounded-lg text-sm font-bold hover:opacity-90 transition-opacity shadow-md"
+              className="border border-brand-300 text-brand-600 px-5 py-2 rounded-lg text-sm font-bold hover:bg-brand-50 transition-colors"
             >
               ۱۴ روز رایگان
             </a>
           </div>
 
+          <div className="flex items-center gap-2 lg:hidden">
+            <DemoRequestButton className="gradient-primary text-white px-3 py-2 rounded-lg text-xs font-bold cursor-pointer" />
+          </div>
           <button
             className="lg:hidden p-2 rounded-lg text-ink-700"
             onClick={() => setIsOpen(!isOpen)}

@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { trialUrl } from "@/app/lib/site";
+import DemoRequestButton from "./DemoRequestButton";
 import Figure from "./Figure";
 import DashboardMockup from "./DashboardMockup";
 /** اگر اسکرین‌شات واقعی محصول آماده شد، مسیرش را اینجا بگذارید؛
@@ -44,12 +44,7 @@ export default function Hero() {
               >
                 ۱۴ روز رایگان امتحان کنید
               </a>
-              <Link
-                href="/contact"
-                className="border-2 border-cream-300 text-ink-700 px-8 py-4 rounded-xl text-base font-bold hover:border-brand-300 hover:text-brand-600 transition-all text-center"
-              >
-                درخواست دمو
-              </Link>
+              <DemoRequestButton className="border-2 border-brand-300 text-brand-600 px-8 py-4 rounded-xl text-base font-bold hover:bg-brand-50 transition-all text-center cursor-pointer" />
             </div>
             <p className="mt-3 text-sm text-ink-400 text-center lg:text-right">
               بدون نیاز به پرداخت · راه‌اندازی در چند دقیقه
