@@ -30,7 +30,7 @@ export default function DemoRequestButton({ className }: { className: string }) 
             <h2 id={`${id}-title`} className="mb-2 text-xl font-black">
               درخواست شما ثبت شد
             </h2>
-            <p className="mb-6 text-sm text-ink-400">تیم مدیلینک به‌زودی با شما تماس می‌گیرد.</p>
+            <p className="mb-6 text-sm text-ink-400">کارشناسان مدیلینک به‌زودی با شما ارتباط می‌گیرند.</p>
             <button
               type="button"
               onClick={() => dialogRef.current?.close()}
