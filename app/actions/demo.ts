@@ -2,7 +2,8 @@
 
 import { z } from "zod";
 import { createAppDbServiceClient } from "@/app/lib/app-db/server";
-import { sendTelegramMessage } from "@/app/lib/telegram";
+import { sendTelegramMessage, sendTelegramSticker } from "@/app/lib/telegram";
+import { siteUrl } from "@/app/lib/site";
 
 const DemoSchema = z.object({
   name: z.string().trim().min(2, "نام را کامل وارد کنید").max(100),
@@ -20,6 +21,9 @@ export type DemoState = {
   message?: string;
   fieldErrors?: Partial<Record<FieldName, string>>;
 };
+
+const latinDigits = (value: string) =>
+  value.replace(/[۰-۹]/g, (d) => String("۰۱۲۳۴۵۶۷۸۹".indexOf(d)));
 
 export async function submitDemoRequest(
   _prev: DemoState,
@@ -65,8 +69,9 @@ export async function submitDemoRequest(
     console.error("[submitDemoRequest]", err);
   }
 
+  await sendTelegramSticker(`${siteUrl}/images/telegram-sticker.webp`);
   const notified = await sendTelegramMessage(
-    `درخواست دموی جدید\n\nنام: ${name}\nواتساپ: ${whatsapp}\nایمیل: ${email}`
+    `درخواست دموی جدید\n\nنام: ${name}\nواتساپ: ${latinDigits(whatsapp)}\nایمیل: ${email}`
   );
 
   if (!saved && !notified) {
