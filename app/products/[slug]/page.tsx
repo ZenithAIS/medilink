@@ -22,13 +22,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const product = getProduct(slug);
   if (!product) return {};
 
+  const title = `${product.seoTitle ?? product.title} | مدیلینک`;
+  const description = product.seoDescription ?? product.description;
   return {
-    title: `${product.title} | مدیلینک`,
-    description: product.description,
+    title,
+    description,
     alternates: { canonical: `/products/${product.slug}` },
     openGraph: {
-      title: `${product.title} | مدیلینک`,
-      description: product.description,
+      title,
+      description,
       url: `/products/${product.slug}`,
     },
   };

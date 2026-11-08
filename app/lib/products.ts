@@ -44,11 +44,17 @@ export type Product = {
   /** سه مرحله‌ی جریان کار محصول، برای دیاگرام «نمونه استفاده». */
   flow: { icon: keyof typeof FLOW_ICONS; label: string; note: string }[];
   faqs: { q: string; a: string }[];
+  /** عنوان و توضیح صفحه برای گوگل؛ با کلیدواژه‌ای که کلینیک‌ها واقعاً جست‌وجو می‌کنند. */
+  seoTitle?: string;
+  seoDescription?: string;
 };
 
 export const products: Product[] = [
   {
     slug: "clinic-management",
+    seoTitle: "نرم‌افزار مدیریت مطب و کلینیک؛ پرونده، نوبت و پرداخت در یک پنل",
+    seoDescription:
+      "نرم‌افزار مدیریت مطب و کلینیک مدیلینک: پرونده‌ی الکترونیک بیمار، نوبت‌دهی، پرداخت و گزارش چندشعبه در یک پنل ابری. دمو رایگان بگیرید.",
     title: "سامانه‌ی مدیریت کلینیک",
     tagline: "همه‌ی کلینیک در یک پنل",
     description:
@@ -96,6 +102,9 @@ export const products: Product[] = [
   },
   {
     slug: "appointment-automation",
+    seoTitle: "نرم‌افزار نوبت‌دهی آنلاین مطب با یادآوری پیامکی",
+    seoDescription:
+      "نرم‌افزار نوبت‌دهی آنلاین مطب و کلینیک: رزرو ۲۴ ساعته، یادآوری پیامکی و واتساپی، کاهش عدم‌حضور بیمار و لیست انتظار خودکار.",
     title: "نوبت‌دهی و یادآوری خودکار",
     tagline: "نوبت بگیرید، حتی وقتی کلینیک بسته است",
     description:
@@ -143,6 +152,9 @@ export const products: Product[] = [
   },
   {
     slug: "ai-assistant",
+    seoTitle: "منشی هوشمند و ربات پاسخ‌گوی کلینیک",
+    seoDescription:
+      "منشی هوشمند کلینیک: ربات پاسخ‌گوی ۲۴ ساعته در سایت و پیام‌رسان‌ها که سؤال بیمار را جواب می‌دهد و نوبت ثبت می‌کند.",
     title: "ربات مشاور و پاسخ‌گوی هوشمند",
     tagline: "پاسخ‌گوی همیشه‌بیدار کلینیک شما",
     description:
@@ -190,6 +202,9 @@ export const products: Product[] = [
   },
   {
     slug: "sms-automation",
+    seoTitle: "سامانه‌ی پیامک خودکار مطب و کلینیک",
+    seoDescription:
+      "پیامک خودکار مطب: یادآوری نوبت، پیگیری بعد از درمان، پیام تولد و بازگرداندن بیماران غیرفعال بدون کار دستی منشی.",
     title: "اتوماسیون پیامک و ارتباط با بیمار",
     tagline: "پیگیری بیمار، بدون کار دستی",
     description:
@@ -237,6 +252,9 @@ export const products: Product[] = [
   },
   {
     slug: "medical-bi",
+    seoTitle: "داشبورد مدیریتی و گزارش هوشمند کلینیک",
+    seoDescription:
+      "داشبورد مدیریتی کلینیک: درآمد، نرخ عدم‌حضور، عملکرد پزشکان و شعب به‌صورت لحظه‌ای در یک گزارش هوشمند.",
     title: "گزارش‌ها و تحلیل داده (BI پزشکی)",
     tagline: "تصمیم بر پایه‌ی عدد، نه حدس",
     description:

@@ -8,6 +8,7 @@ import Reveal from "@/app/components/Reveal";
 import { getPublishedPosts, getPost } from "@/app/lib/blog";
 import { jsonLdScriptProps } from "@/app/lib/json-ld";
 import { articleSchema, classifyHref, safeImageSrc } from "@/app/lib/blog-markup";
+import { ctaForPost } from "@/app/lib/blog-cta";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -125,6 +126,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   const posts = await getPublishedPosts();
   const related = posts.filter((p) => p.slug !== post.slug).slice(0, 3);
+  const cta = ctaForPost(post.slug, post.category);
 
   return (
     <main>
@@ -178,19 +180,25 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
 
           <div className="mt-12 rounded-2xl border border-brand-100 bg-brand-50 p-6">
-            <h2 className="text-lg font-black text-ink-900 mb-2">
-              می‌خواهید این‌ها را در کلینیک خودتان پیاده کنید؟
-            </h2>
-            <p className="text-ink-700 text-sm leading-relaxed mb-4">
-              در یک جلسه‌ی دمو نشان می‌دهیم مدیلینک کدام بخش را برای شما خودکار
-              می‌کند.
-            </p>
-            <Link
-              href="/contact"
-              className="inline-block gradient-primary text-white px-6 py-3 rounded-xl text-sm font-bold hover:opacity-90 transition-opacity"
-            >
-              درخواست دمو رایگان
-            </Link>
+            <h2 className="text-lg font-black text-ink-900 mb-2">{cta.title}</h2>
+            <p className="text-ink-700 text-sm leading-relaxed mb-4">{cta.text}</p>
+            <div className="flex flex-wrap items-center gap-3">
+              <Link
+                href="/contact"
+                className="inline-block gradient-primary text-white px-6 py-3 rounded-xl text-sm font-bold hover:opacity-90 transition-opacity"
+              >
+                درخواست دمو رایگان
+              </Link>
+              <Link
+                href={cta.href}
+                className="inline-block rounded-xl border border-brand-200 bg-white px-5 py-3 text-sm font-bold text-brand-600 hover:bg-brand-50"
+              >
+                {cta.label}
+              </Link>
+              <Link href="/pricing" className="text-sm text-ink-700 underline underline-offset-4 hover:text-brand-600">
+                تعرفه‌ها
+              </Link>
+            </div>
           </div>
         </div>
       </article>
