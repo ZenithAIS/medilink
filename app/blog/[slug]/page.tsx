@@ -33,6 +33,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: post.title,
       description: post.excerpt,
       url: `/blog/${post.slug}`,
+      ...(post.cover ? { images: [{ url: post.cover, width: 1200, height: 675, alt: post.title }] } : {}),
+    },
+    twitter: {
+      card: post.cover ? "summary_large_image" : "summary",
+      ...(post.cover ? { images: [post.cover] } : {}),
     },
   };
 }
