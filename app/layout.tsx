@@ -112,9 +112,18 @@ const jsonLd = {
       name: "مدیلینک — نرم‌افزار مدیریت مطب و کلینیک",
       url: siteUrl,
       applicationCategory: "BusinessApplication",
+      applicationSubCategory: "Medical practice management",
       operatingSystem: "Web",
       inLanguage: "fa-IR",
       description,
+      featureList: [
+        "مدیریت کلینیک و مطب",
+        "نوبت‌دهی خودکار",
+        "ربات پاسخ‌گوی بیماران",
+        "پرونده و پیگیری بیمار",
+        "گزارش‌های هوشمند",
+      ],
+      audience: { "@type": "BusinessAudience", audienceType: "پزشکان، مطب‌ها و کلینیک‌ها" },
       publisher: { "@id": `${siteUrl}#organization` },
       offers: {
         "@type": "Offer",

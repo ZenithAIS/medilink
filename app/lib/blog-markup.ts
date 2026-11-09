@@ -52,6 +52,12 @@ export function articleSchema(post: Post) {
       ...(post.cover ? { image: post.cover } : {}),
       ...(post.publishedAt ? { datePublished: post.publishedAt, dateModified: post.publishedAt } : {}),
       inLanguage: "fa-IR",
+      url,
+      wordCount: post.body.join(" ").split(/\s+/).filter(Boolean).length,
+      articleSection: post.category,
+      isPartOf: { "@id": "https://medilinkapp.online#website" },
+      about: { "@id": "https://medilinkapp.online#software" },
+      speakable: { "@type": "SpeakableSpecification", xpath: ["/html/head/title", "/html/head/meta[@name='description']/@content"] },
       // WebPage/BreadcrumbList come from PageSchema and Organization from the layout — link by @id, don't repeat.
       mainEntityOfPage: { "@id": `${url}#webpage` },
       author: { "@id": "https://medilinkapp.online#organization" },
