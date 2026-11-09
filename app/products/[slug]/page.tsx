@@ -10,6 +10,8 @@ import Reveal from "@/app/components/Reveal";
 import { products, getProduct } from "@/app/lib/products";
 import { checkoutHrefForSlug } from "@/app/lib/packages";
 import { buyLabel } from "@/app/lib/zarinpal";
+import { jsonLdScriptProps } from "@/app/lib/json-ld";
+import { siteUrl } from "@/app/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -44,8 +46,36 @@ export default async function ProductPage({ params }: Props) {
   const { title, tagline, description, Icon, features, benefits, useCase, faqs } =
     product;
 
+  const url = `${siteUrl}/products/${product.slug}`;
+  const schema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "@id": `${url}#software`,
+        name: product.h1 ?? title,
+        description: product.seoDescription ?? description,
+        applicationCategory: "BusinessApplication",
+        operatingSystem: "Web",
+        inLanguage: "fa-IR",
+        url,
+        publisher: { "@id": `${siteUrl}#organization` },
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${url}#faq`,
+        mainEntity: faqs.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      },
+    ],
+  };
+
   return (
     <main>
+      <script {...jsonLdScriptProps(schema)} />
       {/* Hero محصول */}
       <section className="relative overflow-hidden pt-32 pb-16 bg-cream-100 border-b border-cream-200">
         <div className="absolute top-0 left-0 w-72 h-72 bg-violet-50 rounded-full mix-blend-multiply filter blur-3xl opacity-40"></div>
@@ -68,7 +98,7 @@ export default async function ProductPage({ params }: Props) {
                 {tagline}
               </span>
               <h1 className="text-4xl md:text-6xl font-black text-ink-900 mt-2 mb-4 leading-tight">
-                {title}
+                {product.h1 ?? title}
               </h1>
               <p className="text-lg text-ink-700 leading-relaxed mb-8">
                 {description}
@@ -135,6 +165,57 @@ export default async function ProductPage({ params }: Props) {
         </div>
       </section>
 
+
+      {/* راهنمای مفصل */}
+      {product.guide && product.guide.length > 0 && (
+        <section className="py-20 bg-cream-100 border-t border-cream-200">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 leading-loose">
+            {product.guide.map((g) => (
+              <div key={g.h2} className="mb-10">
+                <h2 className="text-3xl font-black text-ink-900 mb-4">{g.h2}</h2>
+                {g.paras?.map((t) => (
+                  <p key={t} className="text-ink-700 mb-4">{t}</p>
+                ))}
+                {g.bullets && (
+                  <ul className="list-disc pr-6 space-y-2 text-ink-700">
+                    {g.bullets.map((b) => (
+                      <li key={b}>{b}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            ))}
+            {product.compare && (
+              <div className="overflow-x-auto">
+                <h2 className="text-3xl font-black text-ink-900 mb-4">{product.compare.caption}</h2>
+                <table className="w-full text-sm border border-cream-300 bg-white rounded-xl">
+                  <thead>
+                    <tr>
+                      {product.compare.headers.map((h) => (
+                        <th key={h} className="p-3 border border-cream-300 text-right bg-cream-200">{h}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {product.compare.rows.map((r) => (
+                      <tr key={r[0]}>
+                        {r.map((c, i) => (
+                          <td key={i} className="p-3 border border-cream-300 text-ink-700">{c}</td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+            <div className="mt-10 text-center">
+              <Link href="/contact" className="gradient-primary text-white px-8 py-4 rounded-xl text-base font-bold inline-block">
+                درخواست دمو رایگان {product.h1 ?? title}
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
       {/* مزایا و نمونه استفاده */}
       <section className="py-24 bg-cream-100 border-y border-cream-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
