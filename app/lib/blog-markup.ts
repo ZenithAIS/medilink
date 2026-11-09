@@ -49,7 +49,9 @@ export function articleSchema(post: Post) {
       "@type": "BlogPosting",
       headline: post.title,
       description: post.excerpt,
-      ...(post.cover ? { image: post.cover } : {}),
+      image: post.cover
+        ? (post.cover.startsWith("http") ? post.cover : `https://medilinkapp.online${post.cover}`)
+        : "https://medilinkapp.online/opengraph-image",
       ...(post.publishedAt ? { datePublished: post.publishedAt, dateModified: post.publishedAt } : {}),
       inLanguage: "fa-IR",
       url,

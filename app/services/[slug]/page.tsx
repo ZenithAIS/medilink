@@ -185,6 +185,21 @@ export default async function ServiceDetailPage({ params }: Props) {
             سوالات متداول {title}
           </h2>
           <Accordion items={faqs} />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "@id": `https://medilinkapp.online/services/${slug}#faq`,
+                mainEntity: faqs.map((item) => ({
+                  "@type": "Question",
+                  name: item.q,
+                  acceptedAnswer: { "@type": "Answer", text: item.a },
+                })),
+              }),
+            }}
+          />
         </div>
       </section>
 
