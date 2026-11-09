@@ -60,6 +60,7 @@ export default async function ProductPage({ params }: Props) {
         inLanguage: "fa-IR",
         url,
         publisher: { "@id": `${siteUrl}#organization` },
+        isPartOf: { "@id": `${siteUrl}#software` },
       },
       {
         "@type": "FAQPage",
