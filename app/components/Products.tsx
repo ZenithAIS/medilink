@@ -12,18 +12,17 @@ export default function Products() {
             محصولات ما
           </div>
           <h2 className="text-4xl md:text-5xl font-black text-ink-900 mb-4">
-            پنج سیستم هوشمند
+            همه‌ی ابزارهای کلینیک
             <br />
             <span className="gradient-text">برای کل مسیر بیمار</span>
           </h2>
           <p className="text-ink-400 max-w-xl mx-auto text-base leading-relaxed">
-            هر محصول به‌تنهایی کار می‌کند و کنار هم یک کلینیک کاملاً خودکار
-            می‌سازد.
+            از همان بخشی شروع کنید که امروز بیشترین وقت منشی را می‌گیرد.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {products.map(({ slug, title, description, Icon }, i) => (
+          {products.map(({ slug, title, description, Icon, comingSoon }, i) => (
             <Reveal key={slug} delay={i * 80}>
               <Link
                 href={`/products/${slug}`}
@@ -32,6 +31,11 @@ export default function Products() {
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-brand-50 to-violet-50 text-brand-600 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3">
                   <Icon className="w-6 h-6" />
                 </div>
+                {comingSoon && (
+                  <span className="mb-2 self-start rounded-full bg-violet-50 px-2.5 py-0.5 text-xs font-bold text-violet-500">
+                    به‌زودی
+                  </span>
+                )}
                 <h3 className="text-lg font-bold text-ink-900 mb-2">{title}</h3>
                 <p className="text-ink-400 text-sm leading-relaxed grow">
                   {description}

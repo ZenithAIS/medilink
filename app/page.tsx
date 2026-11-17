@@ -2,7 +2,7 @@ import Hero from "./components/Hero";
 import TrustBar from "./components/TrustBar";
 import ProblemSolution from "./components/ProblemSolution";
 import Products from "./components/Products";
-import Services from "./components/Services";
+import ProductVideo from "./components/ProductVideo";
 import HowItWorks from "./components/HowItWorks";
 import Stats from "./components/Stats";
 import Commitments from "./components/Commitments";
@@ -17,9 +17,9 @@ export default function Home() {
     <main>
       <Hero />
       <TrustBar />
+      <ProductVideo />
       <ProblemSolution />
       <Products />
-      <Services />
       <HowItWorks />
       <Stats />
       <Commitments />

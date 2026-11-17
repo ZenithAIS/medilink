@@ -23,18 +23,18 @@ export default function Hero() {
           <div className="text-center lg:text-right">
             <div className="inline-flex items-center gap-2 bg-brand-50 border border-brand-100 text-brand-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
               <span className="w-2 h-2 bg-brand-400 rounded-full animate-pulse-ring"></span>
-              نرم‌افزار مدیریت مطب و کلینیک با هوش مصنوعی
+              برای کلینیک‌های پوست، مو، لیزر و دندانپزشکی
             </div>
 
-            <h1 className="text-5xl md:text-6xl font-black text-ink-900 mb-6 leading-tight">
-              کلینیک شما را
+            <h1 className="text-4xl md:text-5xl font-black text-ink-900 mb-6 leading-tight">
+              نرم‌افزار نوبت‌دهی و
               <br />
-              <span className="gradient-text">هوشمند می‌کنیم</span>
+              <span className="gradient-text">مدیریت بیماران کلینیک</span>
             </h1>
 
             <p className="text-lg text-ink-700 max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed">
-              از پذیرش تا پیگیری بیمار، با هوش مصنوعی. مدیلینک کارهای تکراری
-              کلینیک شما را خودکار می‌کند تا تیم‌تان روی درمان تمرکز کند.
+              بیمار خودش آنلاین نوبت می‌گیرد، منشی همه‌ی نوبت‌ها را در یک تقویم
+              می‌بیند و پرونده و پیگیری هر بیمار یک‌جا می‌ماند.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-stretch sm:items-center">
@@ -47,7 +47,7 @@ export default function Hero() {
               <DemoRequestButton className="border-2 border-brand-300 text-brand-600 px-8 py-4 rounded-xl text-base font-bold hover:bg-brand-50 transition-all text-center cursor-pointer" />
             </div>
             <p className="mt-3 text-sm text-ink-400 text-center lg:text-right">
-              بدون نیاز به پرداخت · راه‌اندازی در چند دقیقه
+              بدون کارت بانکی · بدون قرارداد · راه‌اندازی در چند دقیقه
             </p>
           </div>
 
