@@ -50,7 +50,7 @@ export default function ProductsPage() {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {products.map(({ slug, title, tagline, description, Icon }, i) => (
+            {products.map(({ slug, title, tagline, description, Icon, comingSoon }, i) => (
               <Reveal key={slug} delay={i * 80}>
                 <Link
                   href={`/products/${slug}`}
@@ -59,6 +59,11 @@ export default function ProductsPage() {
                   <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-brand-50 to-violet-50 text-brand-600 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3">
                     <Icon className="w-6 h-6" />
                   </div>
+                  {comingSoon && (
+                    <span className="mb-2 self-start rounded-full bg-violet-50 px-2.5 py-0.5 text-xs font-bold text-violet-500">
+                      به‌زودی
+                    </span>
+                  )}
                   <span className="text-xs font-medium text-brand-600 mb-1">
                     {tagline}
                   </span>
