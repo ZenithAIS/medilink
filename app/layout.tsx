@@ -129,11 +129,11 @@ const jsonLd = {
         "@type": "Offer",
         url: `${siteUrl}/pricing`,
         name: "اتوماسیون مطب — مطب تک‌پزشک (ماهانه)",
-        price: "180000000",
+        price: "30000000",
         priceCurrency: "IRR",
         priceSpecification: {
           "@type": "UnitPriceSpecification",
-          price: "180000000",
+          price: "30000000",
           priceCurrency: "IRR",
           unitText: "ماهانه",
           valueAddedTaxIncluded: false,
